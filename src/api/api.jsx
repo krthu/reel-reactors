@@ -1,8 +1,3 @@
-/*  console.log(ListData);
-    console.log(GenresData);
-    console.log(DetailedMovieData);
-    console.log(CastData);*/
-
 const apiUrl = 'https://www.themoviedb.org/';
 
 const getMovies = async () => {

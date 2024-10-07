@@ -1,32 +1,56 @@
-body{
-    background-color: black;
-}
+:root {
+    --handle-size: 3rem;
+    --img-gap: 20px;
+  }
+  *{
+    box-sizing: border-box;
+  }
 
 .carusel-container{
     display: flex;
     justify-content: center;
-    overflow: hidden;
-
+    /* overflow: hidden; */
+    background-color: rgba(3, 35, 62, .34);
+    padding: var(--img-gap); /* Karusellens padding */
+    border-radius: 24px;
 }
 
+/* .carusel-content {
+    --items-per-screen: 4;
+    --slider-index: 0;
+    display: flex;
+    flex-grow: 1;
+    gap: var(--img-gap);
+    background-color: rgba(3, 35, 62, .34);
+    transform: translateX(calc(var(--slider-index) * -100%));
+    transition: transform 250ms ease-in-out;
+    padding: var(--img-gap);
+    border-radius: 24px;
+   
+    overflow-x: scroll;
+    
+
+} */
 .carusel-content {
     --items-per-screen: 5;
     --slider-index: 0;
     display: flex;
     flex-grow: 1;
-    gap: 5px;
+    gap: var(--img-gap);
 
     transform: translateX(calc(var(--slider-index) * -100%));
     transition: transform 250ms ease-in-out;
 
+    overflow-x: auto; /* Gör så att inget svämmar över */
 }
+
 
 .carusel-button {
     border: none;
     border-radius: 1rem;
     flex-grow: 0;
     flex-shrink: 0;
-    background-color: rgba(255, 255, 255, .5);
+    background-color: rgba(255, 255, 255, .25);
     /* background-color: orange; */
     z-index: 10;
     margin: var(--img-gap) 0;
@@ -39,6 +63,13 @@ body{
     color: white;
     line-height: 0;
     transition: background-color 150ms ease-in-out;
+    border: 1px solid black;
+    
+}
+
+.carusel-chevron {
+    color: black;
+    font-size: 3rem;
 }
 
 .carusel-button:hover,
@@ -67,11 +98,18 @@ body{
     height: 300px;
 } */
 
-.poster-carusel-img {
-    flex: 0 0 calc(100% / var(--items-per-screen));
-    max-width: calc(100% / var(--items-per-screen));
-    /* aspect-ratio: 16 / 9; */
+
+
+.poster-carusel-img-container {
+    flex: 0 0 calc((100% / var(--items-per-screen)) - var(--img-gap)); 
+    /* Bort med max-width då flex tar hand om detta */
     padding: var(--img-gap);
     border-radius: 1rem;
+    box-sizing: border-box; /* Se till att padding inte överstiger förälderns bredd */
+}
+
+.poster-carusel-img{
+    max-width: 100%;
+    max-height: 100%;
 
 }

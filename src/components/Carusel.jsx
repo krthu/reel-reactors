@@ -75,24 +75,29 @@ const Carusel = ({ items }) => {
 
     return (
 
-        <div className="carusel-container">
+        <div>
+            <h3 className="carusel-title">Popuära filmer</h3>
+            <div className="carusel-container">
 
-            <button onClick={handleButtonPress} className="carusel-button carusel-button-left">
-            <span className="material-symbols-outlined carusel-chevron">
-                    chevron_left
-                </span>
-            </button>
-            <div className="carusel-content" ref={caruselContentRef}>
-
-                {items}
-
-            </div>
-
-            <button onClick={handleButtonPress} className="carusel-button carusel-button-right">
+                <button onClick={handleButtonPress} className="carusel-button carusel-button-left">
                 <span className="material-symbols-outlined carusel-chevron">
-                    chevron_right
-                </span>
-            </button>
+                        chevron_left
+                    </span>
+                </button>
+                <div className="carusel-content" ref={caruselContentRef}>
+
+
+                        {items}
+       
+
+                </div>
+
+                <button onClick={handleButtonPress} className="carusel-button carusel-button-right">
+                    <span className="material-symbols-outlined carusel-chevron">
+                        chevron_right
+                    </span>
+                </button>
+            </div>
         </div>
     )
 }

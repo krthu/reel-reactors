@@ -1,10 +1,21 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
 
+import placeholder from './features/placeholder'
+
 function App() {
-  const [count, setCount] = useState(0)
+  const ListData = placeholder.getMovieListPlaceholder();
+
+  const GenresData = placeholder.getGenresPlaceholder();
+  const DetailedMovieData = placeholder.getDetaildMoviePlaceholder();
+  const CastData = placeholder.getCastPlaceholder();
+
+  console.log(ListData);
+  console.log(GenresData);
+  console.log(DetailedMovieData);
+  console.log(CastData);
+
 
   return (
     <>

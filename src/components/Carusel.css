@@ -1,0 +1,77 @@
+body{
+    background-color: black;
+}
+
+.carusel-container{
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+
+}
+
+.carusel-content {
+    --items-per-screen: 5;
+    --slider-index: 0;
+    display: flex;
+    flex-grow: 1;
+    gap: 5px;
+
+    transform: translateX(calc(var(--slider-index) * -100%));
+    transition: transform 250ms ease-in-out;
+
+}
+
+.carusel-button {
+    border: none;
+    border-radius: 1rem;
+    flex-grow: 0;
+    flex-shrink: 0;
+    background-color: rgba(255, 255, 255, .5);
+    /* background-color: orange; */
+    z-index: 10;
+    margin: var(--img-gap) 0;
+    width: var(--handle-size);
+    cursor: pointer;
+    font-size: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    line-height: 0;
+    transition: background-color 150ms ease-in-out;
+}
+
+.carusel-button:hover,
+.carusel-button:focus {
+  background-color: rgba(255, 255, 255, .75);
+}
+
+.carusel-button-left{
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.carusel-button-right {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.carusel-items {
+    display: flex;
+    
+    
+}
+
+/* .carusel-item {
+    width: 100;
+    height: 300px;
+} */
+
+.poster-carusel-img {
+    flex: 0 0 calc(100% / var(--items-per-screen));
+    max-width: calc(100% / var(--items-per-screen));
+    /* aspect-ratio: 16 / 9; */
+    padding: var(--img-gap);
+    border-radius: 1rem;
+
+}

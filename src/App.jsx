@@ -3,6 +3,8 @@ import { useState } from 'react'
 import './App.css'
 
 import placeholder from './features/placeholder'
+import PosterCarusellItem from './components/PosterCaruselItem';
+import Carusell from './components/Carusel';
 
 function App() {
   const ListData = placeholder.getMovieListPlaceholder();
@@ -16,9 +18,20 @@ function App() {
   console.log(DetailedMovieData);
   console.log(CastData);
 
+  const posterCarusellItems = [];
 
+
+//Change when api i ready
+  const fillCurusell = () => {
+    ListData.results.forEach((movie) => {
+      posterCarusellItems.push(<PosterCarusellItem url={movie.poster_path} key={movie.id}/>)
+    })
+  }
+  fillCurusell();
   return (
-    <>
+    <>  
+      {/* <PosterCarusellItem url={'/1E5baAaEse26fej7uHcjOgEE2t2.jpg'} /> */}
+      <Carusell items={posterCarusellItems} />
 
     </>
   )

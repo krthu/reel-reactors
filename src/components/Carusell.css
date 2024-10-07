@@ -1,0 +1,8 @@
+.carusell-container{
+    display: flex;
+    width: 100%;
+}
+
+.carusell-content {
+    display: flex;
+}

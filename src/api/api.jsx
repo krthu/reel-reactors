@@ -1,6 +1,6 @@
 const apiUrl = 'https://api.themoviedb.org/3';
-const apiKey = process.env.REACT_APP_TMDB_API_KEY;
-const accessToken = process.env.REACT_APP_TMDB_ACCESS_TOKEN;
+const apiKey = process.env.VITE_TMDB_API_KEY;
+const accessToken = process.env.VITE_TMDB_READ_ACCESS_TOKEN;
 
 const defaultOptions = {
   headers: {

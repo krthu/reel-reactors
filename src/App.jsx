@@ -1,8 +1,14 @@
+import React from 'react';
 import { useState } from 'react'
+import Navbar from './components/Navbar';
 
 import './App.css'
 
 import placeholder from './features/placeholder'
+import { Route, Routes } from 'react-router-dom';
+import Discover from './components/Discover';
+import Movie from './components/Movie';
+
 
 function App() {
   const ListData = placeholder.getMovieListPlaceholder();
@@ -17,10 +23,24 @@ function App() {
   console.log(CastData);
 
 
-  return (
-    <>
 
-    </>
+
+
+
+
+  return (
+      <div className='app-container'>
+        <Routes>
+          <Route path='/' element={<Discover />} />
+          <Route path='/movie/:id' element={<Movie />} />
+
+        </Routes>
+
+      </div>
+
+  
+
+    
   )
 }
 

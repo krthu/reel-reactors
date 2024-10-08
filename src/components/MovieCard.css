@@ -1,0 +1,26 @@
+.movie-card-container {
+    flex: 0 0 calc((100% / var(--items-per-screen)) - var(--spacing-medium));
+    padding: var(--spacing-medium);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.movie-card-img  {
+    border-radius: var(--border-radius-medium);
+    box-shadow: var(--box-shadow-medium)
+}
+
+.movie-card-img:hover {
+    border: 3px solid var(--hover-color);
+
+}
+
+.movie-card-selected {
+    max-height: 100%;
+    max-width: 100%;
+    position: absolute;
+    border: 3px solid var(--hover-color);
+
+}

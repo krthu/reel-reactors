@@ -1,0 +1,49 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.nav-left {
+    display: flex;
+}
+
+.nav-left button {
+    background: pink;
+    border: none;
+    color: white;   
+}
+
+
+.logo-center {
+    flex: 1;
+    text-align: center;
+}
+
+.logo {
+    width: 100px;
+    height: auto;
+}
+
+.nav-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.search-container input {
+    background-color: #333;
+}
+
+.search-container input::placeholder {
+    color: #aaa;
+}
+
+.cart-button {
+    background: none;   
+}
+
+.cart-icon {
+    height: auto;
+}

@@ -1,0 +1,104 @@
+/* Detta laddar in olika vikter (400, 500 och 700) av Poppins från Google Fonts och gör det tillgängligt i CSS */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+:root {    
+
+    /* Bakgrunder */
+    --body-bg: linear-gradient(to bottom, #000000, #040C18); /* Applicera som huvudbakgrund på body */
+    --navbar-bg: linear-gradient(to bottom, rgba(11, 18, 32, 0.7), rgba(0, 0, 0, 0.7)); /* Använd för navbarens bakgrund */
+    --footer-bg: #0B1220; /* Färg för footerns bakgrund (just nu har vi ingen footer med i vår design) */
+    --button-bg-primary: linear-gradient(to bottom, #102537, #0c5797); /* Används för primära knappar som "Köp nu" och "Information" */
+    --button-bg-secondary: transparent; /* Används för transparenta knappar som "Se Trailer" */
+    
+    /* Textfärger */
+    --text-color-light: #fefefe; /* Applicera på de flesta texter som ligger på mörka bakgrunder */
+    --text-color-dark: #000000; /* Används för texter på ljusare bakgrunder om det behövs */
+    
+    /* Kortbakgrunder */
+    --movie-list-bg: rgba(3, 35, 62, 0.35); /* Använd som bakgrund på MovieList/MovieRecommend-containern */
+    --movie-list-border: rgba(3, 35, 62, 0.5); /* Använd som border (kantlinje) på MovieList/MovireRecomend -containern */
+    
+    /* Knappstater */
+    --hover-color: #1A5276; /* Använd denna färg för hover-effekter på knappar */
+    --button-hover-opacity: 0.85; /* Använd denna opacitet för knappar när man hovrar över dem */
+    --button-active-opacity: 0.75; /* Använd denna opacitet för knappar när de är aktiva/klickade */
+    
+    /* Övergångar */
+    --transition-default: all 0.3s ease; /* Standard övergångsinställning för mjukare interaktioner */
+
+    /* Skuggor */
+    --box-shadow-small: 0 1px 2px rgba(0, 0, 0, 0.1); /* Liten skugga för små element som knappar */
+    --box-shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.1); /* Medium skugga för större element som kort */
+
+    /* Rundade hörn */
+    --border-radius-small: 4px; /* Små rundade hörn, t.ex. för knappar */
+    --border-radius-medium: 8px; /* Medium rundade hörn, t.ex. för kort */
+    --border-radius-large: 12px; /* Stora rundade hörn för större sektioner */
+
+    /* Padding & Marginaler */
+    --spacing-small: 8px; /* Används för små padding eller marginaler, t.ex. inuti knappar eller små mellanrum mellan element */
+    --spacing-medium: 16px; /* Används för generell padding eller marginaler, t.ex. mellan sektioner eller kort */
+    --spacing-large: 24px; /* Används för större mellanrum, t.ex. mellan huvudsektioner eller för att skapa luft i designen */
+    
+    /* Fontstorlekar
+       Vi använder 'rem' som enheten för fontstorlekar för att göra dem skalbara och responsiva. 
+       'rem' baseras på root-elementets (html) fontstorlek, vilket gör att om användaren ändrar 
+       sin standardstorlek i webbläsaren så kommer texten att skala därefter. Detta förbättrar 
+       tillgängligheten och gör designen mer flexibel för olika enheter och skärmstorlekar. 
+       Folk som har synnedsättning vill oftast ändra standardstorlek på sin webbläsare */
+    --font-size-small: 0.875rem; /* Används för mindre texter, t.ex. etiketter eller förklaringar */
+    --font-size-medium: 1rem; /* Applicera för generell brödtext, t.ex. filmbeskrivningar */
+    --font-size-large: 1.25rem; /* Används för underrubriker eller viktigare text, som sektionstitlar */
+    --font-size-xlarge: 1.75rem; /* Används för huvudrubriker, som filmtitlar */
+    
+    /* Fontfamilj */
+    --font-family: 'Poppins', sans-serif; /* Använd detta typsnitt över hela webbplatsen för en enhetlig stil */
+
+    /* Breakpoints för responsiv design */
+    --breakpoint-xs: 320px;   /* Extra små enheter, som små mobiler */
+    --breakpoint-sm: 480px;   /* Små enheter, som mobiltelefoner */
+    --breakpoint-md: 768px;   /* Mellanstora enheter, som tablets */
+    --breakpoint-lg: 1024px;  /* Större enheter, som laptops och desktops */
+    --breakpoint-xl: 1440px;  /* Extra stora skärmar, som stora desktops */
+}
+
+  /* CSS Reset 
+  Syftet med denna reset är att eliminera webbläsarnas standardstilar som kan variera.
+   Det ger oss en ren grund att börja från, vilket gör att vår design blir mer konsekvent
+   över olika webbläsare. */
+* {
+    margin: 0; /* Tar bort standardmarginaler */
+    padding: 0; /* Tar bort standardutfyllnad */
+    box-sizing: border-box; /* Säkerställer att padding och border inkluderas i elementets totalbredd */
+}
+  
+html, body {
+    height: 100%; /* Gör att body tar upp hela höjden av webbläsarfönstret */
+}
+  
+body {
+    line-height: 1.5; /* Sätter en standard radavstånd */
+    -webkit-font-smoothing: antialiased; /* Gör texten mjukare att läsa på skärmar */
+    -moz-osx-font-smoothing: grayscale; /* Gör texten mjukare på Mac */
+}
+  
+img, picture, video, canvas, svg {
+    display: block; /* Tar bort inline-block beteendet från mediaelement */
+    max-width: 100%; /* Säkerställer att media-element inte överstiger sitt förälder-element */
+}
+  
+input, button, textarea, select {
+    font: inherit; /* Ärver typsnitt från förälderelement, istället för att använda webbläsarens standard */
+}
+
+  /* Exempel: Applicera stil på body */
+body {
+    background: var(--body-bg);
+    font-family: var(--font-family);
+}
+
+/* Exempel: Applicera stil på alla knappar och alla länkar (a) i projektet */
+button, a {
+    transition: var(--transition-default);
+    border-radius: var(--border-radius-small); /* Exempel på rundade hörn för knappar och länkar */
+}

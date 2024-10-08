@@ -5,7 +5,8 @@ import './Navbar.css';
 
 
 
-const Navbar = () => {
+const Navbar = ({ setCartVisible }) => {
+    
 
     return (
         <nav className="navbar">
@@ -21,9 +22,11 @@ const Navbar = () => {
                 <img src="./pictures/reel-reactors-logga.png" alt="Reel Reactors Logo" />
             </div>
                 <div className="nav-right">
-                    <button className="cart-button">
-                    <img src ="/pictures/icons8-cart-64.png" alt="Cart icon"/>
-                    </button>
+                <button className="cart-button" onClick={() => setCartVisible(true)}>
+                    <img src="/pictures/icons8-cart-64.png" alt="Cart icon" />
+                    Visa varukorg
+                </button>
+                   
                 </div>
         </nav>
     );

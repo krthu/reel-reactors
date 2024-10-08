@@ -1,6 +1,6 @@
 const apiUrl = 'https://api.themoviedb.org/3';
-const apiKey = process.env.VITE_TMDB_API_KEY;
-const accessToken = process.env.VITE_TMDB_READ_ACCESS_TOKEN;
+const apiKey = import.meta.env.VITE_TMDB_API_KEY; 
+const accessToken = import.meta.env.VITE_TMDB_READ_ACCESS_TOKEN;
 
 const defaultOptions = {
   headers: {
@@ -31,5 +31,10 @@ const getCast = async (id) => {
   const data = await response.json();
   return data;
 };
+const getRecommendations = async (movieId) => {
+  const response = await fetch(`${apiUrl}/movie/${movieId}/recommendations?api_key=${apiKey}`, defaultOptions);
+  const data = await response.json();
+  return data.results; 
+};
 
-export default { getMovies, getGenres, getMovieDetails, getCast };
+export default { getMovies, getGenres, getMovieDetails, getCast,getRecommendations };

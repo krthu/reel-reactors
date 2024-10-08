@@ -1,4 +1,4 @@
-.poster-carusel-img-container {
+.movie-card-container {
     flex: 0 0 calc((100% / var(--items-per-screen)) - var(--spacing-medium));
     padding: var(--spacing-medium);
     display: flex;
@@ -7,17 +7,17 @@
 
 }
 
-.poster-carusel-img {
+.movie-card-img  {
     border-radius: var(--border-radius-medium);
     box-shadow: var(--box-shadow-medium)
 }
 
-.poster-carusel-img:hover {
+.movie-card-img:hover {
     border: 3px solid var(--hover-color);
 
 }
 
-.carusel-item-selected {
+.movie-card-selected {
     max-height: 100%;
     max-width: 100%;
     position: absolute;

@@ -4,6 +4,7 @@ import './App.css'
 
 import placeholder from './features/placeholder'
 
+
 function App() {
   const ListData = placeholder.getMovieListPlaceholder();
 
@@ -17,8 +18,15 @@ function App() {
   console.log(CastData);
 
 
+
+
+
+
+
   return (
-    <>
+    <>  
+
+  
 
     </>
   )

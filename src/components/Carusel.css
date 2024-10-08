@@ -1,119 +1,80 @@
-:root {
-    --handle-size: 3rem;
-    --img-gap: 20px;
-  }
-  *{
-    box-sizing: border-box;
-  }
+.carusel-section {
+    padding: var(--spacing-smal);
+}
 
-.carusel-container{
+.carusel-container {
     display: flex;
     justify-content: center;
-    /* overflow: hidden; */
-  
-  
 }
 
 .carusel-title {
     margin-left: 80px;
+    color: var(--text-color-light);
 }
 
-/* .carusel-content {
-    --items-per-screen: 4;
-    --slider-index: 0;
-    display: flex;
-    flex-grow: 1;
-    gap: var(--img-gap);
-    background-color: rgba(3, 35, 62, .34);
-    transform: translateX(calc(var(--slider-index) * -100%));
-    transition: transform 250ms ease-in-out;
-    padding: var(--img-gap);
-    border-radius: 24px;
-   
-    overflow-x: scroll;
-    
-
-} */
 .carusel-content {
     --items-per-screen: 5;
-    --slider-index: 0;
     display: flex;
     flex-grow: 1;
-    gap: var(--img-gap);
-    border-radius: 24px;
-    transform: translateX(calc(var(--slider-index) * -100%));
-    transition: transform 250ms ease-in-out;
-    background-color: rgba(3, 35, 62, .34);
-    overflow-x: auto; /* Gör så att inget svämmar över */
-    border: 1px solid #0C518E;
+    align-items: center;
+    gap: var(--spacing-medium);
+    border-radius: var(--border-radius-large);
+    transform: translateX(calc(0 * -100%));
+    transition: var(--transition-default);
+    background-color: var(--movie-list-bg);
+    overflow-x: hidden;
+    border: 1px solid var(--movie-list-border);
 }
 
 
 .carusel-button {
     border: none;
-    border-radius: 1rem;
-    flex-grow: 0;
-    flex-shrink: 0;
-    background-color: rgba(255, 255, 255, .25);
-    /* background-color: orange; */
-    z-index: 10;
-    margin: var(--img-gap) 0;
-    width: var(--handle-size);
+    background-color: var(--button-bg-secondary);
+    margin: var(--spacing-medium) 0;
     cursor: pointer;
-    font-size: 5rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    line-height: 0;
-    transition: background-color 150ms ease-in-out;
-    border: 1px solid black;
-    
+    color: var(--text-color-light);
+    transition: background-color 150ms var(--transition-default);
+}
+
+.carusel-button:hover {
+    background-color: var(--hover-colors);
+
 }
 
 .carusel-chevron {
-    color: #FFFFFF;
     font-size: 3rem;
 }
 
-.carusel-button:hover,
-.carusel-button:focus {
-  background-color: rgba(255, 255, 255, .75);
+.carusel-button:hover {
+    background-color: var(--hover-color);
+    opacity: var(--button-hover-opacity);
 }
 
-.carusel-button-left{
+.carusel-button-left {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
 
 .carusel-button-right {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 }
 
-.carusel-items {
-    display: flex;
-    
-    
+
+
+@media (max-width: 768px) {
+    .carusel-content {
+        --items-per-screen: 3;
+    }
+
 }
 
-/* .carusel-item {
-    width: 100;
-    height: 300px;
-} */
-
-
-
-.poster-carusel-img-container {
-    flex: 0 0 calc((100% / var(--items-per-screen)) - var(--img-gap)); 
-    /* Bort med max-width då flex tar hand om detta */
-    padding: var(--img-gap);
-    border-radius: 1rem;
-    box-sizing: border-box; /* Se till att padding inte överstiger förälderns bredd */
-}
-
-.poster-carusel-img{
-    max-width: 100%;
-    max-height: 100%;
+@media (max-width: 480px) {
+    .carusel-content {
+        --items-per-screen: 2;
+    }
 
 }

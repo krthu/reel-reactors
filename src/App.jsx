@@ -18,24 +18,16 @@ function App() {
   console.log(DetailedMovieData);
   console.log(CastData);
 
-  const posterCarusellItems = [];
-
-  const handlePosterPress = (id) => {
-    console.log(id);
-  }
 
 
-//Change when api i ready
-  const fillCurusell = () => {
-    ListData.results.forEach((movie) => {
-      posterCarusellItems.push(<PosterCarusellItem url={movie.poster_path} key={movie.id} onPress={() => handlePosterPress(movie.id)}/>)
-    })
-  }
-  fillCurusell();
+
+
+
+
   return (
     <>  
-      {/* <PosterCarusellItem url={'/1E5baAaEse26fej7uHcjOgEE2t2.jpg'} /> */}
-      <Carusell items={posterCarusellItems}/>
+
+  
 
     </>
   )

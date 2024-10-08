@@ -1,5 +1,6 @@
 import React from "react";
-//import '/.Navbar.css';
+import './Navbar.css';
+
 
 
 const Navbar = () => {
@@ -18,8 +19,9 @@ const Navbar = () => {
                 <img src="./pictures/reel-reactors-logga.png" alt="Reel Reactors Logo" />
                 </div>
                 <div className="nav-right">
-                    <button>Cart icon</button>
-                <div/>
+                    <button className="cart-button">
+                    <img src ="/pictures/icons8-cart-64.png" alt="Cart icon"/>
+                    </button>
                 </div>
         </nav>
     );

@@ -1,9 +1,13 @@
+import { defaultMethod } from "react-router-dom/dist/dom";
+
 const apiUrl = 'https://api.themoviedb.org/3';
 const apiKey = import.meta.env.VITE_TMDB_API_KEY; // Correct way to access env vars in Vite
 const accessToken = import.meta.env.VITE_TMDB_READ_ACCESS_TOKEN;
 
 const defaultOptions = {
+  defaultMethod: 'GET',
   headers: {
+    accept: 'application/json',
     Authorization: `Bearer ${accessToken}`,
   },
 };

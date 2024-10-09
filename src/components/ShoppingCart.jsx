@@ -4,32 +4,29 @@ import './ShoppingCart.css';
 
 
 const ShoppingCart = ({ cart, removeFromCart, addToCart}) => {
-    console.log('Current cart:', cart);
-
     const mockProduct = {
         id: 'mock-product',
         name: 'Mock Produkt',
         price: 10,
-        quantity: 1,
     };
 
+    const existingItem = cart.find(item => item.id === mockProduct.id);
+
     const handleIncrease = () => {
-        const existingItem = cart.find(item => item.id === mockProduct.id);
         if (existingItem) {
-            addToCart(existingItem);
+            addToCart({ ...existingItem, quantity: existingItem.quantity + 1 });
         } else {
             addToCart({ ...mockProduct, quantity: 1 }); 
         }
     };
 
     const handleDecrease = () => {
-        const existingItem = cart.find(item => item.id === mockProduct.id);
-        if (existingItem && existingItem.quantity > 1) {
-            removeFromCart(existingItem);
-            addToCart({ ...existingItem, quantity: existingItem.quantity - 1 });
-        } else if (existingItem) {
-            removeFromCart(existingItem);
-        }
+            if (existingItem.quantity > 1) {
+                addToCart({ ...existingItem, quantity: existingItem.quantity - 1 });
+            } else {
+                removeFromCart(mockProduct);
+            }
+        
     };
 
     const totalPrice = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
@@ -44,17 +41,17 @@ const ShoppingCart = ({ cart, removeFromCart, addToCart}) => {
                 ) : (
                     <p>Din kundvagn är tom.</p>
                 )}
-               <h3 style={{ display: 'flex', alignItems: 'center' }}>
-                {mockProduct.name}
-                <div style={{ display: 'flex', alignItems: 'center', marginLeft: '10px' }}>
+               <div style={{ display: 'flex', alignItems: 'center', marginTop: '20px' }}>
+                <span style={{ marginRight: '10px' }}></span>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
                     <button onClick={handleDecrease}>-</button>
                     <span style={{ margin: '0 5px' }}>
                         {cart.find(item => item.id === mockProduct.id)?.quantity || 0}
                     </span>
                     <button onClick={handleIncrease}>+</button>
                 </div>
-            </h3>
-            <h3>Totalpris: ${totalPrice.toFixed(2) || 0}</h3>
+            </div>
+            <h3>Totalpris: {totalPrice.toFixed(2) || 0}kr</h3>
         </div>
     );
 };

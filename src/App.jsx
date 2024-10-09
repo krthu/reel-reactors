@@ -13,11 +13,32 @@ import Discover from './components/Discover';
 import Movie from './components/Movie';
 import { configureStore } from '@reduxjs/toolkit';
 import rootReducer from './features/rootReducer';
+import ShoppingCart from './components/ShoppingCart'
+import { useSelector } from 'react-redux';
 
 
 function App() {
 
+  const shoppingCart = useSelector((state) => state.shoppingCart);
+  // console.log(shoppingCart);
 
+
+  const [cart, setCart] = useState([]);
+
+  const addToCart = (movie) => {
+    const existingItem = cart.find(item => item.id === movie.id);
+    if (existingItem) {
+      setCart(cart.map(item => 
+        item.id === movie.id ? { ...existingItem, quantity: existingItem.quantity + 1 } : item
+      ));
+    } else {
+      setCart([...cart, { ...movie, quantity: 1 }]);
+    }
+  };
+
+  const removeFromCart = (movie) => {
+    setCart(cart.filter(item => item.id !== movie.id));
+  };
 
 
 
@@ -27,10 +48,10 @@ function App() {
   const DetailedMovieData = placeholder.getDetaildMoviePlaceholder();
   const CastData = placeholder.getCastPlaceholder();
 
-  console.log(ListData);
-  console.log(GenresData);
-  console.log(DetailedMovieData);
-  console.log(CastData);
+  // console.log(ListData);
+  // console.log(GenresData);
+  // console.log(DetailedMovieData);
+  // console.log(CastData);
 
 
 
@@ -45,6 +66,7 @@ function App() {
         <Route path="/tvseries" element={<TVSeriesPage />} />
           <Route path='/' element={<Discover />} />
           <Route path='/movie/:id' element={<Movie />} />
+          <Route path='/cart' element={<ShoppingCart cart={cart} removeFromCart={removeFromCart} addToCart={addToCart} />} />
         </Routes>
 
       </div>

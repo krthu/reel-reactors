@@ -1,4 +1,4 @@
-import { defaultMethod } from "react-router-dom/dist/dom";
+
 
 const apiUrl = 'https://api.themoviedb.org/3';
 const apiKey = import.meta.env.VITE_TMDB_API_KEY; // Correct way to access env vars in Vite

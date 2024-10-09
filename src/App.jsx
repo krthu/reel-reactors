@@ -11,9 +11,16 @@ import placeholder from './features/placeholder'
 import { Route, Routes } from 'react-router-dom';
 import Discover from './components/Discover';
 import Movie from './components/Movie';
+import { configureStore } from '@reduxjs/toolkit';
+import rootReducer from './features/rootReducer';
 
 
 function App() {
+
+
+
+
+
   const ListData = placeholder.getMovieListPlaceholder();
 
   const GenresData = placeholder.getGenresPlaceholder();

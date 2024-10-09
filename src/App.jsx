@@ -17,18 +17,20 @@ import Movie from './components/Movie';
 function App() {
 
   const [cart, setCart] = useState([]);
-  const [isCartVisible, setCartVisible] = useState(false);
 
   const addToCart = (movie) => {
-    setCart([...cart, movie]);
+    const existingItem = cart.find(item => item.id === movie.id);
+    if (existingItem) {
+      setCart(cart.map(item => 
+        item.id === movie.id ? { ...existingItem, quantity: existingItem.quantity + 1 } : item
+      ));
+    } else {
+      setCart([...cart, { ...movie, quantity: 1 }]);
+    }
   };
 
   const removeFromCart = (movie) => {
     setCart(cart.filter(item => item.id !== movie.id));
-  };
-
-  const closeCart = () => {
-    setCartVisible(false);
   };
 
 
@@ -48,15 +50,12 @@ function App() {
   return (
       <div className='app-container'>
 
-
-
-
-
         <Routes>
             <Route path="/movies" element={<MoviePage />} />
             <Route path="/tvseries" element={<TVSeriesPage />} />
             <Route path='/' element={<Discover />} />
             <Route path='/movie/:id' element={<Movie />} />
+            <Route path='/cart' element={<ShoppingCart cart={cart} removeFromCart={removeFromCart} addToCart={addToCart} />} />
         </Routes>
       </div>
   );

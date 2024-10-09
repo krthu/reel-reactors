@@ -22,10 +22,10 @@ const Navbar = ({ setCartVisible }) => {
                 <img src="./pictures/reel-reactors-logga.png" alt="Reel Reactors Logo" />
             </div>
                 <div className="nav-right">
-                <button className="cart-button" onClick={() => setCartVisible(true)}>
+                <Link to="/cart" className="cart-button">
                     <img src="/pictures/icons8-cart-64.png" alt="Cart icon" />
-                    Visa varukorg
-                </button>
+    
+                </Link>
                    
                 </div>
         </nav>

@@ -1,0 +1,30 @@
+.actor-section {
+    padding: 20px;
+  }
+  
+  .actor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+  }
+  
+  .actor-card {
+    text-align: center;
+  }
+  
+  .actor-photo {
+    width: 100px;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .actor-details h4 {
+    margin: 8px 0;
+    font-size: 16px;
+  }
+  
+  .actor-details p {
+    font-size: 14px;
+    color: #666;
+  }
+  

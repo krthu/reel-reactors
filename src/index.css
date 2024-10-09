@@ -6,7 +6,7 @@
     /* Bakgrunder */
     --body-bg: linear-gradient(to bottom, #000000, #040C18); /* Applicera som huvudbakgrund på body */
     --body-bg-fallback: #040C18; /* Fallback-färg för bakgrunden om gradient inte stöds */
-    --navbar-bg: linear-gradient(to bottom, rgba(11, 18, 32, 0.7), rgba(0, 0, 0, 0.7)); /* Använd för navbarens bakgrund */
+    --navbar-bg: linear-gradient(to bottom, rgba(11, 18, 32, 0.75), rgba(0, 0, 0, 0.75)); /* Använd för navbarens bakgrund */
     --footer-bg: #0B1220; /* Färg för footerns bakgrund (just nu har vi ingen footer med i vår design) */
     --button-bg-primary: linear-gradient(to bottom, #102537, #0c5797); /* Används för primära knappar som "Köp nu" och "Information" */
     --button-bg-secondary: transparent; /* Används för transparenta knappar som "Se Trailer" */

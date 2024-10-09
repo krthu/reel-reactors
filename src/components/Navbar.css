@@ -1,49 +1,61 @@
 .navbar {
+    position: fixed;  /* Håller navbaren fast högst upp */
+    top: 0;
+    left: 0;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: var( --navbar-bg);
+    padding: 10px 20px;
+    z-index: 10; /* Säkerställer att navbaren ligger över headern */
     color: white;
 }
 
 .nav-left {
     display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Flyttar upp både länkar och sökrutan i containern */
+    gap: 10px;
+    flex: 1;  /* Tillåter .nav-left att ta upp mer utrymme */
 }
 
-.nav-left button {
-    background: pink;
-    border: none;
-    color: white;   
+.links {
+    display: flex;
+    gap: 20px;
 }
 
+.search-container {
+    flex-grow: 1; /* Låter sökrutan ta upp mer utrymme inom sin container */
+    width: 100%;
+}
+
+.search-container input {
+    padding: 10px;
+    background-color: rgba(0, 94, 170, 0.3); /* 0.5 är 50% opacity */
+    color: white;
+    width: 100%; /* Anpassa bredden efter behov */
+}
 
 .logo-center {
-    flex: 1;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex: 1;  /* Justerar loggan så att den centreras */
 }
 
 .logo {
-    width: 100px;
+    width: 350px; /* Anpassa storlek efter behov */
     height: auto;
 }
 
 .nav-right {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-}
-
-.search-container input {
-    background-color: #333;
-}
-
-.search-container input::placeholder {
-    color: #aaa;
+    justify-content: flex-end;
+    flex: 1;  /* Fördelar utrymme till höger */
 }
 
 .cart-button {
-    background: none;   
-}
-
-.cart-icon {
-    height: auto;
+    background: none;
+    border: none;
+    cursor: pointer;
 }

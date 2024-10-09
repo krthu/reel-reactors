@@ -90,7 +90,6 @@ body {
     background: var(--body-bg-fallback); 
     background: var(--body-bg); /* Gradient */
     font-family: var(--font-family);
-    max-width: 1200px; /* Begränsa bredden på body för stora skärmar */
     margin: 0 auto; /* Centrerar innehållet */
 }
   

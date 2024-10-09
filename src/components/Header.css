@@ -1,0 +1,36 @@
+/* Header-styling */
+.header {
+    position: relative;
+    height: 80vh;
+    background: url('https://image.tmdb.org/t/p/original/3q01ACG0MWm0DekhvkPFCXyPZSu.jpg') no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    color: white;
+    padding: 20px;
+}
+
+/* Content inside the header */
+.header-content {
+    max-width: 600px;
+    z-index: 2;
+}
+
+.header h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.header h2 {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.header p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}

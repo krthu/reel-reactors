@@ -1,6 +1,6 @@
 import Carusel from "./Carusel";
 import Navbar from "./Navbar";
-
+import Header from "./Header";
 import MovieCard from "./MovieCard";
 import placeholder from "../features/placeholder";
 import { useState } from "react";
@@ -29,22 +29,21 @@ const Discover = () => {
     fillCarusell();
 
     return (
-        <div className="body-container">
-            <div className="header-container">
-                
-                <div className="navbar-container">
-                    <Navbar />
-                </div>
-            </div>
-
-            <div className="movie-genre-container">
-                <div className="popular-movie-container">
-                    <Carusel items={popularCaruselItems} title={"Populära Filmer"} />
-                </div>
-                {/* Lägg till fler genrer här */}
-            </div>
-        </div>
-    );
+      <div className="body-container">
+          <div className="header-container"> {/* Ny container för headern */}
+              <Navbar />
+              <Header />
+          </div>
+  
+          <div className="movie-genre-container">
+              <div className="popular-movie-container">
+                  <Carusel items={popularCaruselItems} title={"Populära Filmer"} />
+              </div>
+              {/* Lägg till fler genrer här, fylla på dynamiskt? */}
+          </div>
+      </div>
+  );
+  
 }
 
 export default Discover;

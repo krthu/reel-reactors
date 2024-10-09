@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom"
 import RecommendationComp from "./RecommendationComp";
+import ActorCard from './ActorCard';
 
 const Movie = () => {
     const params = useParams();
@@ -12,6 +13,7 @@ const Movie = () => {
             <h1>Movie Details for {id}</h1>
             Movie {id}
             <RecommendationComp movieId={id} />
+            <ActorCard movieId={id} />
         </div>
     )
 }

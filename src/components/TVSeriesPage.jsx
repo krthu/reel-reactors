@@ -7,7 +7,7 @@ const TVSeriesPage = () => {
 
     return(
         <div className="tvseries-page">
-        <h1>HÄR LISTAR VI ALLA TV SERIER</h1>
+        <h1>List of all TV series</h1>
         </div>
     );
 };

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './MovieInformation.css';
-import { getMovieDetails, getCast } from '../api/api'; // Assuming this is the correct path for the API file
+import { getMovieDetails, getCast, getRecommendations } from '../api/api'; // Make sure getRecommendations is correctly imported
 import { useParams } from 'react-router-dom';
 
 const MovieInformation = ({ onBuy, onWatchTrailer }) => {
@@ -8,9 +8,10 @@ const MovieInformation = ({ onBuy, onWatchTrailer }) => {
   const [movie, setMovie] = useState(null);
   const [cast, setCast] = useState([]);
   const [crew, setCrew] = useState([]);
+  const [recommendations, setRecommendations] = useState([]);
 
   useEffect(() => {
-    const placeholderId = ''; // Placeholder ID
+    const placeholderId = '533535'; // Placeholder ID
     const movieId = id || placeholderId;
 
     if (!movieId) {
@@ -22,9 +23,12 @@ const MovieInformation = ({ onBuy, onWatchTrailer }) => {
       try {
         const movieData = await getMovieDetails(movieId);
         const castData = await getCast(movieId);
-        setMovie({ ...movieData, recommendations: movieData.recommendations || [] });
+        const recData = await getRecommendations(movieId);
+
+        setMovie(movieData);
         setCast(castData.cast);
         setCrew(castData.crew);
+        setRecommendations(recData);
       } catch (error) {
         console.error('Error fetching movie data:', error);
       }
@@ -52,7 +56,7 @@ const MovieInformation = ({ onBuy, onWatchTrailer }) => {
           <p className="overview">{movie.overview}</p>
           <div className="crew-info">
             {crew.map((member) => (
-              <p key={`crew-${member.credit_id}`}><strong>{member.name}</strong> {member.job}</p>
+              <p key={member.credit_id}><strong>{member.name}</strong> {member.job}</p>
             ))}
           </div>
           <div className="actions">
@@ -66,7 +70,7 @@ const MovieInformation = ({ onBuy, onWatchTrailer }) => {
         <h2>Huvudrollsinnehavare</h2>
         <div className="cast-list">
           {cast.map((actor) => (
-            <div key={`cast-${actor.id}`} className="cast-card">
+            <div key={actor.credit_id} className="cast-card">
               <img
                 src={`https://image.tmdb.org/t/p/w185${actor.profile_path}`}
                 alt={actor.name}
@@ -78,16 +82,17 @@ const MovieInformation = ({ onBuy, onWatchTrailer }) => {
           ))}
         </div>
       </div>
-      <div className="recommendations">
+      <div className="cast-section">
         <h2>Rekommendationer</h2>
-        <div className="recommendations-list">
-          {movie.recommendations.map((rec) => (
-            <div key={`rec-${rec.id}`} className="recommendation-card">
+        <div className="cast-list">
+          {recommendations.map((rec) => (
+            <div key={rec.id} className="cast-card">
               <img
                 src={`https://image.tmdb.org/t/p/w185${rec.poster_path}`}
                 alt={rec.title}
-                className="recommendation-image"
+                className="cast-image"
               />
+              <p className="cast-title">{rec.title}</p>
             </div>
           ))}
         </div>

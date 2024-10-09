@@ -51,4 +51,14 @@ export const getCast = async (id) => {
   }
 };
 
-export default { getMovies, getGenres, getMovieDetails, getCast };
+export const getRecommendations = async (id) => {
+  try {
+    const response = await apiClient.get(`/movie/${id}/recommendations`);
+    return response.data.results;
+  } catch (error) {
+    console.error('Error fetching recommendations:', error);
+    throw error;
+  }
+};
+
+export default { getMovies, getGenres, getMovieDetails, getCast, getRecommendations };

@@ -104,6 +104,13 @@
     overflow-x: auto;
     padding: 10px 0;
   }
+
+  .rec-list {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding: 10px 0;
+  }
   
   .cast-card {
     flex: 0 0 auto;

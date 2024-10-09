@@ -1,0 +1,28 @@
+.recommendation-section {
+    padding: 20px;
+  }
+  
+  .recommendation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+  }
+  
+  .recommendation-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .recommendation-poster {
+    width: 150px;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .recommendation-card h4 {
+    margin-top: 8px;
+    font-size: 14px;
+    text-align: center;
+  }
+  

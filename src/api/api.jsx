@@ -35,5 +35,10 @@ const getCast = async (id) => {
   const data = await response.json();
   return data;
 };
+const getRecommendations = async (movieId) => {
+  const response = await fetch(`${apiUrl}/movie/${movieId}/recommendations?api_key=${apiKey}`, defaultOptions);
+  const data = await response.json();
+  return data.results; 
+};
 
-export default { getMovies, getGenres, getMovieDetails, getCast };
+export default { getMovies, getGenres, getMovieDetails, getCast,getRecommendations };

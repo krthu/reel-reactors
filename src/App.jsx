@@ -4,7 +4,6 @@ import Navbar from './components/Navbar';
 import MoviePage from './components/MoviePage';
 import TVSeriesPage from './components/TVSeriesPage';
 
-import ShoppingCart from './components/Shoppingcart';
 
 import './App.css'
 
@@ -17,29 +16,9 @@ import rootReducer from './features/rootReducer';
 
 
 function App() {
-<<<<<<< HEAD
 
 
 
-=======
-
-  const [cart, setCart] = useState([]);
-
-  const addToCart = (movie) => {
-    const existingItem = cart.find(item => item.id === movie.id);
-    if (existingItem) {
-      setCart(cart.map(item => 
-        item.id === movie.id ? { ...existingItem, quantity: existingItem.quantity + 1 } : item
-      ));
-    } else {
-      setCart([...cart, { ...movie, quantity: 1 }]);
-    }
-  };
-
-  const removeFromCart = (movie) => {
-    setCart(cart.filter(item => item.id !== movie.id));
-  };
->>>>>>> dev
 
 
   const ListData = placeholder.getMovieListPlaceholder();
@@ -55,18 +34,25 @@ function App() {
 
 
 
+
+
+
+
   return (
       <div className='app-container'>
-
         <Routes>
-            <Route path="/movies" element={<MoviePage />} />
-            <Route path="/tvseries" element={<TVSeriesPage />} />
-            <Route path='/' element={<Discover />} />
-            <Route path='/movie/:id' element={<Movie />} />
-            <Route path='/cart' element={<ShoppingCart cart={cart} removeFromCart={removeFromCart} addToCart={addToCart} />} />
+        <Route path="/movies" element={<MoviePage />} />
+        <Route path="/tvseries" element={<TVSeriesPage />} />
+          <Route path='/' element={<Discover />} />
+          <Route path='/movie/:id' element={<Movie />} />
         </Routes>
+
       </div>
-  );
+
+  
+
+    
+  )
 }
 
-export default App;
+export default App

@@ -6,7 +6,7 @@ const MoviePage = () => {
 
     return (
         <div className="movie-page">
-            <h1>HÄR LISTAR VI ALLA FILMER</h1>
+            <h1>List of all movies</h1>
         </div>
     );
 };

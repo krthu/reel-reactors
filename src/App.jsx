@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Navbar from './components/Navbar';
 import MoviePage from './components/MoviePage';
 import TVSeriesPage from './components/TVSeriesPage';
-
+import MyMovies from './components/MyMovies';
 
 import './App.css'
 
@@ -64,6 +64,7 @@ function App() {
         <Routes>
         <Route path="/movies" element={<MoviePage />} />
         <Route path="/tvseries" element={<TVSeriesPage />} />
+        <Route path="/mymovies" element={<MyMovies />} />
           <Route path='/' element={<Discover />} />
           <Route path='/movie/:id' element={<Movie />} />
           <Route path='/cart' element={<ShoppingCart cart={cart} removeFromCart={removeFromCart} addToCart={addToCart} />} />

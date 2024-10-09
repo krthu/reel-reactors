@@ -1,14 +1,14 @@
 // Overlay.jsx
 import React from 'react';
-import './Overlay.css'; // Lägg till styling separat
+import './Overlay.css'; 
 
 const Overlay = ({ show, onClose, children }) => {
-  if (!show) return null; // Rendera inte overlayn om show är falsk
+  if (!show) return null; 
 
   return (
     <div className="overlay" onClick={onClose}>
       <div className="overlay-content" onClick={(e) => e.stopPropagation()}>
-        {children} {/* Visar allt som skickas som innehåll */}
+        {children} 
       </div>
     </div>
   );

@@ -85,19 +85,40 @@ const Discover = () => {
           <div className="popular-movie-container">
             <Carusel items={popularCaruselItems} title={"Populära Filmer"} />
           </div>
+          <div className="popular-movie-container">
+            <Carusel items={popularCaruselItems} title={"Populära Filmer"} />
+          </div>
+          <div className="popular-movie-container">
+            <Carusel items={popularCaruselItems} title={"Populära Filmer"} />
+          </div>
+          <div className="popular-movie-container">
+            <Carusel items={popularCaruselItems} title={"Populära Filmer"} />
+          </div>
+          <div className="popular-movie-container">
+            <Carusel items={popularCaruselItems} title={"Populära Filmer"} />
+          </div>
+          <div className="popular-movie-container">
+            <Carusel items={popularCaruselItems} title={"Populära Filmer"} />
+          </div>
         </div>
       </div>
+  {/* Overlay */}
+  <Overlay show={showOverlay} onClose={closeOverlay}>
+  {selectedMovie && (
+    <>
+      <img
+        src={`https://image.tmdb.org/t/p/original${selectedMovie.backdrop_path}`}
+        alt={selectedMovie.title}
+        className="img"
+      />
+      <h2>{selectedMovie.title}</h2>            
+      <p>{selectedMovie.overview}</p>
+      <button onClick={closeOverlay}>X</button>
+    </>
+  )}
+</Overlay>
 
-      {/* Overlay */}
-      <Overlay show={showOverlay} onClose={closeOverlay}>
-        {selectedMovie && (
-          <>
-            <h2>{selectedMovie.title}</h2>
-            <p>{selectedMovie.overview}</p>
-            <button onClick={closeOverlay}>Stäng</button>
-          </>
-        )}
-      </Overlay>
+
     </>
   );
 }

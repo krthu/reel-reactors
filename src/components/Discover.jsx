@@ -64,17 +64,18 @@ const Discover = () => {
         fillCarusell(); // körs bara när komponenten laddas första gången
     }, [ListData]); // lyssna på ListData om det ändras
 
-    const fillHeader = () => {
-        if (ListData === null) {
-            return
-        }
-        if (ListData.results && ListData.results.length > 0) {
-            const firstMovie = ListData.results[0];
+    const fillHeader = (movieData) => {
+        // if (ListData === null) {
+        //     return
+        // }
+
+        // if (ListData.results && ListData.results.length > 0) {
+            const firstMovie = movieData.results[0];
             const baseImageUrl = 'https://image.tmdb.org/t/p/original';
             setBackdropUrl(`${baseImageUrl}${firstMovie.backdrop_path}`);
             setMovieTitle(firstMovie.title);
             setMovieOverview(firstMovie.overview);
-        }
+        // }
     };
 
 
@@ -84,7 +85,7 @@ const Discover = () => {
                 
                 const movieData = await getMovies();
                 setListData(movieData);
-                fillHeader();
+                fillHeader(movieData);
             } catch (error) {
                 console.error('Error fetching movie data:', error);
             }

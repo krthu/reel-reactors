@@ -11,6 +11,7 @@ const ShoppingCart = () => {
     console.log(shoppingCart);
 
 
+
    // const existingItem = cart.find(item => item.id === mockProduct.id);
 
 
@@ -36,11 +37,16 @@ const ShoppingCart = () => {
 
     return (
         <div className="shopping-cart">
-            <h2>Din Varukorg</h2>
+          <div className="cart-header">
+            <div>Produkt</div>
+            <div>Pris</div>
+            <div>Antal</div>
+            <div>Totalt</div>
+        </div>
                 {shoppingCart.length > 0 ? (
                     shoppingCart.map(cartItem => (
-                        
                         <CartItem key={cartItem.item.id} cartItem={cartItem}/>
+                        
                     ))
                 ) : (
                     <p>Din kundvagn är tom.</p>
@@ -59,7 +65,11 @@ const ShoppingCart = () => {
                     {/* <button onClick={handleAddToCart}>+</button> */}
                 {/* </div>
             </div> */}
-            <h3>Totalpris: {totalPrice.toFixed(2) || 0}kr</h3>
+
+            
+            <div className="cart-footer">
+            <h3 className="total-price">Totalpris: {totalPrice.toFixed(2) || 0}kr</h3>
+        </div>
         </div>
     );
 };

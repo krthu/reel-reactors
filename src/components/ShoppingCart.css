@@ -1,38 +1,52 @@
 .shopping-cart {
-    padding: var(--spacing-medium);
-    background-color: var(--movie-list-bg);
-    border: 1px solid var(--movie-list-border);
-    border-radius: var(--border-radius-medium);
-    box-shadow: var(--box-shadow-small);
-    color: var(--text-color-light);
-}
-
-.products, .cart {
     display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-medium);
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: var(--spacing-medium);
+    background-color: var(--movie-list-bg); /* Mörk bakgrund med transparens */
+    border: 1px;
+    border-radius: var(--border-radius-medium);
+    color: var(--text-color-light); /* Ljus text */
+    width: 800px;
+    box-shadow: var(--box-shadow-medium);
+    font-family: var(--font-family);
+    position: relative;
 }
 
-.product, .cart-item {
-    border: 1px solid var(--movie-list-border);
+.cart-header {
+    display: flex;
+    justify-content: flex-end;
+    gap: 50px;
     padding: var(--spacing-small);
-    width: 150px;
+    font-weight: 300;
+    border-bottom: 1px solid var(--movie-list-border);
+    margin-bottom: var(--spacing-small);
+}
+
+.cart-header div {
+    flex:1;
+    text-align: right;
+}
+
+
+
+.cart-footer {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: var(--spacing-large);
+}
+
+h2, h3 {
+    color: var(--text-color-light); /* Ljus textfärg */
+    font-weight: 700;
     text-align: center;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: var(--border-radius-small);
 }
 
-button {
-    background-color: var(--button-bg-primary);
+.total-price {
+    font-size: var(--font-size-large);
+    font-weight: 700;
+    margin-top: var(--spacing-medium);
     color: var(--text-color-light);
-    border: none;
-    padding: var(--spacing-small);
-    cursor: pointer;
-    border-radius: var(--border-radius-small);
-    transition: var(--transition-default);
 }
 
-button:hover {
-    background-color: var(--hover-color);
-    opacity: var(--button-hover-opacity);
-}

@@ -2,13 +2,13 @@ import Carusel from "./Carusel";
 import Navbar from "./Navbar";
 import Header from "./Header";
 import MovieCard from "./MovieCard";
-import placeholder from "../features/placeholder";
 import { useState, useEffect } from "react";
 import Overlay from "./Overlay";
-import api, { getMovies } from "../api/api";
+import { getMovies, getMoviesWithGenres } from "../api/api";
 
 const Discover = () => {
     //const ListData = placeholder.getMovieListPlaceholder();
+    const [movieData, setMovieData] = useState({});
     const [ListData, setListData] = useState(null);
     const [selectedMovieID, setSelectedMovieID] = useState('');
     const [showOverlay, setShowOverlay] = useState(false);
@@ -17,6 +17,7 @@ const Discover = () => {
     const [movieTitle, setMovieTitle] = useState("");
     const [movieOverview, setMovieOverview] = useState("");
     const [popularCaruselItems, setPopularCaruselItems] = useState([]);
+
 
     // lyssna på URL-ändringar
     useEffect(() => {
@@ -65,17 +66,13 @@ const Discover = () => {
     }, [ListData]); // lyssna på ListData om det ändras
 
     const fillHeader = (movieData) => {
-        // if (ListData === null) {
-        //     return
-        // }
+        //Write a random function for this 
+        const firstMovie = movieData.results[0];
+        const baseImageUrl = 'https://image.tmdb.org/t/p/original';
+        setBackdropUrl(`${baseImageUrl}${firstMovie.backdrop_path}`);
+        setMovieTitle(firstMovie.title);
+        setMovieOverview(firstMovie.overview);
 
-        // if (ListData.results && ListData.results.length > 0) {
-            const firstMovie = movieData.results[0];
-            const baseImageUrl = 'https://image.tmdb.org/t/p/original';
-            setBackdropUrl(`${baseImageUrl}${firstMovie.backdrop_path}`);
-            setMovieTitle(firstMovie.title);
-            setMovieOverview(firstMovie.overview);
-        // }
     };
 
 
@@ -94,6 +91,89 @@ const Discover = () => {
         
     },[]);
 
+    useEffect(() => {
+        const fetchAllData = async () => {
+            try {
+                // Hämta data för alla genrer parallellt
+                const data = await fetchMovieData();
+                setMovieData(data); // Uppdatera state med all genre-data
+            } catch (error) {
+                console.error('Error fetching movie data:', error);
+            }
+        };
+        
+        fetchAllData();
+    }, []);
+
+    const genres = [
+        { id: 28, name: "Action" },
+        { id: 35, name: "Comedy" },
+        { id: 18, name: "Drama" },
+        { id: 878, name: "Science Fiction" },
+        { id: 27, name: "Horror" }
+    ];
+
+    const fetchMovieData = async () => {
+     //   const data = {};
+        // const res = await getMovies();
+        // const res2 = await getMoviesWithGenres(28);
+        // console.log(res);
+        // console.log(res2);
+        // data['Action'] = res;
+        // setMovieData(data)
+
+
+
+
+        const data = {};
+        const promises = genres.map(async(genre) =>{
+            // console.log(genre);
+            const genreData = await getMoviesWithGenres(genre.id);
+            // console.log(genreData);
+            data[genre.name] = genreData;
+            
+        });
+        await Promise.all(promises);
+        // console.log(data)
+        return data
+
+
+        // for (const genre of genres){
+        //     const genreData = await getMoviesWithGenres(genre.id);
+            
+        //     data[genre.name] = genreData
+
+        // }
+        // setMovieData(data);
+
+    }
+
+    const renderCarusels = () => {
+
+        if (!movieData || Object.keys(movieData).length === 0) {
+            return <div>Loading...</div>; // Visa laddningsmeddelande tills data är hämtad
+        }
+
+        return genres.map((genre) => {
+            const movies = movieData[genre.name] || [];
+            const movieCards = movies.results.map((movie) => {
+               return( <MovieCard
+                    url={movie.poster_path}
+                    key={movie.id}
+                    onPress={() => handlePosterPress(movie)}
+                    isSelected={movie.id === selectedMovieID}
+                />
+               );
+            });
+            return (
+                <div key={genre.id} className="popular-movie-container">
+                    <Carusel items={movieCards} title={genre.name} />
+                </div>
+            )
+        })
+
+    }
+
 
 
     return (
@@ -105,7 +185,10 @@ const Discover = () => {
                 </div>
 
                 <div className="movie-genre-container">
-                    <div className="popular-movie-container">
+
+                    {renderCarusels()}
+
+                    {/* <div className="popular-movie-container">
                         <Carusel items={popularCaruselItems} title={"Populära Filmer"} />
                     </div>
                     <div className="popular-movie-container">
@@ -121,8 +204,8 @@ const Discover = () => {
                         <Carusel items={popularCaruselItems} title={"Populära Filmer"} />
                     </div>
                     <div className="popular-movie-container">
-                        <Carusel items={popularCaruselItems} title={"Populära Filmer"} />
-                    </div>
+                        <Carusel items={popularCaruselItems} title={"Populära Filmer"} /> */}
+                    {/* </div> */}
                 </div>
             </div>
             {/* Overlay */}

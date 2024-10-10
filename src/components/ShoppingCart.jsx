@@ -12,7 +12,7 @@ const ShoppingCart = () => {
 
 
 
-   // const existingItem = cart.find(item => item.id === mockProduct.id);
+   
 
 
     const handleIncrease = () => {

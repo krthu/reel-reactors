@@ -39,11 +39,13 @@ const ShoppingCart = () => {
 
     return (
         <div className="shopping-cart">
-          <div className="cart-header">
-            <div>Produkt</div>
-            <div>Pris</div>
-            <div>Antal</div>
-            <div>Totalt</div>
+          <div class="cart-header">
+      
+            <div className="header-item">Produkt</div>
+            <div className="header-item">Pris</div>
+            <div className="header-item">Antal</div>
+            <div className="header-item">Total</div>
+          
         </div>
                 {shoppingCart.length > 0 ? (
                     shoppingCart.map(cartItem => (
@@ -67,6 +69,9 @@ const ShoppingCart = () => {
                     {/* <button onClick={handleAddToCart}>+</button> */}
                 {/* </div>
             </div> */}
+
+
+
 
             
             <div className="cart-footer">

@@ -7,28 +7,31 @@
     border: 1px;
     border-radius: var(--border-radius-medium);
     color: var(--text-color-light); /* Ljus text */
-    width: 800px;
+    width: 100%;
+    margin-top: 20px;
     box-shadow: var(--box-shadow-medium);
     font-family: var(--font-family);
     position: relative;
 }
 
-.cart-header {
-    display: flex;
-    justify-content: flex-end;
-    gap: 50px;
+.cart-header, .cart-item {
+    display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr; 
+    justify-content: flex-start;
+    gap: 20px;
     padding: var(--spacing-small);
-    font-weight: 300;
+    font-weight: 500;
     border-bottom: 1px solid var(--movie-list-border);
     margin-bottom: var(--spacing-small);
 }
 
-.cart-header div {
-    flex:1;
+.cart-header div, .cart-item div {
     text-align: right;
 }
 
-
+.header-item {
+    font-size: var(--font-size-medium);
+}
 
 .cart-footer {
     display: flex;
@@ -50,3 +53,86 @@ h2, h3 {
     color: var(--text-color-light);
 }
 
+
+
+
+
+
+
+
+
+
+
+.cart-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+    background-color: var(--navbar-bg); /* Bakgrundsfärg */
+    padding: var(--spacing-small); /* Inre avstånd */
+    border-radius: var(--border-radius-medium); /* Rundade hörn */
+    margin-bottom: var(--spacing-small); /* Avstånd mellan varor */
+}
+
+.cart-item img {
+    width: 100px; 
+    border-radius: 2px; 
+    margin-right: 20px;
+
+}
+
+.cartItem-info {
+    display: flex;
+    flex-direction: column; 
+    margin-left: 10px;
+}
+
+.cart-item h4 {
+    margin: 0;
+    font-size: var(--font-size-medium);
+    font-weight: 500;
+    color: var(--text-color-light);
+}
+
+.cart-item p {
+    margin: var(--spacing-small) 0; /* Utrymme mellan stycken */
+    font-size: var(--font-size-small);
+    color: var(--text-color-light);
+}
+
+.cartItem-price, .carItem-count-container, .cart-item-totalt{
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 10px;
+}
+
+button { 
+    display: grid;
+    background: var(--button-bg-primary); 
+    color: var(--text-color-light);
+    border: none;
+    padding: 4px 10px;
+    font-size: 0.875rem;
+    margin: 0 5px; /* Utrymme mellan knapparna */
+    border-radius: var(--border-radius-small);
+    cursor: pointer;
+    transition: var(--transition-default);
+    
+}
+
+button:hover {
+    background-color: var(--hover-color); 
+    opacity: var(--button-hover-opacity);
+}
+
+.delete-button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: var(--font-size-small);
+}
+
+.delete-button:hover {
+    color: red;
+}

@@ -7,9 +7,9 @@ const Navbar = () => {
         <nav className="navbar">
             <div className="nav-left">
                 <div className="links">
-                    <Link to="/movies">Filmer</Link>
-                    <Link to="/tvseries">TV-serier</Link>
-                    <Link to="/mymovies">Mina Filmer</Link>
+                    <Link to="/movies">Movies</Link>
+                    <Link to="/tvseries">TV-Shows</Link>
+                    <Link to="/mymovies">My Movies</Link>
                 </div>
                 <div className="search-container">
                     <input type="text" placeholder="Sök..." />

@@ -5,6 +5,7 @@ import MoviePage from './components/MoviePage';
 import TVSeriesPage from './components/TVSeriesPage';
 import MyMovies from './components/MyMovies';
 import MovieInformation from './components/MovieInformation';
+import Checkout from './components/CheckOut';
 
 import './App.css'
 
@@ -68,6 +69,7 @@ function App() {
           <Route path="/mymovies" element={<MyMovies />} />
           <Route path='/' element={<Discover />} />
           <Route path='/movie/:id' element={<MovieInformation />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path='/cart' element={<ShoppingCart cart={cart} removeFromCart={removeFromCart} addToCart={addToCart} />} />
         </Routes>
 

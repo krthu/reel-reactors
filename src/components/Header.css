@@ -2,7 +2,7 @@
 .header {
     position: relative;
     height: 80vh;
-    background: url('https://image.tmdb.org/t/p/original/3q01ACG0MWm0DekhvkPFCXyPZSu.jpg') no-repeat center center/cover;
+    background: no-repeat center center/cover;
     display: flex;
     align-items: center;
     justify-content: center;

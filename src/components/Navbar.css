@@ -59,3 +59,9 @@
     border: none;
     cursor: pointer;
 }
+
+.cart-icon {
+    width: 32px;  /* Ändra till önskad bredd */
+    height: 32px; /* Ändra till önskad höjd */
+  }
+  

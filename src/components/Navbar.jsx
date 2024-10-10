@@ -21,10 +21,12 @@ const Navbar = () => {
             </div>
 
             <div className="nav-right">
-                <button className="cart-button">
-                    <img src="/pictures/icons8-cart-64.png" alt="Cart icon" className="cart-icon" />
-                </button>
-            </div>
+                <Link to="/cart" className="cart-button">
+                    <img src="/pictures/icons8-cart-64.png" alt="Cart icon" />
+    
+                </Link>
+                   
+                </div>
         </nav>
 
     );

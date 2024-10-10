@@ -33,7 +33,9 @@ const ShoppingCart = () => {
     };
     //Behöver en ny funktion för det det här som loopar igenom vår shopping cart och tar count * price för alla  
     // const totalPrice = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-    const totalPrice = 0;
+    const totalPrice = shoppingCart.reduce((total, cartItem) => {
+        return total + (cartItem.price * cartItem.count);
+    }, 0);
 
     return (
         <div className="shopping-cart">

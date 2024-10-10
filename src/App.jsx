@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import MoviePage from './components/MoviePage';
 import TVSeriesPage from './components/TVSeriesPage';
 import MyMovies from './components/MyMovies';
+import MovieInformation from './components/MovieInformation';
 
 import './App.css'
 
@@ -62,11 +63,11 @@ function App() {
   return (
       <div className='app-container'>
         <Routes>
-        <Route path="/movies" element={<MoviePage />} />
-        <Route path="/tvseries" element={<TVSeriesPage />} />
-        <Route path="/mymovies" element={<MyMovies />} />
+          <Route path="/movies" element={<MoviePage />} />
+          <Route path="/tvseries" element={<TVSeriesPage />} />
+          <Route path="/mymovies" element={<MyMovies />} />
           <Route path='/' element={<Discover />} />
-          <Route path='/movie/:id' element={<Movie />} />
+          <Route path='/movie/:id' element={<MovieInformation />} />
           <Route path='/cart' element={<ShoppingCart cart={cart} removeFromCart={removeFromCart} addToCart={addToCart} />} />
         </Routes>
 

@@ -1,44 +1,64 @@
-
+import axios from 'axios';
 
 const apiUrl = 'https://api.themoviedb.org/3';
-const apiKey = import.meta.env.VITE_TMDB_API_KEY; // Correct way to access env vars in Vite
+const apiKey = import.meta.env.VITE_TMDB_API_KEY; // Access Vite environment variables
 const accessToken = import.meta.env.VITE_TMDB_READ_ACCESS_TOKEN;
 
-const defaultOptions = {
-  defaultMethod: 'GET',
+const apiClient = axios.create({
+  baseURL: apiUrl,
   headers: {
-    accept: 'application/json',
     Authorization: `Bearer ${accessToken}`,
   },
+});
+
+export const getMovies = async () => {
+  try {
+    const response = await apiClient.get('/movie/popular');
+    return response.data; // Axios automatically parses the JSON
+  } catch (error) {
+    console.error('Error fetching movies:', error);
+    throw error;
+  }
 };
 
-const getMovies = async () => {
-  const response = await fetch(`${apiUrl}/movie/popular`, defaultOptions);
-  const data = await response.json();
-  return data;
+export const getGenres = async () => {
+  try {
+    const response = await apiClient.get('/genre/movie/list');
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching genres:', error);
+    throw error;
+  }
 };
 
-const getGenres = async () => {
-  const response = await fetch(`${apiUrl}/genre/movie/list`, defaultOptions);
-  const data = await response.json();
-  return data;
+export const getMovieDetails = async (id) => {
+  try {
+    const response = await apiClient.get(`/movie/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching movie details:', error);
+    throw error;
+  }
 };
 
-const getMovieDetails = async (id) => {
-  const response = await fetch(`${apiUrl}/movie/${id}`, defaultOptions);
-  const data = await response.json();
-  return data;
+export const getCast = async (id) => {
+  try {
+    const response = await apiClient.get(`/movie/${id}/credits`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching cast:', error);
+    throw error;
+  }
 };
 
-const getCast = async (id) => {
-  const response = await fetch(`${apiUrl}/movie/${id}/credits`, defaultOptions);
-  const data = await response.json();
-  return data;
-};
-const getRecommendations = async (movieId) => {
-  const response = await fetch(`${apiUrl}/movie/${movieId}/recommendations?api_key=${apiKey}`, defaultOptions);
-  const data = await response.json();
-  return data.results; 
+export const getRecommendations = async (id) => {
+  try {
+    const response = await apiClient.get(`/movie/${id}/recommendations`);
+    return response.data.results;
+  } catch (error) {
+    console.error('Error fetching recommendations:', error);
+    throw error;
+  }
 };
 
-export default { getMovies, getGenres, getMovieDetails, getCast,getRecommendations };
+export default { getMovies, getGenres, getMovieDetails, getCast, getRecommendations };

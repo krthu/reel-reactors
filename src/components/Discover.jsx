@@ -16,30 +16,30 @@ const Discover = () => {
   const [movieOverview, setMovieOverview] = useState("");
   const [popularCaruselItems, setPopularCaruselItems] = useState([]);
 
-  // Lyssna på URL-ändringar
+  // lyssna på URL-ändringar
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const movieIDFromURL = urlParams.get('jbv'); // Hämta filmens ID från URL
+    const movieIDFromURL = urlParams.get('jbv'); // hämta filmens ID från URL
     if (movieIDFromURL) {
       const foundMovie = ListData.results.find(movie => movie.id === parseInt(movieIDFromURL));
       if (foundMovie) {
-        setSelectedMovie(foundMovie); // Sätt vald film baserat på URL
-        setShowOverlay(true); // Visa overlay
+        setSelectedMovie(foundMovie); // sätt vald film baserat på URL
+        setShowOverlay(true); // visa overlay
       }
     }
-  }, [window.location.search]); // Kör varje gång URL:en uppdateras
+  }, [window.location.search]); // kör varje gång URL:en uppdateras
 
   const handlePosterPress = (movie) => {
-    setSelectedMovie(movie); // Sätt vald film
-    setShowOverlay(true); // Visa overlay
-    // Uppdatera URL utan att ladda om sidan
+    setSelectedMovie(movie); // sätt vald film
+    setShowOverlay(true); // visa overlay
+    // uppdatera URL utan att ladda om sidan
     window.history.pushState({}, '', `?jbv=${movie.id}`);
   }
 
   const closeOverlay = () => {
-    setShowOverlay(false); // Stäng overlay
-    setSelectedMovie(null); // Nollställ vald film
-    // Återställ URL till standardvärdet
+    setShowOverlay(false); // stäng overlay
+    setSelectedMovie(null); // nollställ vald film
+    // återställ URL till standardvärdet
     window.history.pushState({}, '', window.location.pathname);
   }
 
@@ -48,16 +48,16 @@ const Discover = () => {
       <MovieCard
         url={movie.poster_path}
         key={movie.id}
-        onPress={() => handlePosterPress(movie)} // Skicka hela movie-objektet
+        onPress={() => handlePosterPress(movie)} // skicka hela movie-objektet
         isSelected={movie.id === selectedMovieID}
       />
     ));
-    setPopularCaruselItems(items); // Uppdatera state med filmkorten
+    setPopularCaruselItems(items); // uppdatera state med filmkorten
   }
 
   useEffect(() => {
-    fillCarusell(); // Körs bara när komponenten laddas första gången
-  }, [ListData]); // Lyssna på ListData om det ändras
+    fillCarusell(); // körs bara när komponenten laddas första gången
+  }, [ListData]); // lyssna på ListData om det ändras
 
   const fillHeader = () => {
     if (ListData.results && ListData.results.length > 0) {

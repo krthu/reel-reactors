@@ -1,7 +1,9 @@
 import './MovieCard.css'
+import { baseImageURL } from '../api/baseURLs';
 
 const PosterCaruselItem = ({ url, onPress, isSelected }) => {
-    const baseImageURL = 'https://image.tmdb.org/t/p/w500'
+    // const baseImageURL = 'https://image.tmdb.org/t/p/w500'
+
 
     return (
         <div className={`movie-card-container`}>

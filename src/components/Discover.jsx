@@ -23,6 +23,11 @@ const Discover = () => {
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
         const movieIDFromURL = urlParams.get('jbv'); // hämta filmens ID från URL
+        
+        if (selectedMovie && selectedMovie.id === parseInt(movieIDFromURL)){
+            return
+        }
+
         if (movieIDFromURL) {
             const foundMovie = ListData.results.find(movie => movie.id === parseInt(movieIDFromURL));
             if (foundMovie) {
@@ -76,32 +81,33 @@ const Discover = () => {
     };
 
 
-    useEffect(() => {
-        const getData = async () => {
-            try {
-                
-                const movieData = await getMovies();
-                setListData(movieData);
-                fillHeader(movieData);
-            } catch (error) {
-                console.error('Error fetching movie data:', error);
-            }
-        }
-        getData();
-        
-    },[]);
+    // useEffect(() => {
+    //     const getData = async () => {
+    //         try {
+
+    //             const movieData = await getMovies();
+    //             setListData(movieData);
+    //           //  fillHeader(movieData);
+    //         } catch (error) {
+    //             console.error('Error fetching movie data:', error);
+    //         }
+    //     }
+    //     getData();
+
+    // }, []);
 
     useEffect(() => {
         const fetchAllData = async () => {
             try {
                 // Hämta data för alla genrer parallellt
                 const data = await fetchMovieData();
+                fillHeader(data.popular);
                 setMovieData(data); // Uppdatera state med all genre-data
             } catch (error) {
                 console.error('Error fetching movie data:', error);
             }
         };
-        
+
         fetchAllData();
     }, []);
 
@@ -141,64 +147,66 @@ const Discover = () => {
     ];
 
     const fetchMovieData = async () => {
-     //   const data = {};
-        // const res = await getMovies();
-        // const res2 = await getMoviesWithGenres(28);
-        // console.log(res);
-        // console.log(res2);
-        // data['Action'] = res;
-        // setMovieData(data)
+        // Get Popular data and add to data
+        const data = {
+            popular: await getMovies()
 
-
-
-
-        const data = {};
-        const promises = genres.map(async(genre) =>{
-            // console.log(genre);
+        };
+        //Loop through all genres and get the data and save
+        const promises = genres.map(async (genre) => {
             const genreData = await getMoviesWithGenres(genre.id);
-            // console.log(genreData);
             data[genre.name] = genreData;
-            
+
         });
+        // Wait for all fetches to resolve
         await Promise.all(promises);
-        // console.log(data)
         return data
-
-
-        // for (const genre of genres){
-        //     const genreData = await getMoviesWithGenres(genre.id);
-            
-        //     data[genre.name] = genreData
-
-        // }
-        // setMovieData(data);
 
     }
 
     const renderCarusels = () => {
 
         if (!movieData || Object.keys(movieData).length === 0) {
-            return <div>Loading...</div>; // Visa laddningsmeddelande tills data är hämtad
+            return <div>Loading...</div>;
         }
 
-        return genres.map((genre) => {
-            const movies = movieData[genre.name] || [];
-            const movieCards = movies.results.map((movie) => {
-               return( <MovieCard
-                    url={movie.poster_path}
-                    key={movie.id}
-                    onPress={() => handlePosterPress(movie)}
-                    isSelected={movie.id === selectedMovieID}
-                />
-               );
-            });
-            return (
-                <div key={genre.id} className="popular-movie-container">
-                    <Carusel items={movieCards} title={genre.name} />
-                </div>
+        const popularMovies = movieData.popular.results || [];
+
+        const popularMovieCards = popularMovies.map((movie) => {
+            return (<MovieCard
+                url={movie.poster_path}
+                key={movie.id}
+                onPress={() => handlePosterPress(movie)}
+                isSelected={movie.id === selectedMovieID}
+            />
             )
         })
+        return (
+            <>
+                <div className="popular-movie-container">
+                    <Carusel items={popularMovieCards} title={'Popular'} />
+                </div>
 
+                {genres.map((genre) => {
+                    const movies = movieData[genre.name] || [];
+                    const movieCards = movies.results.map((movie) => {
+                        return (<MovieCard
+                            url={movie.poster_path}
+                            key={movie.id}
+                            onPress={() => handlePosterPress(movie)}
+                            isSelected={movie.id === selectedMovieID}
+                        />
+                        );
+                    });
+                    return (
+                        <div key={genre.id} className="popular-movie-container">
+                            <Carusel items={movieCards} title={genre.name} />
+                        </div>
+                    )
+
+                })}
+            </>
+        )
     }
 
 
@@ -212,6 +220,7 @@ const Discover = () => {
                 </div>
 
                 <div className="movie-genre-container">
+
 
                     {renderCarusels()}
 

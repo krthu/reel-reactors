@@ -16,22 +16,22 @@ const CardInformation = () => {
   
     let validationErrors = {};
 
-    if (!cardNumber) validationErrors.cardNumber = 'Kortnummer krävs';
-    if (!expiryDate) validationErrors.expiryDate = 'Utgångsdatum krävs';
-    if (!cvv) validationErrors.cvv = 'CVV krävs';
-    if (!nameOnCard) validationErrors.nameOnCard = 'Namn på kortet krävs';
+    if (!cardNumber) validationErrors.cardNumber = 'Cardnumber is required';
+    if (!expiryDate) validationErrors.expiryDate = 'Expirationdate is required';
+    if (!cvv) validationErrors.cvv = 'CVV is required';
+    if (!nameOnCard) validationErrors.nameOnCard = 'Name on card is required';
 
-    // Om det finns fel, sätt dem i state så att de visas
+   
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
     } else {
-      // Om inga fel finns, rensa formuläret och visa ingen popup
+  
       setCardNumber('');
       setExpiryDate('');
       setCvv('');
       setNameOnCard('');
 
-      // Nollställ felmeddelanden
+   
       setErrors({});
     }
   };
@@ -93,7 +93,7 @@ const CardInformation = () => {
         {errors.nameOnCard && <p className="error-text">{errors.nameOnCard}</p>}
       </div>
 
-      <button type="submit" className="submit-btn">Betala</button>
+      <button type="submit" className="submit-btn">Pay</button>
     </form>
   );
 };

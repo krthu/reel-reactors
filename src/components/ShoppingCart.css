@@ -1,38 +1,138 @@
 .shopping-cart {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     padding: var(--spacing-medium);
-    background-color: var(--movie-list-bg);
-    border: 1px solid var(--movie-list-border);
+    background-color: var(--movie-list-bg); /* Mörk bakgrund med transparens */
+    border: 1px;
     border-radius: var(--border-radius-medium);
-    box-shadow: var(--box-shadow-small);
+    color: var(--text-color-light); /* Ljus text */
+    width: 100%;
+    margin-top: 20px;
+    box-shadow: var(--box-shadow-medium);
+    font-family: var(--font-family);
+    position: relative;
+}
+
+.cart-header, .cart-item {
+    display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr; 
+    justify-content: flex-start;
+    gap: 20px;
+    padding: var(--spacing-small);
+    font-weight: 500;
+    border-bottom: 1px solid var(--movie-list-border);
+    margin-bottom: var(--spacing-small);
+}
+
+.cart-header div, .cart-item div {
+    text-align: right;
+}
+
+.header-item {
+    font-size: var(--font-size-medium);
+}
+
+.cart-footer {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: var(--spacing-large);
+}
+
+h2, h3 {
+    color: var(--text-color-light); /* Ljus textfärg */
+    font-weight: 700;
+    text-align: center;
+}
+
+.total-price {
+    font-size: var(--font-size-large);
+    font-weight: 700;
+    margin-top: var(--spacing-medium);
     color: var(--text-color-light);
 }
 
-.products, .cart {
+
+
+
+
+
+
+
+
+
+
+.cart-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+    background-color: var(--navbar-bg); /* Bakgrundsfärg */
+    padding: var(--spacing-small); /* Inre avstånd */
+    border-radius: var(--border-radius-medium); /* Rundade hörn */
+    margin-bottom: var(--spacing-small); /* Avstånd mellan varor */
+}
+
+.cart-item img {
+    width: 100px; 
+    border-radius: 2px; 
+    margin-right: 20px;
+
+}
+
+.cartItem-info {
     display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-medium);
+    flex-direction: column; 
+    margin-left: 10px;
 }
 
-.product, .cart-item {
-    border: 1px solid var(--movie-list-border);
-    padding: var(--spacing-small);
-    width: 150px;
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: var(--border-radius-small);
+.cart-item h4 {
+    margin: 0;
+    font-size: var(--font-size-medium);
+    font-weight: 500;
+    color: var(--text-color-light);
 }
 
-button {
-    background-color: var(--button-bg-primary);
+.cart-item p {
+    margin: var(--spacing-small) 0; /* Utrymme mellan stycken */
+    font-size: var(--font-size-small);
+    color: var(--text-color-light);
+}
+
+.cartItem-price, .carItem-count-container, .cart-item-totalt{
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 10px;
+}
+
+button { 
+    display: grid;
+    background: var(--button-bg-primary); 
     color: var(--text-color-light);
     border: none;
-    padding: var(--spacing-small);
-    cursor: pointer;
+    padding: 4px 10px;
+    font-size: 0.875rem;
+    margin: 0 5px; /* Utrymme mellan knapparna */
     border-radius: var(--border-radius-small);
+    cursor: pointer;
     transition: var(--transition-default);
+    
 }
 
 button:hover {
-    background-color: var(--hover-color);
+    background-color: var(--hover-color); 
     opacity: var(--button-hover-opacity);
+}
+
+.delete-button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: var(--font-size-small);
+}
+
+.delete-button:hover {
+    color: red;
 }

@@ -11,6 +11,7 @@ const ShoppingCart = () => {
     console.log(shoppingCart);
 
 
+
    // const existingItem = cart.find(item => item.id === mockProduct.id);
 
 
@@ -32,15 +33,24 @@ const ShoppingCart = () => {
     };
     //Behöver en ny funktion för det det här som loopar igenom vår shopping cart och tar count * price för alla  
     // const totalPrice = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-    const totalPrice = 0;
+    const totalPrice = shoppingCart.reduce((total, cartItem) => {
+        return total + (cartItem.price * cartItem.count);
+    }, 0);
 
     return (
         <div className="shopping-cart">
-            <h2>Din Varukorg</h2>
+          <div class="cart-header">
+      
+            <div className="header-item">Produkt</div>
+            <div className="header-item">Pris</div>
+            <div className="header-item">Antal</div>
+            <div className="header-item">Total</div>
+          
+        </div>
                 {shoppingCart.length > 0 ? (
                     shoppingCart.map(cartItem => (
-                        
                         <CartItem key={cartItem.item.id} cartItem={cartItem}/>
+                        
                     ))
                 ) : (
                     <p>Din kundvagn är tom.</p>
@@ -59,7 +69,14 @@ const ShoppingCart = () => {
                     {/* <button onClick={handleAddToCart}>+</button> */}
                 {/* </div>
             </div> */}
-            <h3>Totalpris: {totalPrice.toFixed(2) || 0}kr</h3>
+
+
+
+
+            
+            <div className="cart-footer">
+            <h3 className="total-price">Totalpris: {totalPrice.toFixed(2) || 0}kr</h3>
+        </div>
         </div>
     );
 };

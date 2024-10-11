@@ -7,7 +7,7 @@ const Navbar = () => {
         <nav className="navbar">
             <div className="nav-left">
                 <div className="links">
-                    <Link to="/movies">Movies</Link>
+                    <Link to="/">Movies</Link>
                     <Link to="/tvseries">TV-Shows</Link>
                     <Link to="/mymovies">My Movies</Link>
                 </div>

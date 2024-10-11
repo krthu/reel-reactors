@@ -93,8 +93,11 @@
         justify-content: center;
         align-items: center;
         padding: 20px;
-        position: relative;
+        position: absolute; /* Fortsätt att ha absolut position i mobilvy */
+        top: 0;
+        width: 100%; /* Se till att den tar upp hela bredden */
     }
+    
 
     .nav-left {
         order: 2;
@@ -105,7 +108,6 @@
     .logo-center {
         order: 1;
         margin-bottom: 10px;
-        /* Justera marginalen under loggan */
     }
 
     .search-container {
@@ -119,11 +121,8 @@
     /* Justera storleken på sökrutan */
     .search-container input {
         height: 30px;
-        /* Mindre höjd */
         padding: 5px;
-        /* Minska padding */
         font-size: 0.9rem;
-        /* Minska fontstorlek */
     }
 
     .nav-right {
@@ -141,7 +140,6 @@
 
     .cart-icon {
         width: 24px;
-        /* Minska storleken på cart-ikonen */
         height: 24px;
     }
 }

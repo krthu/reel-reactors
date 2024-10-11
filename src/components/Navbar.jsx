@@ -22,11 +22,10 @@ const Navbar = () => {
 
             <div className="nav-right">
                 <Link to="/cart" className="cart-button">
-                    <img src="/pictures/icons8-cart-64.png" alt="Cart icon" />
-    
+                    <img src="/pictures/icons8-cart-64.png" alt="Cart icon" className="cart-icon" />
                 </Link>
-                   
-                </div>
+            </div>
+
         </nav>
 
     );

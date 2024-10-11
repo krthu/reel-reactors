@@ -1,23 +1,27 @@
 .navbar {
-    position: fixed;  /* Håller navbaren fast högst upp */
+    position: fixed;
+    /* Håller navbaren fast högst upp */
     top: 0;
     left: 0;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: var( --navbar-bg);
+    background: var(--navbar-bg);
     padding: 10px 20px;
-    z-index: 10; /* Säkerställer att navbaren ligger över headern */
+    z-index: 10;
+    /* Säkerställer att navbaren ligger över headern */
     color: white;
 }
 
 .nav-left {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Flyttar upp både länkar och sökrutan i containern */
+    align-items: flex-start;
+    /* Flyttar upp både länkar och sökrutan i containern */
     gap: 10px;
-    flex: 1;  /* Tillåter .nav-left att ta upp mer utrymme */
+    flex: 1;
+    /* Tillåter .nav-left att ta upp mer utrymme */
 }
 
 .links {
@@ -26,32 +30,38 @@
 }
 
 .search-container {
-    flex-grow: 1; /* Låter sökrutan ta upp mer utrymme inom sin container */
+    flex-grow: 1;
+    /* Låter sökrutan ta upp mer utrymme inom sin container */
     width: 100%;
 }
 
 .search-container input {
     padding: 10px;
-    background-color: rgba(0, 94, 170, 0.3); /* 0.5 är 50% opacity */
+    background-color: rgba(0, 94, 170, 0.3);
+    /* 0.5 är 50% opacity */
     color: white;
-    width: 100%; /* Anpassa bredden efter behov */
+    width: 100%;
+    /* Anpassa bredden efter behov */
 }
 
 .logo-center {
     display: flex;
     justify-content: center;
-    flex: 1;  /* Justerar loggan så att den centreras */
+    flex: 1;
+    /* Justerar loggan så att den centreras */
 }
 
 .logo {
-    width: 250px; /* Anpassa storlek efter behov */
+    width: 250px;
+    /* Anpassa storlek efter behov */
     height: auto;
 }
 
 .nav-right {
     display: flex;
     justify-content: flex-end;
-    flex: 1;  /* Fördelar utrymme till höger */
+    flex: 1;
+    /* Fördelar utrymme till höger */
 }
 
 .cart-button {
@@ -61,7 +71,77 @@
 }
 
 .cart-icon {
-    width: 32px;  /* Ändra till önskad bredd */
-    height: 32px; /* Ändra till önskad höjd */
-  }
-  
+    width: 32px;
+    /* Ändra till önskad bredd */
+    height: 32px;
+    /* Ändra till önskad höjd */
+}
+
+
+/* Mobilanpassning (max 768px bred) */
+@media (max-width: 768px) {
+    .logo {
+        content: url("/pictures/reel-reactors-logga-mobile.png");
+        width: 20vw;
+        max-width: 150px;
+        min-width: 100px;
+        height: auto;
+    }
+
+    .navbar {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        position: relative;
+    }
+
+    .nav-left {
+        order: 2;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .logo-center {
+        order: 1;
+        margin-bottom: 10px;
+        /* Justera marginalen under loggan */
+    }
+
+    .search-container {
+        position: absolute;
+        top: 10px;
+        left: 20px;
+        width: auto;
+        margin: 0;
+    }
+
+    /* Justera storleken på sökrutan */
+    .search-container input {
+        height: 30px;
+        /* Mindre höjd */
+        padding: 5px;
+        /* Minska padding */
+        font-size: 0.9rem;
+        /* Minska fontstorlek */
+    }
+
+    .nav-right {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        margin-top: 0;
+    }
+
+    .links {
+        flex-direction: row;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .cart-icon {
+        width: 24px;
+        /* Minska storleken på cart-ikonen */
+        height: 24px;
+    }
+}

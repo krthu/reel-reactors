@@ -6,22 +6,8 @@
     padding: 20px;
     background-color: #121212;
     color: #ffffff;
-    max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
-  }
-  
-  .movie-header {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 20px;
-    flex-direction: column;
-  }
-  
-  .movie-poster {
-    max-width:fit-content;
-    width: 300px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
   
   .movie-details {
@@ -36,9 +22,10 @@
   }
   
   .movie-info {
-    margin: 10px 0;
-    color: #b3b3b3;
-  }
+    font-size: 1.2rem;
+    color: #dddddd; /* Lighter color for less prominence */
+    margin-bottom: 20px;
+}
   
   .overview {
     max-height: 200px;
@@ -49,18 +36,6 @@
   }
 
   .overview:hover {
-    overflow: auto;
-  }
-  
-  .crew-info {
-    max-height: 200px;
-    overflow: hidden;
-    margin: 10px 0;
-    font-size: 0.9rem;
-    color: #b3b3b3;
-  }
-
-  .crew-info:hover {
     overflow: auto;
   }
   

@@ -1,0 +1,125 @@
+.movie-header {
+    position: relative;
+    display: flex;
+    height: 80vh;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+    color: white;
+    padding: 20px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2)), url(${backdropUrl}) no-repeat center/cover;
+}
+
+.movie-header-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px; /* Adjusted gap for better separation */
+    z-index: 2;
+}
+
+.movie-poster-container {
+    margin-top: 50px;
+    flex: 1.5; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.movie-poster {
+    width: 100%; 
+    height: auto;
+    max-width: fit-content;
+    max-height: 500px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 1.5);
+}
+
+.button-container {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+}
+
+.movie-header-content {
+    margin-top: 50px;
+    flex: 3; /* Takes up 3/4 of the space */
+    padding: 25px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    color: #ffffff;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+}
+
+.movie-header-content h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+.movie-info {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.movie-overview {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-top: 1rem;
+    color: #e0e0e0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 300px;
+    flex-grow: 1; /* Allow the overview to grow */
+}
+
+.movie-overview:hover {
+    overflow: auto; /* Show full text on hover */
+}
+
+.crew-info {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 10px 30px;
+    margin-top: 20px;
+    color: #cccccc;
+}
+
+/* Responsive Styles for Mobile */
+@media (max-width: 768px) {
+    .movie-header-wrapper {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .movie-poster {
+        width: 200px;
+    }
+
+    .movie-header-content {
+        padding: 15px;
+        width: 100%;
+    }
+
+    .movie-header-content h1 {
+        font-size: 2rem;
+    }
+
+    .movie-info,
+    .movie-overview,
+    .crew-info {
+        font-size: 1rem;
+    }
+
+    .rating-container {
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+}

@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import './Cardinformation.css';
 
 
-const CardInformation = () => {
+
+const CardInformation = ({onCompletePay}) => {
   const [cardNumber, setCardNumber] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
   const [cvv, setCvv] = useState('');
@@ -30,9 +31,8 @@ const CardInformation = () => {
       setExpiryDate('');
       setCvv('');
       setNameOnCard('');
-
-   
       setErrors({});
+      onCompletePay();
     }
   };
 
@@ -93,7 +93,9 @@ const CardInformation = () => {
         {errors.nameOnCard && <p className="error-text">{errors.nameOnCard}</p>}
       </div>
 
-      <button type="submit" className="submit-btn">Pay</button>
+      <button type="submit" className="button primary-button">
+        <span className="button-text">Complete Pay</span>
+      </button>
     </form>
   );
 };

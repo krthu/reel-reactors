@@ -28,8 +28,7 @@ const initialState =
         item: mockMovie,
         count: 1,
         price: 129
-    }]
-;
+    }];
 
 const shoppingCartSlice = createSlice({
     name: 'cartItems',

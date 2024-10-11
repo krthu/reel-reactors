@@ -14,6 +14,7 @@ import { Route, Routes } from 'react-router-dom';
 import Discover from './components/Discover';
 import ShoppingCart from './components/ShoppingCart'
 import { useSelector } from 'react-redux';
+import OrderDetails from './components/OrderDetails';
 
 
 function App() {
@@ -70,6 +71,7 @@ function App() {
           <Route path='/movie/:id' element={<MovieInformation />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path='/cart' element={<ShoppingCart cart={cart} removeFromCart={removeFromCart} addToCart={addToCart} />} />
+          <Route path='/order' element={<OrderDetails />}/>
         </Routes>
 
       </div>

@@ -2,14 +2,17 @@ import React from "react";
 import "./MovieHeader.css";
 import RatingComponent from './RatingComponent'; // Import the RatingComponent
 import Button from './Button'; // Import Button component for consistent usage
+import { useDispatch } from "react-redux";
+import { addItem } from "../features/shopppingCartSlice";
 
 // Define default image paths
 const DEFAULT_POSTER = '/pictures/poster.png';
 const DEFAULT_BACKDROP = '/pictures/backdrop.png';
 
-const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genres, crew, posterUrl, rating }) => {
+const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genres, crew, posterUrl, rating, movie }) => {
   // State to manage the background image
   const [backgroundImage, setBackgroundImage] = React.useState(backdropUrl || DEFAULT_BACKDROP);
+  const dispatch = useDispatch();
 
   // Preload the backdrop image
   React.useEffect(() => {
@@ -18,6 +21,12 @@ const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genr
     img.onload = () => setBackgroundImage(backdropUrl);
     img.onerror = () => setBackgroundImage(DEFAULT_BACKDROP);
   }, [backdropUrl]);
+
+  const handleBuyPress = () => {
+    console.log('Buy Clicked')
+
+    dispatch(addItem({item: movie, price: 149}))
+  }
 
   return (
     <header className="movie-header" style={{ backgroundImage: `url(${backgroundImage})` }}>
@@ -34,7 +43,7 @@ const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genr
           />
           <div className="button-container">
             <Button text="Watch Trailer" primary onPress={() => console.log('Watch Trailer Clicked')} />
-            <Button text="Buy" icon="shopping_cart" onPress={() => console.log('Buy Clicked')} />
+            <Button text="Buy" icon="shopping_cart" onPress={() => handleBuyPress()} />
           </div>
         </div>
         <div className="movie-header-content">

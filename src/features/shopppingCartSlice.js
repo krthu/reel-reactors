@@ -36,10 +36,12 @@ const shoppingCartSlice = createSlice({
     initialState,
     reducers: {
         addItem: (state, action) => {
-            const foundItem = state.find(cartItem => cartItem.item.id === action.payload.id);
+          
+            const foundItem = state.find(cartItem => cartItem.item.id === action.payload.item.id);
+
             if (foundItem){
                 const newState = state.map(cartItem => {
-                    if (cartItem.item.id === action.payload.id){
+                    if (cartItem.item.id === action.payload.item.id){
                         return {...cartItem, count: cartItem.count + 1}
                     } else {
                         return cartItem
@@ -48,7 +50,7 @@ const shoppingCartSlice = createSlice({
                 return newState;
 
             } else {
-                return[...state, {item: action.payload, count: 1}]
+                return[...state, {item: action.payload.item, count: 1, price: action.payload.price}]
             }
         },
         decrease: (state, action) => {

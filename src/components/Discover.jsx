@@ -6,14 +6,12 @@ import { useState, useEffect } from "react";
 import Overlay from "./Overlay";
 import { getMovies, getMoviesWithGenres, getMovieDetails } from "../api/api";
 
-const Discover = () => {
-    const [movieData, setMovieData] = useState({});
+const Discover = ({movieData, setMovieData}) => {
     const [showOverlay, setShowOverlay] = useState(false);
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [backdropUrl, setBackdropUrl] = useState("");
     const [movieTitle, setMovieTitle] = useState("");
     const [movieOverview, setMovieOverview] = useState("");
-
 
 
     // lyssna på URL-ändringar
@@ -68,18 +66,21 @@ const Discover = () => {
 
 
     useEffect(() => {
-        const fetchAllData = async () => {
-            try {
-                // Hämta data för alla genrer parallellt
-                const data = await fetchMovieData();
-                fillHeader(data.popular);
-                setMovieData(data); // Uppdatera state med all genre-data
-            } catch (error) {
-                console.error('Error fetching movie data:', error);
-            }
-        };
+        if(Object.keys(movieData).length === 0){
+            const fetchAllData = async () => {
+                try {
+                    // Hämta data för alla genrer parallellt
+                    const data = await fetchMovieData();
+                    console.log('Data Fetched with alot of calls!')
+                    fillHeader(data.popular);
+                    setMovieData(data); // Uppdatera state med all genre-data
+                } catch (error) {
+                    console.error('Error fetching movie data:', error);
+                }
+            };
 
-        fetchAllData();
+            fetchAllData();
+        }
     }, []);
 
     const genres = [
@@ -200,27 +201,8 @@ const Discover = () => {
 
                 <div className="movie-genre-container">
 
-
                     {renderCarusels()}
 
-                    {/* <div className="popular-movie-container">
-                        <Carusel items={popularCaruselItems} title={"Populära Filmer"} />
-                    </div>
-                    <div className="popular-movie-container">
-                        <Carusel items={popularCaruselItems} title={"Populära Filmer"} />
-                    </div>
-                    <div className="popular-movie-container">
-                        <Carusel items={popularCaruselItems} title={"Populära Filmer"} />
-                    </div>
-                    <div className="popular-movie-container">
-                        <Carusel items={popularCaruselItems} title={"Populära Filmer"} />
-                    </div>
-                    <div className="popular-movie-container">
-                        <Carusel items={popularCaruselItems} title={"Populära Filmer"} />
-                    </div>
-                    <div className="popular-movie-container">
-                        <Carusel items={popularCaruselItems} title={"Populära Filmer"} /> */}
-                    {/* </div> */}
                 </div>
             </div>
             {/* Overlay */}

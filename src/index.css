@@ -4,7 +4,7 @@
 :root {    
 
     /* Bakgrunder */
-    --body-bg: linear-gradient(to bottom, #000000, #040C18); /* Applicera som huvudbakgrund på body */
+    --body-bg: #040C18; /* Applicera som huvudbakgrund på body */
     --body-bg-fallback: #040C18; /* Fallback-färg för bakgrunden om gradient inte stöds */
     --navbar-bg: linear-gradient(to bottom, rgba(11, 18, 32, 0.75), rgba(0, 0, 0, 0.75)); /* Använd för navbarens bakgrund */
     --footer-bg: #0B1220; /* Färg för footerns bakgrund (just nu har vi ingen footer med i vår design) */

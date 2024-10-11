@@ -60,3 +60,62 @@
     display: flex;
     align-items: center;
 }
+
+/* Specifik styling för overlay-header */
+.overlay-header {
+    background-color: rgba(0, 0, 0, 0.7); /* Mörkare bakgrund för overlay-headern */
+    padding: 20px;
+}
+
+.overlay-header .container-left {
+    padding: 0 20px;
+}
+
+.overlay-header .button-container {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px; /* Lägg till avstånd mellan text och knappar */
+    justify-content: flex-start; /* Justera knapparna till vänster */
+}
+
+/* Knappar i overlay-headern: ingen bakgrund, vit text och vit kantlinje */
+.overlay-header .button {
+    position: relative; /* Behåll relativ positionering */
+    padding: 10px 20px; /* Justera padding för knappar */
+    font-size: 1rem; /* Justera storlek på knappen */
+    background-color: transparent; /* Ingen bakgrundsfärg */
+    color: white; /* Vit textfärg */
+    border: 2px solid white; /* Vit kantlinje */
+    cursor: pointer; /* Muspekare vid hover */
+}
+
+.overlay-header .button:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Lätt genomskinlig bakgrundsfärg vid hover */
+    color: white; /* Behåll vit text vid hover */
+}
+
+/* Styling för Close-knappen: vit text, vit kantlinje, ingen bakgrund */
+.overlay-close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: white; /* Ingen bakgrund */
+    background-color: white;
+    border: 2px solid white; /* Vit kantlinje */
+    color: white; /* Vit textfärg */
+    font-size: 1rem; /* Justera storlek på texten "Close" */
+    cursor: pointer;
+    padding: 5px 10px; /* Justera padding för bättre utrymme */
+    border-radius: 5px; /* Rundade hörn */
+    z-index: 3; /* Se till att knappen alltid är ovanpå */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Lätt övergångseffekt */
+}
+
+.overlay-close-button:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Lätt genomskinlig bakgrund vid hover */
+    color: white; /* Behåll vit text vid hover */
+}
+
+
+
+

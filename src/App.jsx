@@ -12,9 +12,6 @@ import './App.css'
 import placeholder from './features/placeholder'
 import { Route, Routes } from 'react-router-dom';
 import Discover from './components/Discover';
-import Movie from './components/Movie';
-import { configureStore } from '@reduxjs/toolkit';
-import rootReducer from './features/rootReducer';
 import ShoppingCart from './components/ShoppingCart'
 import { useSelector } from 'react-redux';
 
@@ -22,10 +19,12 @@ import { useSelector } from 'react-redux';
 function App() {
 
   const shoppingCart = useSelector((state) => state.shoppingCart);
+  const [movieData, setMovieData] = useState({});
   // console.log(shoppingCart);
 
 
   const [cart, setCart] = useState([]);
+
 
   const addToCart = (movie) => {
     const existingItem = cart.find(item => item.id === movie.id);
@@ -67,7 +66,7 @@ function App() {
           <Route path="/movies" element={<MoviePage />} />
           <Route path="/tvseries" element={<TVSeriesPage />} />
           <Route path="/mymovies" element={<MyMovies />} />
-          <Route path='/' element={<Discover />} />
+          <Route path='/' element={<Discover movieData={movieData} setMovieData={setMovieData}/>} />
           <Route path='/movie/:id' element={<MovieInformation />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path='/cart' element={<ShoppingCart cart={cart} removeFromCart={removeFromCart} addToCart={addToCart} />} />

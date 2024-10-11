@@ -1,6 +1,7 @@
-// CastList.jsx
 import React from 'react';
 import './ActorCard.css'; // Style for the cast list
+
+const DEFAULT_POSTER = '/pictures/poster.png';
 
 const ActorCard = ({ cast }) => {
   return (
@@ -13,6 +14,10 @@ const ActorCard = ({ cast }) => {
               src={`https://image.tmdb.org/t/p/w185${actor.profile_path}`}
               alt={actor.name}
               className="cast-image"
+              onError={(e) => {
+                e.target.onerror = null; // Prevents infinite loop in case default image also fails
+                e.target.src = DEFAULT_POSTER;
+              }}
             />
             <p className="cast-name">{actor.name}</p>
             <p className="character-name">{actor.character}</p>

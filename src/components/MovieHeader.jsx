@@ -3,12 +3,35 @@ import "./MovieHeader.css";
 import RatingComponent from './RatingComponent'; // Import the RatingComponent
 import Button from './Button'; // Import Button component for consistent usage
 
+// Define default image paths
+const DEFAULT_POSTER = '/pictures/poster.png';
+const DEFAULT_BACKDROP = '/pictures/backdrop.png';
+
 const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genres, crew, posterUrl, rating }) => {
+  // State to manage the background image
+  const [backgroundImage, setBackgroundImage] = React.useState(backdropUrl || DEFAULT_BACKDROP);
+
+  // Preload the backdrop image
+  React.useEffect(() => {
+    const img = new Image();
+    img.src = backdropUrl;
+    img.onload = () => setBackgroundImage(backdropUrl);
+    img.onerror = () => setBackgroundImage(DEFAULT_BACKDROP);
+  }, [backdropUrl]);
+
   return (
-    <header className="movie-header" style={{ backgroundImage: `url(${backdropUrl})` }}>
+    <header className="movie-header" style={{ backgroundImage: `url(${backgroundImage})` }}>
       <div className="movie-header-wrapper">
         <div className="movie-poster-container">
-          <img src={posterUrl} alt={movieTitle} className="movie-poster" />
+          <img
+            src={posterUrl}
+            alt={movieTitle}
+            className="movie-poster"
+            onError={(e) => {
+              e.target.onerror = null; // Prevents infinite loop in case default image also fails
+              e.target.src = DEFAULT_POSTER;
+            }}
+          />
           <div className="button-container">
             <Button text="Watch Trailer" primary onPress={() => console.log('Watch Trailer Clicked')} />
             <Button text="Buy" icon="shopping_cart" onPress={() => console.log('Buy Clicked')} />

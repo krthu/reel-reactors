@@ -3,7 +3,7 @@ import './MovieInformation.css';
 import { getMovieDetails, getCast } from '../api/api';
 import { useParams } from 'react-router-dom';
 import MovieHeader from './MovieHeader';
-import CastList from './CastList';
+import ActorCard from './ActorCard';
 import RecommendationComp from './RecommendationComp';
 
 const MovieInformation = ({ onBuy, onWatchTrailer }) => {
@@ -53,7 +53,7 @@ const MovieInformation = ({ onBuy, onWatchTrailer }) => {
         crew={crew}
       />
       {/* Additional sections like CastList and RecommendationComp */}
-      <CastList cast={cast} />
+      <ActorCard cast={cast} />
       <RecommendationComp movieId={movie.id} />
     </div>
   );

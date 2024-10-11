@@ -39,7 +39,7 @@ const ShoppingCart = () => {
 
     return (
         <div className="shopping-cart">
-          <div class="cart-header">
+          <div className="cart-header">
       
             <div className="header-item">Produkt</div>
             <div className="header-item">Pris</div>

@@ -65,7 +65,7 @@ export const getMoviesWithGenres = async (genres, page=1) => {
   const genreURL = `&with_genres=${genres}`;
   const pageURL = `&page=${page}`;
   try {
-    const response = await apiClient.get(`/discover/movie?language=en-US${genreURL}${pageURL}`)
+    const response = await apiClient.get(`/discover/movie?language=en-US${genreURL}${pageURL}&include_adult=false`)
     return response.data
   } catch {
     console.error('Error fetching movies with genres:', error);

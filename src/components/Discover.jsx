@@ -4,19 +4,16 @@ import Header from "./Header";
 import MovieCard from "./MovieCard";
 import { useState, useEffect } from "react";
 import Overlay from "./Overlay";
-import { getMovies, getMoviesWithGenres } from "../api/api";
+import { getMovies, getMoviesWithGenres, getMovieDetails } from "../api/api";
 
 const Discover = () => {
-    //const ListData = placeholder.getMovieListPlaceholder();
     const [movieData, setMovieData] = useState({});
-    const [ListData, setListData] = useState(null);
-    const [selectedMovieID, setSelectedMovieID] = useState('');
     const [showOverlay, setShowOverlay] = useState(false);
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [backdropUrl, setBackdropUrl] = useState("");
     const [movieTitle, setMovieTitle] = useState("");
     const [movieOverview, setMovieOverview] = useState("");
-    const [popularCaruselItems, setPopularCaruselItems] = useState([]);
+
 
 
     // lyssna på URL-ändringar
@@ -27,13 +24,19 @@ const Discover = () => {
         if (selectedMovie && selectedMovie.id === parseInt(movieIDFromURL)){
             return
         }
+        const getMovie = async () => {
+            try {
+                const movie = await getMovieDetails(parseInt(movieIDFromURL));
+                setSelectedMovie(movie);
+                setShowOverlay(true);
 
-        if (movieIDFromURL) {
-            const foundMovie = ListData.results.find(movie => movie.id === parseInt(movieIDFromURL));
-            if (foundMovie) {
-                setSelectedMovie(foundMovie); // sätt vald film baserat på URL
-                setShowOverlay(true); // visa overlay
+
+            } catch  {
+                console.error('Error fetching movie data:', error);
             }
+        }
+        if (movieIDFromURL){
+            getMovie();
         }
     }, [window.location.search]); // kör varje gång URL:en uppdateras
 
@@ -51,28 +54,11 @@ const Discover = () => {
         window.history.pushState({}, '', window.location.pathname);
     }
 
-    const fillCarusell = () => {
-        if (ListData === null) {
-            return
-        }
-        const items = ListData.results.map((movie) => (
-            <MovieCard
-                url={movie.poster_path}
-                key={movie.id}
-                onPress={() => handlePosterPress(movie)} // skicka hela movie-objektet
-                isSelected={movie.id === selectedMovieID}
-            />
-        ));
-        setPopularCaruselItems(items); // uppdatera state med filmkorten
-    }
-
-    useEffect(() => {
-        fillCarusell(); // körs bara när komponenten laddas första gången
-    }, [ListData]); // lyssna på ListData om det ändras
 
     const fillHeader = (movieData) => {
         //Write a random function for this 
-        const firstMovie = movieData.results[0];
+        const randomIndex = Math.floor(Math.random() * movieData.results.length);
+        const firstMovie = movieData.results[randomIndex];
         const baseImageUrl = 'https://image.tmdb.org/t/p/original';
         setBackdropUrl(`${baseImageUrl}${firstMovie.backdrop_path}`);
         setMovieTitle(firstMovie.title);
@@ -80,21 +66,6 @@ const Discover = () => {
 
     };
 
-
-    // useEffect(() => {
-    //     const getData = async () => {
-    //         try {
-
-    //             const movieData = await getMovies();
-    //             setListData(movieData);
-    //           //  fillHeader(movieData);
-    //         } catch (error) {
-    //             console.error('Error fetching movie data:', error);
-    //         }
-    //     }
-    //     getData();
-
-    // }, []);
 
     useEffect(() => {
         const fetchAllData = async () => {
@@ -145,6 +116,13 @@ const Discover = () => {
             "name": "Family"
         },
     ];
+    function shuffleArray(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1)); // Slumpmässigt index mellan 0 och i
+            [arr[i], arr[j]] = [arr[j], arr[i]]; // Byter plats på elementet vid index i med elementet vid index j
+        }
+        return arr;
+    }
 
     const fetchMovieData = async () => {
         // Get Popular data and add to data
@@ -155,6 +133,7 @@ const Discover = () => {
         //Loop through all genres and get the data and save
         const promises = genres.map(async (genre) => {
             const genreData = await getMoviesWithGenres(genre.id);
+            genreData.results = shuffleArray(genreData.results)
             data[genre.name] = genreData;
 
         });
@@ -177,7 +156,7 @@ const Discover = () => {
                 url={movie.poster_path}
                 key={movie.id}
                 onPress={() => handlePosterPress(movie)}
-                isSelected={movie.id === selectedMovieID}
+                isSelected={selectedMovie !== null && movie.id === selectedMovie.id}
             />
             )
         })
@@ -194,7 +173,7 @@ const Discover = () => {
                             url={movie.poster_path}
                             key={movie.id}
                             onPress={() => handlePosterPress(movie)}
-                            isSelected={movie.id === selectedMovieID}
+                            isSelected={selectedMovie !== null && movie.id === selectedMovie.id}
                         />
                         );
                     });

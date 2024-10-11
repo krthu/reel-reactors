@@ -86,9 +86,8 @@
     font-size: var(--font-size-large);
     font-weight: 700;
     color: var(--text-color-light);
-    text-align: right; /* Justera texten till höger */
-    margin-top: var(--spacing-medium); /* Marginal över totalsumman */
-}
+    text-align: right; 
+    margin-top: var(--spacing-medium); 
 
 .confirm-button {
     width: 100%;

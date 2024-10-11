@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { removeItem, addItem, decrease } from '../features/shopppingCartSlice';
 import { baseImageURL } from '../api/baseURLs';
-import './ShoppingCart.css'; // Svi stilovi su sada u ShoppingCart.css
+import './ShoppingCart.css';
 
 const CartItem = ({ cartItem }) => {
     const dispatch = useDispatch();

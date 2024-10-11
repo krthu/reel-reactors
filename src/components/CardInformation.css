@@ -1,0 +1,66 @@
+.card-info-form {
+    max-width: 400px;
+    --font-family: 'Poppins', sans-serif;
+    color: white;
+    padding: 20px;
+    background-color: #000000;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .form-row .form-group {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  .form-row .form-group:last-child {
+    margin-right: 0;
+  }
+  
+  .submit-btn {
+    background-color: #7028a7;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    width: 100%;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+
+  .error-input {
+    border: 2px solid red;
+  }
+  
+
+  .error-text {
+    color: red;
+    font-size: 1rem;
+    margin-top: 5px;
+  }
+  

@@ -18,11 +18,12 @@ import { useSelector } from 'react-redux';
 function App() {
 
   const shoppingCart = useSelector((state) => state.shoppingCart);
+  const [movieData, setMovieData] = useState({});
   // console.log(shoppingCart);
 
 
   const [cart, setCart] = useState([]);
-  const [movieData, setMovieData] = useState({});
+
 
   const addToCart = (movie) => {
     const existingItem = cart.find(item => item.id === movie.id);

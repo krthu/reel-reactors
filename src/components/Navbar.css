@@ -89,6 +89,7 @@
     }
 
     .navbar {
+        background: none;
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -98,31 +99,29 @@
         width: 100%; /* Se till att den tar upp hela bredden */
     }
     
-
-    .nav-left {
-        order: 2;
-        align-items: center;
-        gap: 15px;
-    }
-
-    .logo-center {
-        order: 1;
-        margin-bottom: 10px;
-    }
-
     .search-container {
-        position: absolute;
+        position: relative;
         top: 10px;
-        left: 20px;
-        width: auto;
-        margin: 0;
+        width: 80%;  /* Gör sökfältet större, men inte för mycket */
+        margin-bottom: 20px;  /* Öka utrymmet mellan sökfält och logga */
     }
 
-    /* Justera storleken på sökrutan */
     .search-container input {
         height: 30px;
         padding: 5px;
         font-size: 0.9rem;
+        width: 100%; /* Se till att sökfältet sträcker sig över hela containern */
+    }
+
+    .logo-center {
+        margin-top: 20px;  /* Se till att loggan inte trycks uppåt av navbaren */
+        margin-bottom: 20px; /* Skapar mer utrymme mellan logga och länkar */
+    }
+
+    .nav-left {
+        order: 3;
+        align-items: center;
+        gap: 15px;
     }
 
     .nav-right {

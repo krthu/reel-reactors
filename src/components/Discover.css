@@ -12,18 +12,6 @@
 }
 
 
-/* Navbar.css */
-.navbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    z-index: 10; /* Säkerställer att navbaren ligger över headern */
-    color: white;
-}
+
   
 

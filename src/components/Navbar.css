@@ -1,16 +1,19 @@
+/* Navbar.css */
 .navbar {
-    position: fixed;  /* Håller navbaren fast högst upp */
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
+    max-height: 200px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: var( --navbar-bg);
     padding: 10px 20px;
-    z-index: 10; /* Säkerställer att navbaren ligger över headern */
-    color: white;
+    z-index: 10000; /* Säkerställer att navbaren ligger över headern */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2));
+    box-shadow: 0 14px 15px rgba(4, 62, 128, 0.201);
 }
+
 
 .nav-left {
     display: flex;
@@ -25,6 +28,13 @@
     gap: 20px;
 }
 
+.home-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
 .search-container {
     flex-grow: 1; /* Låter sökrutan ta upp mer utrymme inom sin container */
     width: 100%;
@@ -35,6 +45,7 @@
     background-color: rgba(0, 94, 170, 0.3); /* 0.5 är 50% opacity */
     color: white;
     width: 100%; /* Anpassa bredden efter behov */
+    max-width: 300px; /* Sätter maxbredden till 500px */
 }
 
 .logo-center {
@@ -65,3 +76,17 @@
     height: 32px; /* Ändra till önskad höjd */
   }
   
+.search-overlay {
+    position: fixed;
+    top: 150px; /* Placerar sökresultaten under sökrutan */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 79, 164, 0.788);
+    z-index: 1000;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}   

@@ -62,6 +62,7 @@ function App() {
 
   return (
       <div className='app-container'>
+        <Navbar />
         <Routes>
           <Route path="/movies" element={<MoviePage />} />
           <Route path="/tvseries" element={<TVSeriesPage />} />
@@ -71,7 +72,6 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path='/cart' element={<ShoppingCart cart={cart} removeFromCart={removeFromCart} addToCart={addToCart} />} />
         </Routes>
-
       </div>
 
   

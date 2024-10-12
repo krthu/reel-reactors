@@ -22,15 +22,17 @@
 }
 
 .movie-header-wrapper {
+    margin-top: 60px;
+    position: relative;
     display: flex;
     align-items: flex-start;
-    gap: 30px; /* Adjusted gap for better separation */
-    z-index: 2;
+    gap: 30px;
+    z-index: 8;
 }
 
 .movie-poster-container {
     margin-top: 50px;
-    flex: 1.5; 
+    flex: 1.2; 
     display: flex;
     flex-direction: column;
     align-items: center;

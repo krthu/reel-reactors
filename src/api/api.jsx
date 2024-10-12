@@ -65,7 +65,7 @@ export const getMoviesWithGenres = async (genres, page=1) => {
   const genreURL = `&with_genres=${genres}`;
   const pageURL = `&page=${page}`;
   try {
-    const response = await apiClient.get(`/discover/movie?language=en-US${genreURL}${pageURL}&include_adult=false`)
+    const response = await apiClient.get(`/discover/movie?${genreURL}${pageURL}`)
     return response.data
   } catch {
     console.error('Error fetching movies with genres:', error);
@@ -73,4 +73,20 @@ export const getMoviesWithGenres = async (genres, page=1) => {
   }
 }
 
-export default { getMovies, getGenres, getMovieDetails, getCast, getRecommendations, getMoviesWithGenres };
+export const searchMovies = async (query) => {
+  try {
+    const response = await apiClient.get('/search/movie', {
+      params: {
+        query,
+      },
+    });
+    return response.data.results;
+  } catch (error) {
+    console.error('Error searching movies:', error);
+    return [];
+  }
+};
+
+
+
+export default { getMovies, getGenres, getMovieDetails, getCast, getRecommendations, getMoviesWithGenres, searchMovies };

@@ -3,7 +3,7 @@ import "./Header.css";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 
-const Header = ({ movie, isOverlay, onClose }) => {
+const Header = ({ movie, isOverlay, onClose, isMovie }) => {
   const navigate = useNavigate();
   if (!movie) return null;
   const handleWatchButtonPress = (id) => {

@@ -79,16 +79,6 @@ const Discover = ({ movieData, setMovieData, isMovieData = true }) => {
             return <div>Loading...</div>;
         }
 
-        const popularMovies = movieData.popular.results || [];
-        const popularMovieCards = popularMovies.map((movie) => (
-            <MovieCard
-                url={movie.poster_path}
-                key={movie.id}
-                onPress={() => handlePosterPress(movie)}
-                isSelected={selectedMovie !== null && movie.id === selectedMovie.id}
-            />
-        ));
-
         return (
             <>
                 {/* Rendera alla genrer från movieData */}

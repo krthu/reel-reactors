@@ -87,12 +87,22 @@ export const getMoviesWithGenres = async (genres, page=1, isMovie = true) => {
 //   }
 // }
 
-export const getTvShow = async (page = 1) => {
+export const getTvShow = async () => {
   try {
     const response = await apiClient.get(`/tv/popular?language=en-US&page=${page}`);
     return response.data; // Axios automatically parses the JSON
   } catch (error) {
     console.error('Error fetching movies:', error);
+    throw error;
+  }
+};
+
+export const getTvShowDetails = async (id) => {
+  try {
+    const response = await apiClient.get(`/tv/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching movie details:', error);
     throw error;
   }
 };
@@ -105,68 +115,25 @@ export const fetchDataForDiscover = async (isMovieData) => {
     }
     return arr;
 }
-  const genres = [
-    {
-        "id": 28,
-        "name": "Action"
-    },
-    {
-        "id": 12,
-        "name": "Adventure"
-    },
-    {
-        "id": 16,
-        "name": "Animation"
-    },
-    {
-        "id": 35,
-        "name": "Comedy"
-    },
-    {
-        "id": 80,
-        "name": "Crime"
-    },
-    {
-        "id": 99,
-        "name": "Documentary"
-    },
-    {
-        "id": 18,
-        "name": "Drama"
-    },
-    {
-        "id": 10751,
-        "name": "Family"
-    },
+const genres = [
+  { id: 28, name: "Action" },
+  { id: 12, name: "Adventure" },
+  { id: 16, name: "Animation" },
+  { id: 35, name: "Comedy" },
+  { id: 80, name: "Crime" },
+  { id: 99, name: "Documentary" },
+  { id: 18, name: "Drama" },
+  { id: 10751, name: "Family" }
 ];
 
-
- const tvGenres = [
-      {
-        "id": 10759,
-        "name": "Action & Adventure"
-      },
-      {
-        "id": 16,
-        "name": "Animation"
-      },
-      {
-        "id": 35,
-        "name": "Comedy"
-      },
-      {
-        "id": 80,
-        "name": "Crime"
-      },
-      {
-        "id": 99,
-        "name": "Documentary"
-      },
-      {
-        "id": 18,
-        "name": "Drama"
-      },
-    ];
+const tvGenres = [
+  { id: 10759, name: "Action & Adventure" },
+  { id: 16, name: "Animation" },
+  { id: 35, name: "Comedy" },
+  { id: 80, name: "Crime" },
+  { id: 99, name: "Documentary" },
+  { id: 18, name: "Drama" }
+];
 
 
 
@@ -178,7 +145,7 @@ export const fetchDataForDiscover = async (isMovieData) => {
   };
   //Loop through all genres and get the data and save
   const genresToDownload = isMovieData ? genres : tvGenres
-  console.log(genresToDownload)
+
   const promises = genresToDownload.map(async (genre) => {
      // const genreData = await getMoviesWithGenres(genre.id);
       const genreData = isMovieData ? await getMoviesWithGenres(genre.id) : await getMoviesWithGenres(genre.id, 1, isMovieData);

@@ -1,0 +1,12 @@
+.trailer-container{
+    width: 100%;
+
+
+    border: 1px solid orange;
+}
+
+.trailer-window{
+
+    aspect-ratio: 16/9;
+    min-width: 100%;
+}

@@ -9,7 +9,7 @@ import { addItem } from "../features/shopppingCartSlice";
 const DEFAULT_POSTER = '/pictures/poster.png';
 const DEFAULT_BACKDROP = '/pictures/backdrop.png';
 
-const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genres, crew, posterUrl, rating, movie }) => {
+const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genres, crew, posterUrl, rating, movie, handleWatchPress, trailerIsPresent }) => {
   // State to manage the background image
   const [backgroundImage, setBackgroundImage] = React.useState(backdropUrl || DEFAULT_BACKDROP);
   const dispatch = useDispatch();
@@ -42,7 +42,10 @@ const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genr
             }}
           />
           <div className="button-container">
-            <Button text="Watch Trailer" primary onPress={() => console.log('Watch Trailer Clicked')} />
+            {trailerIsPresent != null && (
+            <Button text="Watch Trailer" primary onPress={() => handleWatchPress()} />
+            )}
+
             <Button text="Buy" icon="shopping_cart" onPress={() => handleBuyPress()} />
           </div>
         </div>

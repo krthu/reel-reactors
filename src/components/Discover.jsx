@@ -140,7 +140,9 @@ const Discover = ({ movieData, setMovieData }) => {
             <div className="body-container">
                 <div className="header-container">
                     <Navbar />
-                    <Header movie={landingMovie} />
+                    {landingMovie && (
+                        <Header movie={landingMovie} />
+                    )}
                 </div>
                 <div className="movie-genre-container">{renderCarusels()}</div>
             </div>
@@ -150,6 +152,7 @@ const Discover = ({ movieData, setMovieData }) => {
                     <Header movie={selectedMovie} isOverlay={true} onClose={closeOverlay} />
                 )}
             </Overlay>
+
         </>
     );
 };

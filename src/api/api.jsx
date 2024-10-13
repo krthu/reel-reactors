@@ -73,4 +73,15 @@ export const getMoviesWithGenres = async (genres, page=1) => {
   }
 }
 
-export default { getMovies, getGenres, getMovieDetails, getCast, getRecommendations, getMoviesWithGenres };
+export const getVideos = async (id, isMovie=true) => {
+  const format = isMovie ? 'movie' : 'tv';
+  try {
+    const response = await apiClient.get(`${format}/${id}/videos?language=en-US`);
+    return response.data.results;
+  } catch (error) {
+    console.log('Error fetching videos')
+  }
+
+}
+
+export default { getMovies, getGenres, getMovieDetails, getCast, getRecommendations, getMoviesWithGenres, getVideos };

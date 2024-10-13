@@ -10,8 +10,8 @@
 }
 
 .button:hover {
-    background: var(--hover-color);
-    opacity: var(--button-hover-opacity);
+    transform: scale(1.1);
+    cursor: pointer;
 }
 
 .icon-container {
@@ -27,7 +27,7 @@
 }
 
 .button-icon {
-    font-size: 1.5rem; /* Justerad storlek på ikonen */
+    font-size: 1.8rem; /* Justerad storlek på ikonen */
     margin-right: 10px; /* Mellanrum mellan ikonen och texten */
 }
 

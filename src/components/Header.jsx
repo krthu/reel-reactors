@@ -28,7 +28,7 @@ const Header = ({ movie, isOverlay, onClose }) => {
       </div>
     ) : (
       <div className="button-container">
-        <Button icon="arrow_right" text="Watch" primary={true} onPress={() => handleWatchButtonPress(movie.id)}/>
+        <Button icon="arrow_right" text="Watch Now" primary={true} onPress={() => handleWatchButtonPress(movie.id)}/>
         <Button text="Trailer" primary={false} />
       </div>
     )}

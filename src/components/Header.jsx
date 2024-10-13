@@ -20,7 +20,6 @@ const Header = ({ movie, isOverlay, onClose }) => {
   }
 
   const handleTrailerPress = () => {
-    console.log('Trailer press!');
     setShowTrailerOverlay(true);
   }
 

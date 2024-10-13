@@ -1,7 +1,6 @@
 .movie-header {
     position: relative;
     display: flex;
-    height: 80vh;
     width: 100%;
     background-size: cover; /* Ändrad från contain till cover */
     background-position: center center;

@@ -1,19 +1,17 @@
-import React from 'react';
-import { useState } from 'react'
-import Navbar from './components/Navbar';
-import MoviePage from './components/MoviePage';
-import TVSeriesPage from './components/TVSeriesPage';
-import MyMovies from './components/MyMovies';
-import MovieInformation from './components/MovieInformation';
+import React, { useState } from 'react';
 import Checkout from './components/CheckOut';
+import MovieInformation from './components/MovieInformation';
+import MoviePage from './components/MoviePage';
+import MyMovies from './components/MyMovies';
+import TVSeriesPage from './components/TVSeriesPage';
 
-import './App.css'
+import './App.css';
 
-import placeholder from './features/placeholder'
+import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import Discover from './components/Discover';
-import ShoppingCart from './components/ShoppingCart'
-import { useSelector } from 'react-redux';
+import ShoppingCart from './components/ShoppingCart';
+import placeholder from './features/placeholder';
 
 
 function App() {

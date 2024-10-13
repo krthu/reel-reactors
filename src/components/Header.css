@@ -116,6 +116,38 @@
     color: white; /* Behåll vit text vid hover */
 }
 
+/* Mobilanpassning (max 768px bred) */
+@media (max-width: 768px) {
 
+    /* Tar bort paragrafen för mobil */
+    .container-left p {
+        display: none;
+    }
 
+    .container-left {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centrerar horisontellt */
+        justify-content: flex-end; /* Flyttar innehållet längre ner */
+        text-align: center; /* Gör att texten hamnar i mitten horisontellt */
+        padding: 0;
+        height: 100%; /* För att använda hela höjden av containern */
+    }
 
+    .container-left h1 {
+        font-size: 2rem; /* Justera storleken på titeln för mobil */
+        margin-bottom: 20px; /* Lite mellanrum mellan titel och knappar */
+    }
+
+    .button-container {
+        display: flex;
+        gap: 10px;
+        justify-content: center; /* Centrerar knapparna under titeln */
+        margin-bottom: 20px; /* Marginal under knapparna */
+    }
+
+    .button {
+        padding: 10px 20px; /* Anpassa storleken på knapparna */
+        font-size: 1rem; /* Justera textstorlek på knappar */
+    }
+}

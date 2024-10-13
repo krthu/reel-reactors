@@ -18,9 +18,11 @@
 .nav-left {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Flyttar upp både länkar och sökrutan i containern */
+    align-items: flex-start;
+    /* Flyttar upp både länkar och sökrutan i containern */
     gap: 10px;
-    flex: 1;  /* Tillåter .nav-left att ta upp mer utrymme */
+    flex: 1;
+    /* Tillåter .nav-left att ta upp mer utrymme */
 }
 
 .links {
@@ -36,13 +38,15 @@
 }
 
 .search-container {
-    flex-grow: 1; /* Låter sökrutan ta upp mer utrymme inom sin container */
+    flex-grow: 1;
+    /* Låter sökrutan ta upp mer utrymme inom sin container */
     width: 100%;
 }
 
 .search-container input {
     padding: 10px;
-    background-color: rgba(0, 94, 170, 0.3); /* 0.5 är 50% opacity */
+    background-color: rgba(0, 94, 170, 0.3);
+    /* 0.5 är 50% opacity */
     color: white;
     width: 100%; /* Anpassa bredden efter behov */
     max-width: 300px; /* Sätter maxbredden till 500px */
@@ -51,18 +55,21 @@
 .logo-center {
     display: flex;
     justify-content: center;
-    flex: 1;  /* Justerar loggan så att den centreras */
+    flex: 1;
+    /* Justerar loggan så att den centreras */
 }
 
 .logo {
-    width: 250px; /* Anpassa storlek efter behov */
+    width: 250px;
+    /* Anpassa storlek efter behov */
     height: auto;
 }
 
 .nav-right {
     display: flex;
     justify-content: flex-end;
-    flex: 1;  /* Fördelar utrymme till höger */
+    flex: 1;
+    /* Fördelar utrymme till höger */
 }
 
 .cart-button {
@@ -70,11 +77,6 @@
     border: none;
     cursor: pointer;
 }
-
-.cart-icon {
-    width: 32px;  /* Ändra till önskad bredd */
-    height: 32px; /* Ändra till önskad höjd */
-  }
   
 .search-overlay {
     position: fixed;
@@ -89,4 +91,69 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
-}   
+}
+
+/* Mobilanpassning (max 768px bred) */
+@media (max-width: 768px) {
+    .logo {
+        content: url("/pictures/reel-reactors-logga-mobile.png");
+        width: 20vw;
+        max-width: 150px;
+        min-width: 100px;
+        height: auto;
+    }
+
+    .navbar {
+        background: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        position: absolute; /* Fortsätt att ha absolut position i mobilvy */
+        top: 0;
+        width: 100%; /* Se till att den tar upp hela bredden */
+    }
+    
+    .search-container {
+        position: relative;
+        top: 10px;
+        width: 80%;  /* Gör sökfältet större, men inte för mycket */
+        margin-bottom: 20px;  /* Öka utrymmet mellan sökfält och logga */
+    }
+
+    .search-container input {
+        height: 30px;
+        padding: 5px;
+        font-size: 0.9rem;
+        width: 100%; /* Se till att sökfältet sträcker sig över hela containern */
+    }
+
+    .logo-center {
+        margin-top: 20px;  /* Se till att loggan inte trycks uppåt av navbaren */
+        margin-bottom: 20px; /* Skapar mer utrymme mellan logga och länkar */
+    }
+
+    .nav-left {
+        order: 3;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .nav-right {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        margin-top: 0;
+    }
+
+    .links {
+        flex-direction: row;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .cart-icon {
+        width: 24px;
+        height: 24px;
+    }
+}

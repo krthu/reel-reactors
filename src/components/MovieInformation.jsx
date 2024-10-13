@@ -51,6 +51,7 @@ const MovieInformation = ({ onBuy, onWatchTrailer }) => {
         releaseDate={movie.release_date}
         genres={movie.genres.map(genre => genre.name)}
         crew={crew}
+        movie={movie}
       />
       {/* Additional sections like CastList and RecommendationComp */}
       <ActorCard cast={cast} />

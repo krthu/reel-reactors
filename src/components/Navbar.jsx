@@ -13,35 +13,41 @@ const Navbar = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const moviesData = [];
-        const movieIds = new Set(); // To track unique movie IDs
-        const totalPages = 5; // Adjust the number of pages as needed
-
+        const totalPages = 20;
+        const movieIds = new Set();
+        const requests = [];
+    
         for (let page = 1; page <= totalPages; page++) {
-          const response = await axios.get('https://api.themoviedb.org/3/movie/popular', {
-            headers: {
-              Authorization: `Bearer ${import.meta.env.VITE_TMDB_READ_ACCESS_TOKEN}`,
-            },
-            params: {
-              page,
-            },
-          });
-
-          // Filter out duplicates before adding to moviesData
-          response.data.results.forEach((movie) => {
+          requests.push(
+            axios.get('https://api.themoviedb.org/3/movie/popular', {
+              headers: {
+                Authorization: `Bearer ${import.meta.env.VITE_TMDB_READ_ACCESS_TOKEN}`,
+              },
+              params: {
+                page,
+              },
+            })
+          );
+        }
+    
+        const responses = await Promise.all(requests);
+    
+        const moviesData = [];
+        responses.forEach(response => {
+          response.data.results.forEach(movie => {
             if (!movieIds.has(movie.id)) {
               movieIds.add(movie.id);
               moviesData.push(movie);
             }
           });
-        }
-
+        });
+    
         setMovies(moviesData);
       } catch (error) {
         console.error('Error fetching movies:', error);
       }
     };
-
+    
     fetchMovies();
   }, []);
 

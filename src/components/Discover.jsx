@@ -159,22 +159,27 @@ const Discover = ({ movieData, setMovieData }) => {
     };
 
     return (
-        <>
-            <div className="body-container">
+    <>
+        <div className="body-container">
             <div className="header-container">
-                    <Navbar />
-                    {landingMovie ? <Header movie={landingMovie} /> : <div>Loading...</div>}
-                </div>
-                <div className="movie-genre-container">{renderCarusels()}</div>
-            </div>
-            {/* Overlay */}
-            <Overlay show={showOverlay} onClose={closeOverlay}>
-                {selectedMovie && (
-                    <Header movie={selectedMovie} isOverlay={true} onClose={closeOverlay} />
+                <Navbar />
+                {landingMovie ? (
+                    <Header movie={landingMovie} />
+                ) : (
+                    <div>Loading...</div>
                 )}
-            </Overlay>
-        </>
-    );
+            </div>
+            <div className="movie-genre-container">{renderCarusels()}</div>
+        </div>
+        {/* Overlay */}
+        <Overlay show={showOverlay} onClose={closeOverlay}>
+            {selectedMovie && (
+                <Header movie={selectedMovie} isOverlay={true} onClose={closeOverlay} />
+            )}
+        </Overlay>
+    </>
+);
+
 };
 
 export default Discover;

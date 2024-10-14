@@ -1,6 +1,5 @@
 .navbar {
     position: fixed;
-    /* Håller navbaren fast högst upp */
     top: 0;
     left: 0;
     width: 100%;
@@ -10,9 +9,11 @@
     background: var(--navbar-bg);
     padding: 10px 20px;
     z-index: 10;
-    /* Säkerställer att navbaren ligger över headern */
     color: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);
+    transition: all 0.3s ease-in-out;
 }
+
 
 .nav-left {
     display: flex;
@@ -76,7 +77,20 @@
     height: 32px;
     /* Ändra till önskad höjd */
 }
-
+  
+.search-overlay {
+    position: fixed;
+    top: 150px; /* Placerar sökresultaten under sökrutan */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    z-index: 10000;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 /* Mobilanpassning (max 768px bred) */
 @media (max-width: 768px) {

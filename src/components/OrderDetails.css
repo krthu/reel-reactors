@@ -1,0 +1,109 @@
+.order-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: var(--spacing-medium);
+    background-color: var(--movie-list-bg);
+    border-radius: var(--border-radius-medium);
+    color: var(--text-color-light);
+    width: 20%;
+    margin: 20px auto;
+    box-shadow: var(--box-shadow-medium);
+    font-family: var(--font-family);
+}
+
+.order-cart {
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    padding: var(--spacing-small);
+    font-weight: 500;
+    border-bottom: 1px solid var(--movie-list-border);
+    text-align: center;
+}
+
+.cart-header .header-item:first-child {
+    text-align: left;
+    margin-left: 10px;
+}
+
+.cart-header div {
+    padding: 10px;
+    font-size: var(--font-size-medium);
+}
+
+.cart-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    align-items: center;
+    padding: var(--spacing-small);
+    border-bottom: 1px solid var(--movie-list-border);
+    margin-bottom: var(--spacing-small);
+}
+
+.cart-item-info {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    text-align: left;
+}
+
+.cart-item img {
+    width: 80px;
+    height: auto;
+    border-radius: 4px;
+}
+
+.cart-item-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-item-details h4 {
+    font-size: 14px;
+    margin: 0 0 5px 0;
+}
+
+.cart-item-details p {
+    margin: 0;
+    font-size: 12px;
+    color: var(--text-color-light);
+}
+
+.cart-item-price, .cart-item-count, .cart-item-total {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+
+.total-price {
+    font-size: var(--font-size-large);
+    font-weight: 700;
+    color: var(--text-color-light);
+    text-align: right; 
+    margin-top: var(--spacing-medium); 
+
+.confirm-button {
+    width: 100%;
+    padding: var(--spacing-small);
+    background: var(--button-bg-primary);
+    border: none;
+    color: var(--text-color-light);
+    cursor: pointer;
+    border-radius: var(--border-radius-large);
+    font-size: var(--font-size-medium);
+    transition: var(--transition-default);
+}
+
+.confirm-button:hover {
+    background: var(--hover-color);
+    opacity: var(--button-hover-opacity);
+}
+
+}

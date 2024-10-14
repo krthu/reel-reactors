@@ -31,8 +31,8 @@ const Checkout = () => {
       {isPaymentComplete && (
         <div className="popup-overlay">
           <div className="popup-content">
-            <h3>🎉 Congratulations! The movie is now yours! 🎉</h3>
-            <p>You can now watch the movie or continue shopping</p>
+            <h3>🎉 The purchase is complete! The movie is now yours! 🎉</h3>
+            <p>You can now watch the movie or continue shopping!</p>
             <button className="button secondary-button" onClick={handleGoToMyMovies}>
               <span className="button-text">Go to My movies</span>
             </button>

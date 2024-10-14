@@ -11,22 +11,37 @@ const CardInformation = ({onCompletePay}) => {
 
   const [errors, setErrors] = useState({});
 
+  const validateCardNumber = (number) => {
+    const cardNumberRegex = /^\d{16}$/;
+    if (!number) {
+        return 'Card number is required';
+    }else if (!cardNumberRegex.test(number)) {
+        return 'Card number must be 16 digits';
+    }
+    return null;
+};
+
   const handleSubmit = (e) => {
     e.preventDefault();
     
   
     let validationErrors = {};
 
+    validationErrors.cardNumber = validateCardNumber(cardNumber);
+
+    const filteredErrors = Object.fromEntries(Object.entries(validationErrors).filter(([_, value]) => value));
+
+    
     if (!cardNumber) validationErrors.cardNumber = 'Cardnumber is required';
     if (!expiryDate) validationErrors.expiryDate = 'Expirationdate is required';
     if (!cvv) validationErrors.cvv = 'CVV is required';
     if (!nameOnCard) validationErrors.nameOnCard = 'Name on card is required';
 
    
-    if (Object.keys(validationErrors).length > 0) {
+    if (Object.keys(filteredErrors).length > 0) {
       setErrors(validationErrors);
     } else {
-  
+        
       setCardNumber('');
       setExpiryDate('');
       setCvv('');

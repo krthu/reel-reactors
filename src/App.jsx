@@ -12,7 +12,6 @@ import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import Discover from './components/Discover';
 import ShoppingCart from './components/ShoppingCart'
-import { useSelector } from 'react-redux';
 import OrderDetails from './components/OrderDetails';
 import StarComponent from './components/StarComponent';
 import placeholder from './features/placeholder';

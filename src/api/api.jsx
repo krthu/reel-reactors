@@ -100,4 +100,44 @@ export const searchMovies = async (query) => {
   }
 };
 
+function shuffleArray(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+const genres = [
+  { id: 28, name: "Action" },
+  { id: 12, name: "Adventure" },
+  { id: 16, name: "Animation" },
+  { id: 35, name: "Comedy" },
+  { id: 80, name: "Crime" },
+  { id: 99, name: "Documentary" },
+  { id: 18, name: "Drama" },
+  { id: 10751, name: "Family" },
+];
+
+
+export const fetchAllDiscoverData = async () => {
+
+  try {
+
+      const data = { popular: await getMovies() };
+      
+      const promises = genres.map(async (genre) => {
+        const genreData = await getMoviesWithGenres(genre.id);
+        genreData.results = shuffleArray(genreData.results);
+        data[genre.name] = genreData;
+
+    });
+    await Promise.all(promises);
+    return data;
+
+  }catch (error) {
+    console.log('Error fetching discover data.')
+  }
+}
+
 export default { getMovies, getGenres, getMovieDetails, getCast, getRecommendations, getMoviesWithGenres, getVideos, searchMovies };

@@ -4,7 +4,7 @@ import Header from "./Header";
 import MovieCard from "./MovieCard";
 import { useState, useEffect } from "react";
 import Overlay from "./Overlay";
-import { getMovies, getMoviesWithGenres, getMovieDetails } from "../api/api";
+import { getMovies, getMoviesWithGenres, getMovieDetails, fetchAllDiscoverData } from "../api/api";
 
 const Discover = ({ movieData, setMovieData }) => {
     const [showOverlay, setShowOverlay] = useState(false);
@@ -72,42 +72,11 @@ const Discover = ({ movieData, setMovieData }) => {
         };
     }, [landingMovie, movieData]);
 
-    const genres = [
-        { id: 28, name: "Action" },
-        { id: 12, name: "Adventure" },
-        { id: 16, name: "Animation" },
-        { id: 35, name: "Comedy" },
-        { id: 80, name: "Crime" },
-        { id: 99, name: "Documentary" },
-        { id: 18, name: "Drama" },
-        { id: 10751, name: "Family" },
-    ];
-
-    function shuffleArray(arr) {
-        for (let i = arr.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-        return arr;
-    }
-
-    const fetchMovieData = async () => {
-        const data = { popular: await getMovies() };
-        const promises = genres.map(async (genre) => {
-            const genreData = await getMoviesWithGenres(genre.id);
-            genreData.results = shuffleArray(genreData.results);
-            data[genre.name] = genreData;
-        });
-        await Promise.all(promises);
-        return data;
-    };
-
-    // Fetch all movie data if it's not already set
     useEffect(() => {
         if (Object.keys(movieData).length === 0) {
             const fetchAllData = async () => {
                 try {
-                    const data = await fetchMovieData();
+                    const data = await fetchAllDiscoverData();
                     fillHeader(data.popular);
                     setMovieData(data); // Update state with genre data
                 } catch (error) {

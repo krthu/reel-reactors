@@ -8,10 +8,12 @@ import { useState } from "react";
 import TrailerEmbed from './TrailerEmbed';
 import Overlay from './Overlay';
 import { getTrailerID } from '../features/getTrailerID';
-
 // Define default image paths
-const DEFAULT_POSTER = '/pictures/poster.png';
-const DEFAULT_BACKDROP = '/pictures/backdrop.png';
+import DEFAULT_POSTER from '../assets/images/poster.png';
+import DEFAULT_BACKDROP from '../assets/images/backdrop.png';
+
+
+
 
 const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genres, crew, posterUrl, rating, movie}) => {
   // State to manage the background image
@@ -51,7 +53,7 @@ const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genr
             className="movie-poster"
             onError={(e) => {
               e.target.onerror = null; // Prevents infinite loop in case default image also fails
-              e.target.src = DEFAULT_POSTER;
+              e.target.src = {DEFAULT_POSTER};
             }}
           />
           <div className="button-container">

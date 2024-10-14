@@ -110,7 +110,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="nav-left">
         <div className="links">
-          <Link to="/movies">Movies</Link>
+          <Link to="/">Movies</Link>
           <Link to="/tvseries">TV-Shows</Link>
           <Link to="/mymovies">My Movies</Link>
         </div>
@@ -127,10 +127,7 @@ const Navbar = () => {
       <div className="logo-center">
         <img src="/pictures/reel-reactors-logga.png" alt="Reel Reactors Logo" className="logo" />
       </div>
-      <div className="nav-right">
-        <Link to="/" className="home-button" onClick={handleHome}>
-          <img src="/pictures/icons8-home-64.png" alt="Home icon" />
-        </Link>
+      <div className="nav-right">        
         <Link to="/cart" className="cart-button">
           <img src="/pictures/icons8-cart-64.png" alt="Cart icon" />
         </Link>

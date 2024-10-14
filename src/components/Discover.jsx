@@ -1,6 +1,7 @@
 import Carusel from "./Carusel";
 import Navbar from "./Navbar";
 import Header from "./Header";
+import Footer from "./Footer";
 import MovieCard from "./MovieCard";
 import { useState, useEffect } from "react";
 import Overlay from "./Overlay";
@@ -10,6 +11,27 @@ const Discover = ({ movieData, setMovieData }) => {
     const [showOverlay, setShowOverlay] = useState(false);
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [landingMovie, setLandingMovie] = useState(null);
+
+
+    const [showFooter, setShowFooter] = useState(false);
+
+
+    //Kollar så att man scrollat till botten på sidan och isf visa footer.
+    useEffect(() => {
+        const handleScroll = () => {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                setShowFooter(true); 
+            } else {
+                setShowFooter(false); 
+            }
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+
 
     // Listen for URL changes
     useEffect(() => {
@@ -173,6 +195,7 @@ const Discover = ({ movieData, setMovieData }) => {
                     <Header movie={selectedMovie} isOverlay={true} onClose={closeOverlay} />
                 )}
             </Overlay>
+            {showFooter && <Footer className="footer-container" />}
         </>
     );
 };

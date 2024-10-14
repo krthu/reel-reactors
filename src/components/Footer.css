@@ -1,0 +1,27 @@
+.footer-container {
+    background-color: var(--footer-bg); 
+    color: var(--text-color-light);
+    padding: var(--spacing-medium) var(--spacing-large);
+    text-align: center;
+    border-top: 1px solid var(--movie-list-border);
+    box-shadow: var(--box-shadow-medium);
+}
+
+.footer-container .contact-info {
+    margin-bottom: var(--spacing-large); 
+}
+
+.footer-container a {
+    color: var(--hover-color);
+    text-decoration: none;
+}
+
+.footer-container a:hover {
+    text-decoration: underline;
+}
+
+.footer-container p {
+    font-size: var(--font-size-small);
+    margin: var(--spacing-small) 0;
+}
+

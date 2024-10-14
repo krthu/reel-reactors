@@ -41,7 +41,7 @@ const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genr
 
   useEffect(() => {
     setTrailerID(getTrailerID(movie.videos.results));
-  },[])
+  },[movie])
 
   return (
     <header className="movie-header" style={{ backgroundImage: `url(${backgroundImage})` }}>

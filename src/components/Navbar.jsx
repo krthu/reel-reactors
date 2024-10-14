@@ -127,11 +127,11 @@ const Navbar = () => {
       <div className="logo-center">
         <img src="/pictures/reel-reactors-logga.png" alt="Reel Reactors Logo" className="logo" />
       </div>
-      <div className="nav-right">        
-        <Link to="/cart" className="cart-button">
-          <img src="/pictures/icons8-cart-64.png" alt="Cart icon" />
-        </Link>
-      </div>
+      <div className="nav-right">
+                <Link to="/cart" className="cart-button">
+                    <img src="/pictures/icons8-cart-64.png" alt="Cart icon" className="cart-icon" />
+                </Link>
+            </div>
 
       {isOverlayVisible && searchQuery && (
         <SearchOverlay

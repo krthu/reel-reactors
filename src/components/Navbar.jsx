@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import './Navbar.css';
+import logo from '../assets/images/reel-reactors-logga.png';
+import cartIcon from '../assets/images/icons8-cart-64.png';
+
 
 const Navbar = () => {
     return (
@@ -18,12 +21,12 @@ const Navbar = () => {
             </div>
 
             <div className="logo-center">
-                <img src="/pictures/reel-reactors-logga.png" alt="Reel Reactors Logo" className="logo" />
+                <img src={logo} alt="Reel Reactors Logo" className="logo" />
             </div>
 
             <div className="nav-right">
                 <Link to="/cart" className="cart-button">
-                    <img src="/pictures/icons8-cart-64.png" alt="Cart icon" className="cart-icon" />
+                    <img src={cartIcon} alt="Cart icon" className="cart-icon" />
                 </Link>
             </div>
 

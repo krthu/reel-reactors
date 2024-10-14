@@ -3,12 +3,13 @@ import "./Header.css";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 
+
 const Header = ({ movie, isOverlay, onClose }) => {
   const navigate = useNavigate();
   if (!movie) return null;
   const handleWatchButtonPress = (id) => {
    
-    navigate(`movie/${id}`);
+    navigate(`/movie/${id}`);
   }
 
   return (

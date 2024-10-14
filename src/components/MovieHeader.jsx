@@ -4,10 +4,12 @@ import RatingComponent from './RatingComponent'; // Import the RatingComponent
 import Button from './Button'; // Import Button component for consistent usage
 import { useDispatch } from "react-redux";
 import { addItem } from "../features/shopppingCartSlice";
+import DEFAULT_POSTER from '../assets/images/poster.png';
+import DEFAULT_BACKDROP from '../assets/images/backdrop.png';
 
 // Define default image paths
-const DEFAULT_POSTER = '/pictures/poster.png';
-const DEFAULT_BACKDROP = '/pictures/backdrop.png';
+// const DEFAULT_POSTER = '/pictures/poster.png';
+// const DEFAULT_BACKDROP = '/pictures/backdrop.png';
 
 const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genres, crew, posterUrl, rating, movie }) => {
   // State to manage the background image

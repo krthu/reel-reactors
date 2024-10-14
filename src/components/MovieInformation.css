@@ -69,7 +69,8 @@
   }
   
   .cast-section {
-    margin-top: 30px;
+    margin-top: 60px;
+    z-index: 8;
   }
   
   .cast-list {

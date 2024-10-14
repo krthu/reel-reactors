@@ -162,8 +162,7 @@ const Discover = ({ movieData, setMovieData }) => {
         <>
             <div className="body-container">
                 <div className="header-container">
-                    <Navbar />
-                    {landingMovie ? <Header movie={landingMovie} /> : <div>Loading...</div>}
+                    <Header movie={landingMovie} />
                 </div>
                 <div className="movie-genre-container">{renderCarusels()}</div>
             </div>

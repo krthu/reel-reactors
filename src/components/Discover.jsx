@@ -97,12 +97,13 @@ const Discover = ({ movieData, setMovieData }) => {
 
         return (
             <>
-            {/* Render all movies from movie data */}
+            {/* Render all movies from movie data into a array of movie cards*/}
             {Object.entries(movieData).map(([genre, data]) => {
                 // Remove items without a poster or a backdrop
                 const movieCards = data.results
                     .filter((movie) => movie.poster_path && movie.backdrop_path)
                     .map((movie) => (
+                        //Create a card per movie
                         <MovieCard
                             url={movie.poster_path}
                             key={movie.id}
@@ -112,6 +113,7 @@ const Discover = ({ movieData, setMovieData }) => {
                     ));
 
                 return (
+                    //For each genre return a whole Carusel with the movieCards in
                     <div key={genre} className="popular-movie-container">
                         <Carusel items={movieCards} title={genre} />
                     </div>

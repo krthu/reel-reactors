@@ -3,6 +3,7 @@ import { getMovies } from '../api/api';
 import Navbar from './Navbar';
 import './MyMovies.css';
 import { useNavigate } from 'react-router-dom';
+import RatingComponent from './RatingComponent';
 
 const MyMovies = () => {
   const [favoriteMovies, setFavoriteMovies] = useState([]);
@@ -48,7 +49,7 @@ const MyMovies = () => {
               {purchasedMovies.map((movie) => (
                 <div key={movie.id} className="movie-card" onClick={() => handleMovieClick(movie.id)}>
                   <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
-                  <p>{movie.title}</p>
+                  <RatingComponent rating={movie.vote_average} />
                 </div>
               ))}
             </div>
@@ -60,7 +61,7 @@ const MyMovies = () => {
               {favoriteMovies.map((movie) => (
                 <div key={movie.id} className="movie-card" onClick={() => handleMovieClick(movie.id)}>
                   <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
-                  <p>{movie.title}</p>
+                  <RatingComponent rating={movie.vote_average} />
                 </div>
               ))}
             </div>

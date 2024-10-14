@@ -1,7 +1,6 @@
 import React from 'react';
 import './ActorCard.css'; // Style for the cast list
-
-const DEFAULT_POSTER = '/pictures/poster.png';
+import DEFAULT_POSTER from '../assets/images/poster.png';
 
 const ActorCard = ({ cast }) => {
   return (

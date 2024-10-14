@@ -110,7 +110,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="nav-left">
         <div className="links">
-          <Link to="/movies">Movies</Link>
+          <Link to="/">Movies</Link>
           <Link to="/tvseries">TV-Shows</Link>
           <Link to="/mymovies">My Movies</Link>
         </div>
@@ -128,13 +128,10 @@ const Navbar = () => {
         <img src="/pictures/reel-reactors-logga.png" alt="Reel Reactors Logo" className="logo" />
       </div>
       <div className="nav-right">
-        <Link to="/" className="home-button" onClick={handleHome}>
-          <img src="/pictures/icons8-home-64.png" alt="Home icon" />
-        </Link>
-        <Link to="/cart" className="cart-button">
-          <img src="/pictures/icons8-cart-64.png" alt="Cart icon" />
-        </Link>
-      </div>
+                <Link to="/cart" className="cart-button">
+                    <img src="/pictures/icons8-cart-64.png" alt="Cart icon" className="cart-icon" />
+                </Link>
+            </div>
 
       {isOverlayVisible && searchQuery && (
         <SearchOverlay

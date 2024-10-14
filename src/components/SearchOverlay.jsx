@@ -1,5 +1,6 @@
 import React from 'react';
 import './SearchOverlay.css';
+import DEFAULT_POSTER from '../assets/images/poster.png';
 
 const SearchOverlay = ({ movies, onSelectMovie, onClose, searchQuery }) => {
   return (
@@ -10,7 +11,7 @@ const SearchOverlay = ({ movies, onSelectMovie, onClose, searchQuery }) => {
           movies.map(movie => (
             <div key={movie.id} className="search-result-item" onClick={() => onSelectMovie(movie)}>
               <img
-                src={movie.poster_path ? `https://image.tmdb.org/t/p/w200${movie.poster_path}` : '/path/to/placeholder.jpg'}
+                src={movie.poster_path ? `https://image.tmdb.org/t/p/w200${movie.poster_path}` : DEFAULT_POSTER}
                 alt={movie.title}
                 className="search-thumbnail"
               />

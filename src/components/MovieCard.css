@@ -9,18 +9,21 @@
 
 .movie-card-img  {
     border-radius: var(--border-radius-medium);
-    box-shadow: var(--box-shadow-medium)
+    box-shadow: var(--box-shadow-medium);
+    transition: filter 0.3s ease, transform 0.3s ease;
 }
 
-.movie-card-img:hover {
-    border: 3px solid var(--hover-color);
-
+.movie-card-img:hover {    
+    cursor: pointer;
+    transform: scale(1.05); /* Slight zoom */
+    transition: filter 0.3s ease, transform 0.3s ease; /* Smooth transition */
 }
 
-.movie-card-selected {
-    max-height: 100%;
-    max-width: 100%;
-    position: absolute;
-    border: 3px solid var(--hover-color);
 
-}
+
+
+
+
+
+
+

@@ -1,6 +1,6 @@
 /* Navbar.css */
 .navbar {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -8,7 +8,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 10px 20px;s
     z-index: 10000; /* Säkerställer att navbaren ligger över headern */
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2));
     box-shadow: 0 14px 15px rgba(4, 62, 128, 0.201);

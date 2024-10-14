@@ -1,6 +1,5 @@
 .navbar {
     position: fixed;
-    /* Håller navbaren fast högst upp */
     top: 0;
     left: 0;
     width: 100%;
@@ -10,9 +9,11 @@
     background: var(--navbar-bg);
     padding: 10px 20px;
     z-index: 10;
-    /* Säkerställer att navbaren ligger över headern */
     color: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);
+    transition: all 0.3s ease-in-out;
 }
+
 
 .nav-left {
     display: flex;

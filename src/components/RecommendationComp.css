@@ -17,8 +17,17 @@
   .recommendation-poster {
     width: 150px;
     height: auto;
-    border-radius: 8px;
+    border-radius: var(--border-radius-medium);
+    box-shadow: var(--box-shadow-medium);
+    transition: filter 0.3s ease, transform 0.3s ease;
   }
+
+  .recommendation-poster:hover {  
+    cursor: pointer;  
+    transform: scale(1.05); /* Slight zoom */
+    transition: filter 0.3s ease, transform 0.3s ease; /* Smooth transition */
+}
+
   
   .recommendation-card h4 {
     margin-top: 8px;

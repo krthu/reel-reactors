@@ -11,7 +11,7 @@ const CartItem = ({ cartItem }) => {
         dispatch(removeItem(cartItem.item));
     };
     const handleIncrease = () => {
-        dispatch(addItem(cartItem.item));
+        dispatch(addItem(cartItem));
     };
     const handleDecrease = () => {
         dispatch(decrease(cartItem.item));

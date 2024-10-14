@@ -6,7 +6,7 @@ const DEFAULT_POSTER = '/pictures/poster.png';
 const ActorCard = ({ cast }) => {
   return (
     <div className="cast-section">
-      <h2>Huvudrollsinnehavare</h2>
+      <h2>Actors</h2>
       <div className="cast-list">
         {cast.map((actor) => (
           <div key={actor.credit_id} className="cast-card">

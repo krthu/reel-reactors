@@ -11,10 +11,10 @@ const Discover = ({ movieData, setMovieData }) => {
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [landingMovie, setLandingMovie] = useState(null);
 
-    // Lyssna på URL-ändringar
+    // Listen for URL changes
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
-        const movieIDFromURL = urlParams.get('jbv'); // Hämta filmens ID från URL
+        const movieIDFromURL = urlParams.get('jbv'); // Get movie ID from URL
 
         if (movieIDFromURL && !selectedMovie) {
             const getMovie = async () => {
@@ -31,39 +31,46 @@ const Discover = ({ movieData, setMovieData }) => {
     }, [window.location.search, selectedMovie]);
 
     const handlePosterPress = (movie) => {
-        setSelectedMovie(movie); // Sätt vald film
-        setShowOverlay(true); // Visa overlay
-        // Uppdatera URL utan att ladda om sidan
+        setSelectedMovie(movie); // Set selected movie
+        setShowOverlay(true); // Show overlay
+        // Update URL without reloading the page
         window.history.pushState({}, '', `?jbv=${movie.id}`);
     };
 
     const closeOverlay = () => {
-        setShowOverlay(false); // Stäng overlay
-        setSelectedMovie(null); // Nollställ vald film
-        // Återställ URL till standardvärdet
+        setShowOverlay(false); // Close overlay
+        setSelectedMovie(null); // Reset selected movie
+        // Reset URL to default
         window.history.pushState({}, '', window.location.pathname);
     };
 
     const fillHeader = (movieData) => {
         const randomIndex = Math.floor(Math.random() * movieData.results.length);
         const firstMovie = movieData.results[randomIndex];
-        setLandingMovie(firstMovie); // Sätt första filmen som landningssidans film
+        setLandingMovie(firstMovie); // Set first movie for landing page header
     };
 
+    // Ensure fillHeader is called whenever movieData changes
     useEffect(() => {
-        if (Object.keys(movieData).length === 0) {
-            const fetchAllData = async () => {
-                try {
-                    const data = await fetchMovieData();
-                    fillHeader(data.popular);
-                    setMovieData(data); // Uppdatera state med all genre-data
-                } catch (error) {
-                    console.error('Error fetching movie data:', error);
-                }
-            };
-            fetchAllData();
+        if (movieData.popular && movieData.popular.results.length > 0) {
+            fillHeader(movieData.popular);
         }
     }, [movieData]);
+
+    // Handle back navigation to re-render or refetch data
+    useEffect(() => {
+        const handlePopState = () => {
+            if (!landingMovie && movieData.popular) {
+                fillHeader(movieData.popular);
+            }
+        };
+
+        window.addEventListener('popstate', handlePopState);
+
+        return () => {
+            window.removeEventListener('popstate', handlePopState);
+        };
+    }, [landingMovie, movieData]);
 
     const genres = [
         { id: 28, name: "Action" },
@@ -94,6 +101,22 @@ const Discover = ({ movieData, setMovieData }) => {
         await Promise.all(promises);
         return data;
     };
+
+    // Fetch all movie data if it's not already set
+    useEffect(() => {
+        if (Object.keys(movieData).length === 0) {
+            const fetchAllData = async () => {
+                try {
+                    const data = await fetchMovieData();
+                    fillHeader(data.popular);
+                    setMovieData(data); // Update state with genre data
+                } catch (error) {
+                    console.error('Error fetching movie data:', error);
+                }
+            };
+            fetchAllData();
+        }
+    }, [movieData]);
 
     const renderCarusels = () => {
         if (!movieData || Object.keys(movieData).length === 0) {
@@ -140,7 +163,7 @@ const Discover = ({ movieData, setMovieData }) => {
             <div className="body-container">
                 <div className="header-container">
                     <Navbar />
-                    <Header movie={landingMovie} />
+                    {landingMovie ? <Header movie={landingMovie} /> : <div>Loading...</div>}
                 </div>
                 <div className="movie-genre-container">{renderCarusels()}</div>
             </div>

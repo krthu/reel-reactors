@@ -22,7 +22,7 @@ const Carusel = ({ items, title }) => {
     return (
 
         <div className="carusel-section">
-            <h3 className="carusel-title">{title}</h3>
+            <h2 className="carusel-title">{title}</h2>
             <div className="carusel-container">
 
                 <button onClick={handlePreviousPress} className="carusel-button carusel-button-left">

@@ -10,6 +10,7 @@ const Navbar = () => {
                     <Link to="/movies">Movies</Link>
                     <Link to="/tvseries">TV-Shows</Link>
                     <Link to="/mymovies">My Movies</Link>
+                    <Link to="/favorites">My Favorites</Link>
                 </div>
                 <div className="search-container">
                     <input type="text" placeholder="Sök..." />

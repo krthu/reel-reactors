@@ -1,35 +1,38 @@
 /* Detta laddar in olika vikter (400, 500 och 700) av Poppins från Google Fonts och gör det tillgängligt i CSS */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
 
-:root {    
+:root {
+    
+    /* App color scheme */
 
-    /* Bakgrunder */
     --body-bg: #040C18; /* Applicera som huvudbakgrund på body */
-    --body-bg-fallback: #040C18; /* Fallback-färg för bakgrunden om gradient inte stöds */
     --navbar-bg: linear-gradient(to bottom, rgba(11, 18, 32, 0.75), rgba(0, 0, 0, 0.75)); /* Använd för navbarens bakgrund */
+    --body-bg-fallback: #040C18; /* Fallback-färg för bakgrunden om gradient inte stöds */    
     --footer-bg: #0B1220; /* Färg för footerns bakgrund (just nu har vi ingen footer med i vår design) */
     --button-bg-primary: linear-gradient(to bottom, #102537, #0c5797); /* Används för primära knappar som "Köp nu" och "Information" */
-    --button-bg-secondary: transparent; /* Används för transparenta knappar som "Se Trailer" */
-    
-    /* Textfärger */
+    --button-bg-secondary: transparent; /* Används för transparenta knappar som "Se Trailer" */     
     --text-color-light: #fefefe; /* Applicera på de flesta texter som ligger på mörka bakgrunder */
-    --text-color-dark: #000000; /* Används för texter på ljusare bakgrunder om det behövs */
-    
-    /* Kortbakgrunder */
+    --text-color-dark: #000000; /* Används för texter på ljusare bakgrunder om det behövs */ 
     --movie-list-bg: rgba(3, 35, 62, 0.35); /* Använd som bakgrund på MovieList/MovieRecommend-containern */
     --movie-list-border: rgba(3, 35, 62, 0.5); /* Använd som border (kantlinje) på MovieList/MovireRecomend -containern */
-    
-    /* Knappstater */
     --hover-color: #1A5276; /* Använd denna färg för hover-effekter på knappar */
     --button-hover-opacity: 0.85; /* Använd denna opacitet för knappar när man hovrar över dem */
     --button-active-opacity: 0.75; /* Använd denna opacitet för knappar när de är aktiva/klickade */
+
+    
+    --star-color-default: #ccc;
+    --star-color-filled: gold;
+    --rating-text-color: #fefefe;
+    --rating-margin-left: 10px;
+    --star-font-size: 24px;
+    --rating-font-size: 14px;
     
     /* Övergångar */
     --transition-default: all 0.3s ease; /* Standard övergångsinställning för mjukare interaktioner */
 
     /* Skuggor */
     --box-shadow-small: 0 1px 2px rgba(0, 0, 0, 0.1); /* Liten skugga för små element som knappar */
-    --box-shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.1); /* Medium skugga för större element som kort */
+    --box-shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.2); /* Medium skugga för större element som kort */
 
     /* Rundade hörn */
     --border-radius-small: 4px; /* Små rundade hörn, t.ex. för knappar */
@@ -55,14 +58,6 @@
     
     /* Fontfamilj */
     --font-family: 'Poppins', sans-serif; /* Använd detta typsnitt över hela webbplatsen för en enhetlig stil */
-
-    /* Breakpoints för responsiv design */
-    --breakpoint-xs: 320px;   /* Extra små enheter, som små mobiler */
-    --breakpoint-sm: 480px;   /* Små enheter, som mobiltelefoner */
-    --breakpoint-md: 768px;   /* Mellanstora enheter, som tablets */
-    --breakpoint-lg: 1024px;  /* Större enheter, som laptops och desktops */
-    --breakpoint-xl: 1440px;  /* Extra stora skärmar, som stora desktops */
-    --breakpoint-xxl: 1920px; /* Extra stora desktopskärmar */
 
     /* Animationer */
     --animation-duration: 0.3s; /* Standardlängd för animationer */

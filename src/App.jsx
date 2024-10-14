@@ -70,7 +70,6 @@ function App() {
 
   return (
       <div className='app-container'>
-        <Navbar />
         <Routes>
           <Route path="/movies" element={<MoviePage />} />
           <Route path="/tvseries" element={<TVSeriesPage />} />

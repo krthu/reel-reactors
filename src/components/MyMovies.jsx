@@ -49,19 +49,25 @@ const MyMovies = () => {
               {purchasedMovies.map((movie) => (
                 <div key={movie.id} className="movie-card" onClick={() => handleMovieClick(movie.id)}>
                   <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
-                  <RatingComponent rating={movie.vote_average} />
+                  <div className="rating-overlay">
+                    <RatingComponent rating={movie.vote_average} />
+                  </div>
+                 
                 </div>
               ))}
             </div>
           </section>
 
           <section className="movie-section">
-            <h2>My Favorite Movies</h2>
+            <h2>Favorite Movies</h2>
             <div className="movies-list">
               {favoriteMovies.map((movie) => (
                 <div key={movie.id} className="movie-card" onClick={() => handleMovieClick(movie.id)}>
                   <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
-                  <RatingComponent rating={movie.vote_average} />
+                  <div className="rating-overlay">
+                    <RatingComponent rating={movie.vote_average} /> 
+                  </div>
+                  
                 </div>
               ))}
             </div>

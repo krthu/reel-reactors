@@ -1,0 +1,29 @@
+.movie-card-container {
+    flex: 0 0 calc((100% / var(--items-per-screen)) - var(--spacing-medium));
+    padding: var(--spacing-medium);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.movie-card-img  {
+    border-radius: var(--border-radius-medium);
+    box-shadow: var(--box-shadow-medium);
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.movie-card-img:hover {    
+    cursor: pointer;
+    transform: scale(1.05); /* Slight zoom */
+    transition: filter 0.3s ease, transform 0.3s ease; /* Smooth transition */
+}
+
+
+
+
+
+
+
+
+

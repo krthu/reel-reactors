@@ -1,0 +1,115 @@
+.shopping-cart {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: var(--spacing-medium);
+    background-color: var(--movie-list-bg);
+    border-radius: var(--border-radius-medium);
+    color: var(--text-color-light);
+    width: 60%;
+    margin: 20px auto;
+    box-shadow: var(--box-shadow-medium);
+    font-family: var(--font-family);
+}
+
+.cart-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr; 
+    padding: var(--spacing-small);
+    font-weight: 500;
+    border-bottom: 1px solid var(--movie-list-border);
+    text-align: center; 
+}
+
+.cart-header .header-item:first-child {
+    text-align: left; 
+    margin-left: 10px; 
+}
+
+.cart-header div {
+    padding: 10px;
+    font-size: var(--font-size-medium);
+}
+
+.cart-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr; 
+    align-items: center;
+    padding: var(--spacing-small);
+    border-bottom: 1px solid var(--movie-list-border);
+    margin-bottom: var(--spacing-small);
+}
+
+
+.cart-item-info {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; 
+    gap: 10px; 
+    text-align: left; 
+}
+
+.cart-item img {
+    width: 80px;
+    height: auto;
+    border-radius: 4px;
+}
+
+.cart-item-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-item-details h4 {
+    font-size: 14px;
+    margin: 0 0 5px 0;
+}
+
+.cart-item-details p {
+    margin: 0;
+    font-size: 12px;
+    color: var(--text-color-light);
+}
+
+
+.cart-item-price, .cart-item-count, .cart-item-total {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    padding: 5px;
+}
+
+.cart-item-remove button {
+    background-color: transparent;
+    border: none;
+    color: #ff4d4d; 
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+}
+
+.cart-item-remove button:hover {
+    color: #ff1a1a; 
+}
+
+
+.cart-item-remove button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.cart-item-remove button:hover {
+    color: red;
+}
+
+.total-price {
+    font-size: var(--font-size-large);
+    font-weight: 700;
+    color: var(--text-color-light);
+}

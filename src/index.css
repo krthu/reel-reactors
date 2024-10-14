@@ -1,0 +1,192 @@
+/* Detta laddar in olika vikter (400, 500 och 700) av Poppins från Google Fonts och gör det tillgängligt i CSS */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+:root {
+    
+    /* App color scheme */
+
+    --body-bg: #040C18; /* Applicera som huvudbakgrund på body */
+    --navbar-bg: linear-gradient(to bottom, rgba(11, 18, 32, 0.75), rgba(0, 0, 0, 0.75)); /* Använd för navbarens bakgrund */
+    --body-bg-fallback: #040C18; /* Fallback-färg för bakgrunden om gradient inte stöds */    
+    --footer-bg: #0B1220; /* Färg för footerns bakgrund (just nu har vi ingen footer med i vår design) */
+    --button-bg-primary: linear-gradient(to bottom, #102537, #0c5797); /* Används för primära knappar som "Köp nu" och "Information" */
+    --button-bg-secondary: transparent; /* Används för transparenta knappar som "Se Trailer" */     
+    --text-color-light: #fefefe; /* Applicera på de flesta texter som ligger på mörka bakgrunder */
+    --text-color-dark: #000000; /* Används för texter på ljusare bakgrunder om det behövs */ 
+    --movie-list-bg: rgba(3, 35, 62, 0.35); /* Använd som bakgrund på MovieList/MovieRecommend-containern */
+    --movie-list-border: rgba(3, 35, 62, 0.5); /* Använd som border (kantlinje) på MovieList/MovireRecomend -containern */
+    --hover-color: #1A5276; /* Använd denna färg för hover-effekter på knappar */
+    --button-hover-opacity: 0.85; /* Använd denna opacitet för knappar när man hovrar över dem */
+    --button-active-opacity: 0.75; /* Använd denna opacitet för knappar när de är aktiva/klickade */
+
+    
+    --star-color-default: #ccc;
+    --star-color-filled: gold;
+    --rating-text-color: #fefefe;
+    --rating-margin-left: 10px;
+    --star-font-size: 24px;
+    --rating-font-size: 14px;
+    
+    /* Övergångar */
+    --transition-default: all 0.3s ease; /* Standard övergångsinställning för mjukare interaktioner */
+
+    /* Skuggor */
+    --box-shadow-small: 0 1px 2px rgba(0, 0, 0, 0.1); /* Liten skugga för små element som knappar */
+    --box-shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.2); /* Medium skugga för större element som kort */
+
+    /* Rundade hörn */
+    --border-radius-small: 4px; /* Små rundade hörn, t.ex. för knappar */
+    --border-radius-medium: 8px; /* Medium rundade hörn, t.ex. för kort */
+    --border-radius-large: 12px; /* Stora rundade hörn för större sektioner */
+    --border-radius-xlarge: 41px; /* För de stora knapparna som köp och information */ 
+
+    /* Padding & Marginaler */
+    --spacing-small: 8px; /* Används för små padding eller marginaler, t.ex. inuti knappar eller små mellanrum mellan element */
+    --spacing-medium: 16px; /* Används för generell padding eller marginaler, t.ex. mellan sektioner eller kort */
+    --spacing-large: 24px; /* Används för större mellanrum, t.ex. mellan huvudsektioner eller för att skapa luft i designen */
+    
+    /* Fontstorlekar
+       Vi använder 'rem' som enheten för fontstorlekar för att göra dem skalbara och responsiva. 
+       'rem' baseras på root-elementets (html) fontstorlek, vilket gör att om användaren ändrar 
+       sin standardstorlek i webbläsaren så kommer texten att skala därefter. Detta förbättrar 
+       tillgängligheten och gör designen mer flexibel för olika enheter och skärmstorlekar. 
+       Folk som har synnedsättning vill oftast ändra standardstorlek på sin webbläsare */
+    --font-size-small: 0.875rem; /* Används för mindre texter, t.ex. etiketter eller förklaringar */
+    --font-size-medium: 1rem; /* Applicera för generell brödtext, t.ex. filmbeskrivningar */
+    --font-size-large: 1.25rem; /* Används för underrubriker eller viktigare text, som sektionstitlar */
+    --font-size-xlarge: 1.75rem; /* Används för huvudrubriker, som filmtitlar */
+    
+    /* Fontfamilj */
+    --font-family: 'Poppins', sans-serif; /* Använd detta typsnitt över hela webbplatsen för en enhetlig stil */
+
+    /* Animationer */
+    --animation-duration: 0.3s; /* Standardlängd för animationer */
+    --animation-ease: ease-in-out; /* Mjuk in- och utgång på animationer */
+
+}
+
+  /* CSS Reset 
+  Syftet med denna reset är att eliminera webbläsarnas standardstilar som kan variera.
+   Det ger oss en ren grund att börja från, vilket gör att vår design blir mer konsekvent
+   över olika webbläsare. */
+* {
+    margin: 0; /* Tar bort standardmarginaler */
+    padding: 0; /* Tar bort standardutfyllnad */
+    box-sizing: border-box; /* Säkerställer att padding och border inkluderas i elementets totalbredd */
+}
+  
+html, body {
+    height: 100%; /* Gör att body tar upp hela höjden av webbläsarfönstret */
+}
+  
+body {
+    line-height: 1.5; /* Sätter en standard radavstånd */
+    -webkit-font-smoothing: antialiased; /* Gör texten mjukare att läsa på skärmar */
+    -moz-osx-font-smoothing: grayscale; /* Gör texten mjukare på Mac */
+    background: var(--body-bg-fallback); 
+    background: var(--body-bg); /* Gradient */
+    font-family: var(--font-family);
+    margin: 0 auto; /* Centrerar innehållet */
+}
+  
+img, picture, video, canvas, svg {
+    display: block; /* Tar bort inline-block beteendet från mediaelement */
+    max-width: 100%; /* Säkerställer att media-element inte överstiger sitt förälder-element */
+}
+  
+input, button, textarea, select {
+    font: inherit; /* Ärver typsnitt från förälderelement, istället för att använda webbläsarens standard */
+}
+
+input, textarea, select {
+    padding: var(--spacing-small); /* Standard padding för formulärelement */
+    border-radius: var(--border-radius-small); /* Rundade hörn för formulärelement */
+    border: 1px solid var(--text-color-light); /* Ljus kantlinje */
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: var(--hover-color); /* Färgändring vid fokus */
+    outline: none; /* Ta bort standard-outline */
+}
+
+.card:hover {
+    box-shadow: var(--box-shadow-medium); /* Lägg till skugga på kort när man hovrar */
+    transform: scale(1.05); /* Gör kortet lite större vid hover */
+}
+
+/* Exempel: Applicera stil på alla knappar och alla länkar (a) i projektet */
+button, a {
+    transition: var(--transition-default);
+    border-radius: var(--border-radius-small); /* Exempel på rundade hörn för knappar och länkar */
+}
+
+a {
+    color: var(--text-color-light); /* Färg på länkar */
+    text-decoration: none; /* Ta bort standard-understrykning */
+}
+
+a:hover {
+    color: var(--hover-color); /* Färg vid hover */
+    text-decoration: underline; /* Understrykning vid hover */
+}
+
+/* Standardisering av rubriker och textstycken */
+
+/* Huvudrubrik */
+h1 {
+    font-size: var(--font-size-xlarge); /* Används för de största rubrikerna */
+    font-weight: 700; /* Tung vikt för rubriker */
+    color: var(--text-color-light); /* Ljusa rubriker på mörk bakgrund */
+    margin-bottom: var(--spacing-large); /* Större marginal under rubriker */
+}
+
+/* Sekundär rubrik */
+h2 {
+    font-size: var(--font-size-large); /* Används för underrubriker */
+    font-weight: 500; /* Medelvikt för sekundära rubriker */
+    color: var(--text-color-light); /* Ljusa rubriker på mörk bakgrund */
+    margin-bottom: var(--spacing-medium); /* Normal marginal under underrubriker */
+}
+
+/* Tertiär rubrik */
+h3 {
+    font-size: var(--font-size-medium); /* Används för mindre rubriker */
+    font-weight: 500; /* Medelvikt för mindre rubriker */
+    color: var(--text-color-light); /* Ljusa rubriker */
+    margin-bottom: var(--spacing-small); /* Mindre marginal under tertiära rubriker */
+}
+
+/* Brödtext */
+p {
+    font-size: var(--font-size-medium); /* Används för generell text */
+    font-weight: 400; /* Normal vikt för brödtext */
+    color: var(--text-color-light); /* Ljusa texter på mörk bakgrund */
+    margin-bottom: var(--spacing-medium); /* Normal marginal under textstycken */
+    line-height: 1.6; /* Förbättrad läsbarhet för brödtext */
+}
+
+/* Listor */
+ul, ol {
+    margin-bottom: var(--spacing-large); /* Marginal för att skapa luft mellan listor och andra element */
+    padding-left: var(--spacing-large); /* Indrag för listpunkter */
+}
+
+li {
+    margin-bottom: var(--spacing-small); /* Skapar mellanrum mellan listpunkter */
+}
+
+/* Exempel på responsiva rubrikändringar */
+@media (max-width: var(--breakpoint-md)) {
+    h1 {
+        font-size: 1.5rem; /* Mindre storlek på mindre skärmar */
+    }
+
+    h2 {
+        font-size: 1.25rem; /* Anpassad storlek för mindre enheter */
+    }
+
+    h3 {
+        font-size: 1rem; /* Anpassad storlek för tertiära rubriker på mindre enheter */
+    }
+}
+

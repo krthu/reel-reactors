@@ -1,0 +1,28 @@
+.cast-section {
+  margin-left: 20px;
+}
+
+.cast-section h2 {
+  margin-bottom: 5px;
+}
+
+.cast-card {
+  flex: 0 0 auto;
+  width: 120px;
+  text-align: center;
+}
+
+.cast-image {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: var(--box-shadow-medium);
+  margin-bottom: 10px;
+}
+
+.cast-name {
+  font-weight: bold;
+}
+
+.character-name {
+  color: var(--text-color-light);
+}

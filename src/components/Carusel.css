@@ -1,0 +1,90 @@
+.carusel-container {
+    display: flex;
+    justify-content: center;
+}
+
+.carusel-title {
+    margin-top: 50px;
+    margin-bottom: 5px;
+    margin-left: 80px;
+    color: var(--text-color-light);
+}
+
+.carusel-content {
+    --items-per-screen: 6;
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    gap: var(--spacing-medium);
+    border-radius: var(--border-radius-large);
+    transform: translateX(calc(0 * -100%));
+    transition: var(--transition-default);
+    background-color: var(--movie-list-bg);
+    overflow-x: hidden;
+    border: 1px solid var(--movie-list-border);
+}
+
+
+.carusel-button {
+    border: none;
+    background-color: var(--button-bg-secondary);
+    margin: var(--spacing-medium) 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color-light);
+    transition: background-color 150ms var(--transition-default);
+}
+
+.carusel-button:hover {
+    background-color: var(--hover-colors);
+
+}
+
+.carusel-chevron {
+    font-size: 3rem;
+}
+
+.carusel-button:hover {
+    background-color: var(--hover-color);
+    opacity: var(--button-hover-opacity);
+}
+
+.carusel-button-left {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.carusel-button-right {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+@media (max-width: 1440px) {
+    .carusel-content {
+        --items-per-screen: 5;
+    }
+
+}
+
+@media (max-width: 1024px) {
+    .carusel-content {
+        --items-per-screen: 4;
+    }
+
+}
+
+@media (max-width: 768px) {
+    .carusel-content {
+        --items-per-screen: 2;
+    }
+
+}
+
+@media (max-width: 480px) {
+    .carusel-content {
+        --items-per-screen: 1;
+    }
+
+}

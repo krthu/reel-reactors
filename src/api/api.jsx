@@ -11,10 +11,10 @@ const apiClient = axios.create({
   },
 });
 
-export const getMovies = async () => {
+export const getMovies = async (category = 'popular', params = {}) => {
   try {
-    const response = await apiClient.get('/movie/popular');
-    return response.data; // Axios automatically parses the JSON
+    const response = await apiClient.get(`/movie/${category}`, { params });
+    return response.data;
   } catch (error) {
     console.error('Error fetching movies:', error);
     throw error;

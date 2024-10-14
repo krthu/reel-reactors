@@ -18,14 +18,12 @@ const Discover = ({ movieData, setMovieData }) => {
     useEffect(() => {
         const handleScroll = () => {
           if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-            setShowFooter(true); // Show footer when scrolled to the bottom
+            setShowFooter(true); 
         } else {
-            setShowFooter(false); // Hide footer otherwise
+            setShowFooter(false);
         }
     };
-
     window.addEventListener('scroll', handleScroll);
-
     return () => {
         window.removeEventListener('scroll', handleScroll);
     };

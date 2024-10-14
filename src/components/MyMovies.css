@@ -1,9 +1,36 @@
-.movie-page {
-    color: white;
-   
-}
+/* MyMovies.css */
 
-
-h1 {
-    color: white;
-}
+.my-movies {
+    margin-top: 100px;
+    background-color: var(--body-bg);
+    padding: 20px;
+  }
+  
+  .loading {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-top: 50px;
+  }
+  
+  .movie-section {
+    margin-top: 30px;
+  }
+  
+  .movie-section h2 {
+    font-size: 2rem;
+    color: #ffffff; /* TMDB Primary Color */
+    margin-bottom: 20px;
+  }
+  
+  .movies-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .movie-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.9);
+  }
+  

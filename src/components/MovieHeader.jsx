@@ -39,6 +39,26 @@ const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genr
     setShowOverlay(false);
   }
 
+  const handleTrailerPress = () => {
+    setShowOverlay(true);
+  }
+
+  useEffect(() => {
+    const fetchTrailer = async () => {
+      try {
+        const trailerID = getTrailerID(movie.videos.results);
+        setTrailerID(trailerID);
+      } catch (error) {
+        console.error('Error fetching trailer:', error);
+      }
+    };
+  
+    if (movie && movie.videos) {
+      fetchTrailer();
+    }
+  }, [movie]);
+  
+
   useEffect(() => {
     setTrailerID(getTrailerID(movie.videos.results));
   },[movie])
@@ -58,7 +78,7 @@ const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genr
           />
           <div className="button-container">
             {trailerID && (
-            <Button text="Watch Trailer" primary onPress={() => setShowOverlay(true)} />
+            <Button text="Watch Trailer" primary onPress={() => handleTrailerPress()} />
             )}
 
             <Button text="Buy" icon="shopping_cart" onPress={() => handleBuyPress()} />

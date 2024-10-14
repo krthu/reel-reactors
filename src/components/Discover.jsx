@@ -4,7 +4,7 @@ import Header from "./Header";
 import MovieCard from "./MovieCard";
 import { useState, useEffect } from "react";
 import Overlay from "./Overlay";
-import { getMovies, getMoviesWithGenres, getMovieDetails, fetchAllDiscoverData } from "../api/api";
+import { getMovieDetails, fetchAllDiscoverData } from "../api/api";
 
 const Discover = ({ movieData, setMovieData }) => {
     const [showOverlay, setShowOverlay] = useState(false);
@@ -73,17 +73,20 @@ const Discover = ({ movieData, setMovieData }) => {
     }, [landingMovie, movieData]);
 
     useEffect(() => {
-        if (Object.keys(movieData).length === 0) {
+      
             const fetchAllData = async () => {
                 try {
                     const data = await fetchAllDiscoverData();
                     fillHeader(data.popular);
-                    setMovieData(data); // Update state with genre data
+                    setMovieData(data);
                 } catch (error) {
                     console.error('Error fetching movie data:', error);
                 }
             };
+            if (Object.keys(movieData).length === 0) {
             fetchAllData();
+            } else {
+                fillHeader(movieData.popular)
         }
     }, [movieData]);
 
@@ -92,24 +95,14 @@ const Discover = ({ movieData, setMovieData }) => {
             return <div>Loading...</div>;
         }
 
-        const popularMovies = movieData.popular.results || [];
-        const popularMovieCards = popularMovies.map((movie) => (
-            <MovieCard
-                url={movie.poster_path}
-                key={movie.id}
-                onPress={() => handlePosterPress(movie)}
-                isSelected={selectedMovie !== null && movie.id === selectedMovie.id}
-            />
-        ));
-
         return (
             <>
-                <div className="popular-movie-container">
-                    <Carusel items={popularMovieCards} title="Popular" />
-                </div>
-                {genres.map((genre) => {
-                    const movies = movieData[genre.name]?.results || [];
-                    const movieCards = movies.map((movie) => (
+            {/* Render all movies from movie data */}
+            {Object.entries(movieData).map(([genre, data]) => {
+                // Remove items without a poster or a backdrop
+                const movieCards = data.results
+                    .filter((movie) => movie.poster_path && movie.backdrop_path)
+                    .map((movie) => (
                         <MovieCard
                             url={movie.poster_path}
                             key={movie.id}
@@ -117,13 +110,14 @@ const Discover = ({ movieData, setMovieData }) => {
                             isSelected={selectedMovie !== null && movie.id === selectedMovie.id}
                         />
                     ));
-                    return (
-                        <div key={genre.id} className="popular-movie-container">
-                            <Carusel items={movieCards} title={genre.name} />
-                        </div>
-                    );
-                })}
-            </>
+
+                return (
+                    <div key={genre} className="popular-movie-container">
+                        <Carusel items={movieCards} title={genre} />
+                    </div>
+                );
+            })}
+        </>
         );
     };
 

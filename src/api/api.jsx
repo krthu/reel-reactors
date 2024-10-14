@@ -33,7 +33,7 @@ export const getGenres = async () => {
 
 export const getMovieDetails = async (id) => {
   try {
-    const response = await apiClient.get(`/movie/${id}`);
+    const response = await apiClient.get(`/movie/${id}?append_to_response=videos`);
     return response.data;
   } catch (error) {
     console.error('Error fetching movie details:', error);
@@ -61,18 +61,31 @@ export const getRecommendations = async (id) => {
   }
 };
 
-export const getMoviesWithGenres = async (genres, page=1) => {
+export const getMoviesWithGenres = async (genres, page = 1) => {
   const genreURL = `&with_genres=${genres}`;
   const pageURL = `&page=${page}`;
   try {
-    const response = await apiClient.get(`/discover/movie?${genreURL}${pageURL}`)
-    return response.data
-  } catch {
+    const response = await apiClient.get(`/discover/movie?${genreURL}${pageURL}`);
+    return response.data;
+  } catch (error) {
     console.error('Error fetching movies with genres:', error);
     throw error;
   }
-}
+};
 
+// Funktionen för att hämta trailers och videor
+export const getVideos = async (id, isMovie = true) => {
+  const format = isMovie ? 'movie' : 'tv';
+  try {
+    const response = await apiClient.get(`${format}/${id}/videos?language=en-US`);
+    return response.data.results;
+  } catch (error) {
+    console.log('Error fetching videos');
+    throw error;
+  }
+};
+
+// Funktionen för att söka filmer
 export const searchMovies = async (query) => {
   try {
     const response = await apiClient.get('/search/movie', {
@@ -87,6 +100,4 @@ export const searchMovies = async (query) => {
   }
 };
 
-
-
-export default { getMovies, getGenres, getMovieDetails, getCast, getRecommendations, getMoviesWithGenres, searchMovies };
+export default { getMovies, getGenres, getMovieDetails, getCast, getRecommendations, getMoviesWithGenres, getVideos, searchMovies };

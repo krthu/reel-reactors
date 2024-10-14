@@ -7,11 +7,13 @@ import ActorCard from './ActorCard';
 import RecommendationComp from './RecommendationComp';
 import Navbar from './Navbar';
 
+
 const MovieInformation = ({ onBuy, onWatchTrailer }) => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [cast, setCast] = useState([]);
   const [crew, setCrew] = useState([]);
+
 
   useEffect(() => {
     const movieId = id;
@@ -29,6 +31,7 @@ const MovieInformation = ({ onBuy, onWatchTrailer }) => {
         setMovie(movieData);
         setCast(castData.cast);
         setCrew(castData.crew);
+        console.log(movieData);
       } catch (error) {
         console.error('Error fetching movie data:', error);
       }
@@ -42,6 +45,7 @@ const MovieInformation = ({ onBuy, onWatchTrailer }) => {
   }
 
   return (
+    <>
     <div className="movie-information-container">
       <Navbar />
       <MovieHeader 
@@ -59,6 +63,7 @@ const MovieInformation = ({ onBuy, onWatchTrailer }) => {
       <ActorCard cast={cast} />
       <RecommendationComp movieId={movie.id} />
     </div>
+    </>
   );
 };
 

@@ -1,18 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./MovieHeader.css";
 import RatingComponent from './RatingComponent'; // Import the RatingComponent
 import Button from './Button'; // Import Button component for consistent usage
 import { useDispatch } from "react-redux";
 import { addItem } from "../features/shopppingCartSlice";
+import { useState } from "react";
+import TrailerEmbed from './TrailerEmbed';
+import Overlay from './Overlay';
+import { getTrailerID } from '../features/getTrailerID';
 
 // Define default image paths
 const DEFAULT_POSTER = '/pictures/poster.png';
 const DEFAULT_BACKDROP = '/pictures/backdrop.png';
 
-const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genres, crew, posterUrl, rating, movie }) => {
+const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genres, crew, posterUrl, rating, movie}) => {
   // State to manage the background image
   const [backgroundImage, setBackgroundImage] = React.useState(backdropUrl || DEFAULT_BACKDROP);
   const dispatch = useDispatch();
+  const [showOverlay, setShowOverlay] = useState(false);
+  const [trailerID, setTrailerID] = useState(null);
 
   // Preload the backdrop image
   React.useEffect(() => {
@@ -27,6 +33,13 @@ const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genr
 
     dispatch(addItem({item: movie, price: 149}))
   }
+  const closeOverlay = () => {
+    setShowOverlay(false);
+  }
+
+  useEffect(() => {
+    setTrailerID(getTrailerID(movie.videos.results));
+  },[])
 
   return (
     <header className="movie-header" style={{ backgroundImage: `url(${backgroundImage})` }}>
@@ -42,7 +55,10 @@ const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genr
             }}
           />
           <div className="button-container">
-            <Button text="Watch Trailer" primary onPress={() => console.log('Watch Trailer Clicked')} />
+            {trailerID && (
+            <Button text="Watch Trailer" primary onPress={() => setShowOverlay(true)} />
+            )}
+
             <Button text="Buy" icon="shopping_cart" onPress={() => handleBuyPress()} />
           </div>
         </div>
@@ -61,6 +77,11 @@ const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genr
           </div>
         </div>
       </div>
+      <Overlay show={showOverlay} onClose={closeOverlay}>
+        {trailerID && (
+        <TrailerEmbed trailerID={trailerID}/>
+        )}
+    </Overlay>
     </header>
   );
 };

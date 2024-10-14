@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { getTrailerID } from '../features/getTrailerID';
+
 
 const apiUrl = 'https://api.themoviedb.org/3';
 const apiKey = import.meta.env.VITE_TMDB_API_KEY; // Access Vite environment variables
@@ -93,12 +95,30 @@ export const searchMovies = async (query) => {
         query,
       },
     });
-    return response.data.results;
+
+    const movieResults = response.data.results;
+
+    // Now, for each movie, fetch the trailer
+    const moviesWithTrailers = await Promise.all(
+      movieResults.map(async (movie) => {
+        try {
+          const videosResponse = await apiClient.get(`/movie/${movie.id}/videos`);
+          const trailerID = getTrailerID(videosResponse.data.results);
+          return { ...movie, trailerID };
+        } catch (error) {
+          console.error(`Error fetching videos for movie ${movie.id}:`, error);
+          return { ...movie, trailerID: null }; // In case fetching videos fails, set trailerID to null
+        }
+      })
+    );
+
+    return moviesWithTrailers;
   } catch (error) {
     console.error('Error searching movies:', error);
     return [];
   }
 };
+
 
 function shuffleArray(arr) {
   for (let i = arr.length - 1; i > 0; i--) {

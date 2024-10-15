@@ -1,3 +1,4 @@
+// RecommendationComp.jsx
 import './RecommendationComp.css'; 
 import { useNavigate } from 'react-router-dom';
 import FavoriteButton from './FavoriteButton';
@@ -13,7 +14,6 @@ const RecommendationComp = ({ recommendedMovies }) => {
     });
   }
 
-
   return (
     <div className="recommendation-section">
       <h3>Recommended Movies</h3>
@@ -25,9 +25,10 @@ const RecommendationComp = ({ recommendedMovies }) => {
                 src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                 alt={movie.title}
                 className="recommendation-poster"
-                 onClick={() => moviePress(movie.id)}/>
+                onClick={() => moviePress(movie.id)}
+              />
+              <FavoriteButton movie={movie} /> {/* Pass the entire movie object */}
               <h4>{movie.title}</h4>
-              <FavoriteButton movie={movie} />
             </div>
           ))
         ) : (

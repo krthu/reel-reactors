@@ -14,6 +14,11 @@ const MyMovies = () => {
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
+    const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    setFavorites(storedFavorites);
+  }, []);
+
+  useEffect(() => {
     const fetchMovies = async () => {
       setIsLoading(true);
       try {
@@ -40,12 +45,17 @@ const MyMovies = () => {
 
 
   const toggleFavorite = (movie) => {
+    let updatedFavorites;
     if (favorites.some(favMovie => favMovie.id === movie.id)) {
-      setFavorites(favorites.filter(favMovie => favMovie.id !== movie.id));
+      updatedFavorites = favorites.filter(favMovie => favMovie.id !== movie.id);
     } else {
-      setFavorites([...favorites, movie]);
+      updatedFavorites = [...favorites, movie];
     }
+  
+    setFavorites(updatedFavorites);
+    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
   };
+  
 
   const isFavorite = (movieId) => {
     return favorites.some(favMovie => favMovie.id === movieId);

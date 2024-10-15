@@ -1,5 +1,6 @@
 import './RecommendationComp.css'; 
 import { useNavigate } from 'react-router-dom';
+import FavoriteButton from './FavoriteButton';
 
 const RecommendationComp = ({ recommendedMovies }) => {
 
@@ -26,6 +27,7 @@ const RecommendationComp = ({ recommendedMovies }) => {
                 className="recommendation-poster"
                  onClick={() => moviePress(movie.id)}/>
               <h4>{movie.title}</h4>
+              <FavoriteButton movie={movie} />
             </div>
           ))
         ) : (

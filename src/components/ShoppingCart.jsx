@@ -29,17 +29,20 @@ const ShoppingCart = () => {
                 <div className="header-item">Antal</div>
                 <div className="header-item">Total</div>
             </div>
-
-            {shoppingCart.length > 0 ? (
-                shoppingCart.map(cartItem => (
-                    <CartItem key={cartItem.item.id} cartItem={cartItem} />
-                ))
-            ) : (
-                <p>Din kundvagn är tom.</p>
-            )}
-
+    
+            {/* Lägg produkterna i en egen container för scroll */}
+            <div className="cart-items-container">
+                {shoppingCart.length > 0 ? (
+                    shoppingCart.map(cartItem => (
+                        <CartItem key={cartItem.item.id} cartItem={cartItem} />
+                    ))
+                ) : (
+                    <p>Din kundvagn är tom.</p>
+                )}
+            </div>    
+            
             <div className="cart-footer">
-                <h3 className="total-price">Totalpris: {totalPrice.toFixed(2) || 0} kr</h3>
+                <h3 className="total-price">Totalpris: {totalPrice.toFixed(2)} kr</h3>
                 <div className="cart-buttons">
                     <button className="primary-button" onClick={handleCheckout}>
                         Betala
@@ -51,6 +54,8 @@ const ShoppingCart = () => {
             </div>
         </div>
     );
+    
+    
 };
 
 export default ShoppingCart;

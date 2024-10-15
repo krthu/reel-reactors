@@ -8,6 +8,7 @@
     margin-bottom: 5px;
     margin-left: 80px;
     color: var(--text-color-light);
+    text-transform: capitalize;
 }
 
 .carusel-content {

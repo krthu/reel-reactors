@@ -21,7 +21,6 @@ const CartItem = ({ cartItem, isOrderDetails = false }) => {
 
     return (
         <div className='cart-item-title'>
-
             <h4>{cartItem.item.title}</h4>
             <div className="cart-item">
                 <div className="cart-item-info">
@@ -35,23 +34,10 @@ const CartItem = ({ cartItem, isOrderDetails = false }) => {
                     <p>{cartItem.price} kr</p>
                 </div>
 
-
-            <div className="cart-item-count">
-                {isOrderDetails ? null : <button onClick={handleDecrease}>-</button>}
-                <span>{cartItem.count}</span>
-                {isOrderDetails ? null : <button onClick={handleIncrease}>+</button>}
-            </div>
-
                 <div className="cart-item-count">
                     {isOrderDetails ? null : <button onClick={handleDecrease}>-</button>}
-
-
                     <span>{cartItem.count}</span>
                     {isOrderDetails ? null : <button onClick={handleIncrease}>+</button>}
-                </div>
-
-                <div className="cart-item-total">
-                    <p>{(cartItem.count * cartItem.price).toFixed(2)} kr</p>
                 </div>
 
                 <div className="cart-item-delete"> {/* Ny kolumn för radera-knappen */}
@@ -62,16 +48,8 @@ const CartItem = ({ cartItem, isOrderDetails = false }) => {
                     }
                 </div>
             </div>
-
-            <div className="cart-item-delete"> {/* Ny kolumn för radera-knappen */}
-                {isOrderDetails ? null :
-                    <button className="delete-button" onClick={handleDeletePress}>
-                        <i className="fas fa-trash-alt"></i> {/* Papperskorgsikonen */}
-                    </button>
-                }
-            </div>
         </div>
-    </div>
+
     );
 };
 

@@ -89,7 +89,7 @@ const Navbar = () => {
         />
       )}
 
-      {isLoading && <div className="loading">Loading...</div>}
+      {/* {isLoading && <div className="loading">Loading...</div>} kommenterar bort då den flyttar loggan osv*/} 
     </nav>
   );
 };

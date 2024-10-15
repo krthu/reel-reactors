@@ -7,17 +7,16 @@
     margin: 0 auto;
   }
   
-  .left-placeholder {
-    flex: 1; 
-    background-color: #a11fbf; 
-    height: 600px; 
+  .order-details-section {
+    flex: 1;
     margin-right: 20px;
   }
   
   .card-info-section {
-    flex: 1; 
-    max-width: 400px; 
+    flex: 1;
+    max-width: 400px;
   }
+
   
   .card-info-form {
     padding: 20px;

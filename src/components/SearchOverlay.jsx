@@ -1,8 +1,6 @@
 import React from 'react';
 import './SearchOverlay.css';
-import Button from './Button';
-import DEFAULT_POSTER from '../assets/images/poster.png';
-
+import FavoriteButton from './FavoriteButton';
 
 const SearchOverlay = ({ movies, onSelectMovie, onClose, searchQuery }) => {
   return (
@@ -10,13 +8,16 @@ const SearchOverlay = ({ movies, onSelectMovie, onClose, searchQuery }) => {
       <button className="close-button" onClick={onClose}>Close</button>
       <div className="search-results">
         {movies.length > 0 ? (
-          movies.map(movie => (
-            <div key={movie.id} className="search-result-item" onClick={() => onSelectMovie(movie)}>
+          movies.map((movie) => (
+            <div key={movie.id} className="movie-card-container">
               <img
-                src={movie.poster_path ? `https://image.tmdb.org/t/p/w200${movie.poster_path}` : DEFAULT_POSTER}
+                className="movie-card-img"
+                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                 alt={movie.title}
-                className="search-thumbnail"
+                onClick={() => onSelectMovie(movie)}
               />
+              <FavoriteButton movie={movie} />
+
               <div className="search-details">
                 <h3>{movie.title}</h3>
                 <p>{movie.release_date}</p>
@@ -24,6 +25,7 @@ const SearchOverlay = ({ movies, onSelectMovie, onClose, searchQuery }) => {
                   <Button text="Watch Trailer" primary={false} onPress={() => window.open(`https://www.youtube.com/watch?v=${movie.trailerID}`, '_blank')} />
                 )} */}
               </div>
+
             </div>
           ))
         ) : (

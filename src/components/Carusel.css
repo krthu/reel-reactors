@@ -81,10 +81,3 @@
     }
 
 }
-
-@media (max-width: 480px) {
-    .carusel-content {
-        --items-per-screen: 1;
-    }
-
-}

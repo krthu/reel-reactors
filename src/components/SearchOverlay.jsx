@@ -17,15 +17,6 @@ const SearchOverlay = ({ movies, onSelectMovie, onClose, searchQuery }) => {
                 onClick={() => onSelectMovie(movie)}
               />
               <FavoriteButton movie={movie} />
-
-              <div className="search-details">
-                <h3>{movie.title}</h3>
-                <p>{movie.release_date}</p>
-                {/* {movie.trailerID && (
-                  <Button text="Watch Trailer" primary={false} onPress={() => window.open(`https://www.youtube.com/watch?v=${movie.trailerID}`, '_blank')} />
-                )} */}
-              </div>
-
             </div>
           ))
         ) : (

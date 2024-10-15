@@ -46,10 +46,11 @@
     color: white;
 }
 
-.secondary-button {
+.button.secondary-button {
     background: rgba(0, 0, 0, 0.5);
     border: 2px solid white;  
-    color: white;  
+    color: white;
+  
 }
 
 .secondary-button:hover {

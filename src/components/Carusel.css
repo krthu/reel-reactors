@@ -8,6 +8,7 @@
     margin-bottom: 5px;
     margin-left: 80px;
     color: var(--text-color-light);
+    text-transform: capitalize;
 }
 
 .carusel-content {
@@ -37,28 +38,17 @@
     transition: background-color 150ms var(--transition-default);
 }
 
-.carusel-button:hover {
-    background-color: var(--hover-colors);
+.carusel-button {
+    transition: filter 0.3s ease, transform 0.3s ease; /* smooth transition after hover */
+}
 
+.carusel-button:hover {
+    transform: scale(1.2);
+    transition: filter 0.3s ease, transform 0.3s ease; /* smooth transition into hover */
 }
 
 .carusel-chevron {
-    font-size: 3rem;
-}
-
-.carusel-button:hover {
-    background-color: var(--hover-color);
-    opacity: var(--button-hover-opacity);
-}
-
-.carusel-button-left {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-.carusel-button-right {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+    font-size: 3rem;    
 }
 
 @media (max-width: 1440px) {
@@ -78,13 +68,6 @@
 @media (max-width: 768px) {
     .carusel-content {
         --items-per-screen: 2;
-    }
-
-}
-
-@media (max-width: 480px) {
-    .carusel-content {
-        --items-per-screen: 1;
     }
 
 }

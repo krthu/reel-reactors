@@ -1,16 +1,115 @@
-import React from "react";
-import Navbar from "./Navbar";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getMovies } from '../api/api';
 import './MyMovies.css';
+import Navbar from './Navbar';
+import RatingComponent from './RatingComponent';
+import FavoriteButton from './FavoriteButton';
 
+const MyMovies = () => {
+  const [purchasedMovies, setPurchasedMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
+  const [favorites, setFavorites] = useState([]);
 
+  useEffect(() => {
+    const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    setFavorites(storedFavorites);
 
-const TVSeriesPage = () => {
+    const handleFavoritesUpdated = () => {
+      const updatedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+      setFavorites(updatedFavorites);
+    };
 
-    return(
-        <div className="mymovies">            
-        <h1>Here we show my purchased and rented movies and series</h1>
-        </div>
-    );
+    window.addEventListener('favoritesUpdated', handleFavoritesUpdated);
+
+    return () => {
+      window.removeEventListener('favoritesUpdated', handleFavoritesUpdated);
+    };
+  }, []);
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      setIsLoading(true);
+      try {
+        const purchased = await getMovies('top_rated');
+        setPurchasedMovies(purchased.results);
+      } catch (error) {
+        console.error('Error fetching movies:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchMovies();
+  }, []);
+
+  const handleMovieClick = (movie) => {
+    navigate(`/movie/${movie.id}`);
+  };
+
+  return (
+    <div className="my-movies">
+      <Navbar />
+      {isLoading ? (
+        <div className="loading">Loading...</div>
+      ) : (
+        <>
+          {/* My Movies Section */}
+          <section className="movie-section">
+            <h2>My Movies</h2>
+            <div className="movies-list">
+              {purchasedMovies.map((movie) => (
+                <div
+                  key={movie.id}
+                  className="movie-card"
+                  onClick={() => handleMovieClick(movie)}
+                >
+                  <img
+                    src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                    alt={movie.title}
+                  />
+                  <div className="rating-overlay">
+                    <RatingComponent rating={movie.vote_average} />
+                  </div>
+                  {/* Use FavoriteButton */}
+                  <FavoriteButton movie={movie} />
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* My Favorites Section */}
+          <section className="movie-section">
+            <h2>My Favorites</h2>
+            <div className="movies-list">
+              {favorites.length > 0 ? (
+                favorites.map((movie) => (
+                  <div
+                    key={movie.id}
+                    className="movie-card"
+                    onClick={() => handleMovieClick(movie)}
+                  >
+                    <img
+                      src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                      alt={movie.title}
+                    />
+                    <div className="rating-overlay">
+                      <RatingComponent rating={movie.vote_average} />
+                    </div>
+                    {/* Use FavoriteButton */}
+                    <FavoriteButton movie={movie} />
+                  </div>
+                ))
+              ) : (
+                <p>No favorite movies yet.</p>
+              )}
+            </div>
+          </section>
+        </>
+      )}
+    </div>
+  );
 };
 
-export default TVSeriesPage;
+export default MyMovies;

@@ -1,0 +1,71 @@
+.footer-container {
+    display: flex;
+    justify-content: space-between; /* Sprider ut kolumnerna på större skärmar */
+    align-items: center; /* Centrera elementen vertikalt */
+    background-color: var(--footer-bg); 
+    color: var(--text-color-light);
+    padding: var(--spacing-medium) var(--spacing-large);
+    border-top: 1px solid var(--movie-list-border);
+    box-shadow: var(--box-shadow-medium);
+    flex-wrap: wrap; /* Gör det möjligt att elementen omsluts på mindre skärmar */
+}
+
+.footer-left, .footer-middle, .footer-right {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column; 
+}
+
+.footer-left, .footer-right {
+    width: 20%; 
+}
+
+.footer-middle {
+    width: 60%; 
+    text-align: center; 
+}
+
+.footer-container .contact-info {
+    margin-bottom: var(--spacing-large); 
+}
+
+.footer-container a {
+    color: var(--hover-color);
+    text-decoration: none;
+}
+
+.tmdb-logo {
+    width: 100px; 
+    height: auto;
+}
+
+.footer-container a:hover {
+    text-decoration: underline;
+}
+
+.footer-container p {
+    font-size: var(--font-size-small);
+    margin: var(--spacing-small) 0;
+}
+
+/* Mobilanpassningar */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column; 
+        padding: var(--spacing-small); 
+    }
+
+    .footer-left, .footer-middle, .footer-right {
+        width: 100%; 
+        margin-bottom: var(--spacing-small); 
+    }
+
+    .tmdb-logo {
+        width: 80px; 
+    }
+
+    .footer-container p {
+        font-size: var(--font-size-medium); 
+    }
+}

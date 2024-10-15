@@ -111,12 +111,13 @@
         position: absolute; /* Fortsätt att ha absolut position i mobilvy */
         top: 0;
         width: 100%; /* Se till att den tar upp hela bredden */
+        box-shadow: none;
     }
     
     .search-container {
-        position: relative;
+        position: absolute;
         top: 10px;
-        width: 80%;  /* Gör sökfältet större, men inte för mycket */
+        width: 70%;  /* Gör sökfältet större, men inte för mycket */
         margin-bottom: 20px;  /* Öka utrymmet mellan sökfält och logga */
     }
 
@@ -125,6 +126,10 @@
         padding: 5px;
         font-size: 0.9rem;
         width: 100%; /* Se till att sökfältet sträcker sig över hela containern */
+    }
+
+    .search-overlay { 
+        top: 50px;
     }
 
     .logo-center {

@@ -1,14 +1,21 @@
 import React from 'react';
+import { useSelector} from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { baseImageURL } from '../api/baseURLs';
 import './OrderDetails.css';
 
 const OrderDetails = () => {
+
+    const shoppingCart = useSelector((state) => state.shoppingCart);
+
     const location = useLocation();
-    const { cart = [], totalPrice = 0 } = location.state || {};
+
+    const cart = shoppingCart;
+
+    //const { cart = [], totalPrice = 0 } = location.state || {};
 
     console.log("Cart Items:", cart);
-    console.log("Total Price:", totalPrice);
+   // console.log("Total Price:", totalPrice);
 
     return (
         <div className="order-details">
@@ -33,7 +40,7 @@ const OrderDetails = () => {
                 )}
             </div>
             <div className="form-group total-sum">
-                <h4>Totalsumma: {totalPrice.toFixed(2)} kr</h4>
+                {/* <h4>Totalsumma: {totalPrice.toFixed(2)} kr</h4> */}
             </div>
         </div>
     );

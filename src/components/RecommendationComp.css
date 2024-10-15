@@ -34,4 +34,31 @@
     font-size: 14px;
     text-align: center;
   }
+
+
+  .recommendation-card {
+  position: relative;
+  /* Other styles... */
+}
+
+  .recommendation-card:hover .favorite-icon {
+  opacity: 1;
+}
+
+  .favorite-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  opacity: 0; /* Hidden by default */
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+
+  @media (max-width: 768px) {
+    .recommendation-grid {
+      padding-left: 50px;
+    }
+  }
   

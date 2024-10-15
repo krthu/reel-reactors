@@ -16,6 +16,9 @@ const Header = ({ movie, isOverlay, onClose }) => {
 
   // Navigera till mer information om filmen
   const handleMoreInfoClick = () => {
+    if (isOverlay){
+      onClose();
+    }
     navigate(`/movie/${movie.id}`);
   };
 

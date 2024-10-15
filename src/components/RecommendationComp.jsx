@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import api from '../api/api'; 
+// RecommendationComp.jsx
 import './RecommendationComp.css'; 
 import { useNavigate } from 'react-router-dom';
+import FavoriteButton from './FavoriteButton';
 
-const RecommendationComp = ({ movieId }) => {
-  const [recommendedMovies, setRecommendedMovies] = useState([]);
+const RecommendationComp = ({ recommendedMovies }) => {
+
   const navigate = useNavigate();
   const moviePress = (id) => {
     navigate(`/movie/${id}`)
@@ -13,21 +13,6 @@ const RecommendationComp = ({ movieId }) => {
       behavior: 'smooth' 
     });
   }
-
-  useEffect(() => {
-    const fetchRecommendations = async () => {
-      if (movieId) {
-        try {
-          const recommendations = await api.getRecommendations(movieId);
-          setRecommendedMovies(recommendations);
-        } catch (error) {
-          console.error("Error fetching recommendations:", error);
-        }
-      }
-    };
-
-    fetchRecommendations();
-  }, [movieId]);
 
   return (
     <div className="recommendation-section">
@@ -40,7 +25,9 @@ const RecommendationComp = ({ movieId }) => {
                 src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                 alt={movie.title}
                 className="recommendation-poster"
-                 onClick={() => moviePress(movie.id)}/>
+                onClick={() => moviePress(movie.id)}
+              />
+              <FavoriteButton movie={movie} /> {/* Pass the entire movie object */}
               <h4>{movie.title}</h4>
             </div>
           ))

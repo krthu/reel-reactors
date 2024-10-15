@@ -13,14 +13,13 @@ import DEFAULT_POSTER from '../assets/images/poster.png';
 import DEFAULT_BACKDROP from '../assets/images/backdrop.png';
 
 
-
-
 const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genres, crew, posterUrl, rating, movie}) => {
   // State to manage the background image
   const [backgroundImage, setBackgroundImage] = React.useState(backdropUrl || DEFAULT_BACKDROP);
   const dispatch = useDispatch();
   const [showOverlay, setShowOverlay] = useState(false);
   const [trailerID, setTrailerID] = useState(null);
+
 
   // Preload the backdrop image
   React.useEffect(() => {
@@ -31,13 +30,52 @@ const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genr
   }, [backdropUrl]);
 
   const handleBuyPress = () => {
-    console.log('Buy Clicked')
+  
 
-    dispatch(addItem({item: movie, price: 149}))
+    dispatch(addItem({item: movie, price: getPrice(movie.release_date)}))
   }
   const closeOverlay = () => {
     setShowOverlay(false);
   }
+
+  const handleTrailerPress = () => {
+    setShowOverlay(true);
+  }
+
+  const getPrice = (releaseDate) => {
+    console.log(movie);
+    const yearNow = new Date().getFullYear();
+    const releaseYear = new Date(releaseDate).getFullYear();;
+    console.log(yearNow);
+    console.log(releaseYear);
+    const diff = yearNow - releaseYear;
+    
+    if (diff <= 3){
+      return 149
+    } else if (diff <= 5){
+      return 99
+    } else {
+      return 49
+    }
+
+  }
+  const price = getPrice(movie);
+
+  useEffect(() => {
+    const fetchTrailer = async () => {
+      try {
+        const trailerID = getTrailerID(movie.videos.results);
+        setTrailerID(trailerID);
+      } catch (error) {
+        console.error('Error fetching trailer:', error);
+      }
+    };
+  
+    if (movie && movie.videos) {
+      fetchTrailer();
+    }
+  }, [movie]);
+  
 
   useEffect(() => {
     setTrailerID(getTrailerID(movie.videos.results));
@@ -47,18 +85,21 @@ const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genr
     <header className="movie-header" style={{ backgroundImage: `url(${backgroundImage})` }}>
       <div className="movie-header-wrapper">
         <div className="movie-poster-container">
-          <img
-            src={posterUrl}
-            alt={movieTitle}
-            className="movie-poster"
-            onError={(e) => {
-              e.target.onerror = null; // Prevents infinite loop in case default image also fails
-              e.target.src = {DEFAULT_POSTER};
-            }}
-          />
+          <div className="movie-poster-container-img">
+            <img
+              src={posterUrl}
+              alt={movieTitle}
+              className="movie-poster"
+              onError={(e) => {
+                e.target.onerror = null; // Prevents infinite loop in case default image also fails
+                e.target.src = {DEFAULT_POSTER};
+              }}
+            />
+            <h2 className="movie-price">{getPrice(movie.release_date)}:-</h2>
+          </div>
           <div className="button-container">
             {trailerID && (
-            <Button text="Watch Trailer" primary onPress={() => setShowOverlay(true)} />
+            <Button text="Watch Trailer" primary onPress={() => handleTrailerPress()} />
             )}
 
             <Button text="Buy" icon="shopping_cart" onPress={() => handleBuyPress()} />

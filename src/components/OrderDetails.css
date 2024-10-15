@@ -6,13 +6,14 @@
     background-color: var(--movie-list-bg);
     border-radius: var(--border-radius-medium);
     color: var(--text-color-light);
-    width: 20%;
+    /* width: 20%; */
+    border: 1px solid green;
     margin: 20px auto;
     box-shadow: var(--box-shadow-medium);
     font-family: var(--font-family);
 }
 
-.order-cart {
+.order-items {
     display: flex;
     flex-direction: column;
 }
@@ -36,7 +37,7 @@
     font-size: var(--font-size-medium);
 }
 
-.cart-item {
+.order-item {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr;
     align-items: center;
@@ -45,7 +46,9 @@
     margin-bottom: var(--spacing-small);
 }
 
-.cart-item-info {
+.product-info {
+    border:1px solid purple;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-start;

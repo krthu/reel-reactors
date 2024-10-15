@@ -39,6 +39,9 @@ const CartItem = ({ cartItem, isOrderDetails = false }) => {
                     <span>{cartItem.count}</span>
                     {isOrderDetails ? null : <button onClick={handleIncrease}>+</button>}
                 </div>
+                <div className="cart-item-total">
+                    <p>{(cartItem.count * cartItem.price).toFixed(2)} kr</p>
+                </div>
 
                 <div className="cart-item-delete"> {/* Ny kolumn för radera-knappen */}
                     {isOrderDetails ? null :

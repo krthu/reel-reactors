@@ -7,12 +7,12 @@
     background-color: var(--movie-list-bg);
     border-radius: 10px;
     color: #fff;
-    width: 80%; /* Bredden justerad för större skärmar */
-    max-width: 1200px; /* Sätt maxbredd för stora skärmar */
+    width: 80%;
+    max-width: 1200px;
     margin: 20px auto;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Mjukare skugga för djup */
-    font-family: 'Roboto', sans-serif; /* Tydlig font för läsbarhet */
-    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'Roboto', sans-serif;
+    height: 95vh; 
 }
 
 /* Header styling */
@@ -54,9 +54,9 @@
 }
 
 .cart-items-container {
-    max-height: 500px; 
-    overflow-y: auto; 
-    margin-bottom: 20px; 
+    flex-grow: 1;
+    overflow-y: auto;
+    height: calc(100vh - 150px); /* Justera 150px för header + footer */
 }
 
 .cart-item-title h4 {
@@ -146,10 +146,10 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.3); /* Kontrastfärg mot bakgrunden */
+    background-color: rgba(0, 0, 0, 0.3);
     position: sticky;
     bottom: 0;
-    border-radius: 0 0 10px 10px; /* Runda hörnen på botten */
+    border-radius: 0 0 10px 10px;
     z-index: 10;
 }
 

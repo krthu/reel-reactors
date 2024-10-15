@@ -42,7 +42,7 @@ const ShoppingCart = () => {
             </div>    
             
             <div className="cart-footer">
-                <h3 className="total-price">Totalpris: {totalPrice.toFixed(2)} kr</h3>
+                <h3 className="total-price">Totalpris: {totalPrice.toFixed(2)}:-</h3>
                 <div className="cart-buttons">
                     <button className="primary-button" onClick={handleCheckout}>
                         Betala

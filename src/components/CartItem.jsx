@@ -31,7 +31,7 @@ const CartItem = ({ cartItem, isOrderDetails = false }) => {
                 </div>
 
                 <div className="cart-item-price">
-                    <p>{cartItem.price} kr</p>
+                    <p>{cartItem.price}:-</p>
                 </div>
 
                 <div className="cart-item-count">
@@ -40,7 +40,7 @@ const CartItem = ({ cartItem, isOrderDetails = false }) => {
                     {isOrderDetails ? null : <button onClick={handleIncrease}>+</button>}
                 </div>
                 <div className="cart-item-total">
-                    <p>{(cartItem.count * cartItem.price).toFixed(2)} kr</p>
+                    <p>{(cartItem.count * cartItem.price).toFixed(0)}:-</p>
                 </div>
 
                 <div className="cart-item-delete"> {/* Ny kolumn för radera-knappen */}

@@ -15,18 +15,15 @@ const Discover = ({ movieData, setMovieData }) => {
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [landingMovie, setLandingMovie] = useState(null);
     const navigate = useNavigate();
-
-
     const [showFooter, setShowFooter] = useState(false);
 
-
-    //Kollar så att man scrollat till botten på sidan och isf visa footer.
+    // Kollar så att man scrollat till botten på sidan och isf visar footern.
     useEffect(() => {
         const handleScroll = () => {
             if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-                setShowFooter(true); 
+                setShowFooter(true);
             } else {
-                setShowFooter(false); 
+                setShowFooter(false);
             }
         };
         window.addEventListener('scroll', handleScroll);
@@ -34,8 +31,6 @@ const Discover = ({ movieData, setMovieData }) => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
-
-
 
     // Listen for URL changes
     useEffect(() => {
@@ -56,7 +51,7 @@ const Discover = ({ movieData, setMovieData }) => {
         }
     }, [window.location.search, selectedMovie]);
 
-    // funktionen som navigerar till filmsidan
+    // Funktionen som navigerar till filmsidan
     const handleMoreInfoClick = (movie) => {
         navigate(`/movie/${movie.id}`);
     };
@@ -110,20 +105,19 @@ const Discover = ({ movieData, setMovieData }) => {
     }, [landingMovie, movieData]);
 
     useEffect(() => {
-      
-            const fetchAllData = async () => {
-                try {
-                    const data = await fetchAllDiscoverData();
-                    fillHeader(data.popular);
-                    setMovieData(data);
-                } catch (error) {
-                    console.error('Error fetching movie data:', error);
-                }
-            };
-            if (Object.keys(movieData).length === 0) {
+        const fetchAllData = async () => {
+            try {
+                const data = await fetchAllDiscoverData();
+                fillHeader(data.popular);
+                setMovieData(data);
+            } catch (error) {
+                console.error('Error fetching movie data:', error);
+            }
+        };
+        if (Object.keys(movieData).length === 0) {
             fetchAllData();
-            } else {
-                fillHeader(movieData.popular)
+        } else {
+            fillHeader(movieData.popular);
         }
     }, [movieData]);
 
@@ -134,57 +128,57 @@ const Discover = ({ movieData, setMovieData }) => {
 
         return (
             <>
-            {/* Render all movies from movie data into a array of movie cards*/}
-            {Object.entries(movieData).map(([genre, data]) => {
-                // Remove items without a poster or a backdrop
-                const movieCards = data.results
-                    .filter((movie) => movie.poster_path && movie.backdrop_path)
-                    .map((movie) => (
-                        //Create a card per movie
-                        <PosterCaruselItem
-                            movie={movie}
-                            key={movie.id}
-                            onPress={() => handlePosterPress(movie)}
-                            isSelected={selectedMovie !== null && movie.id === selectedMovie.id}
-                        />
-                    ));
+                {/* Render all movies from movie data into an array of movie cards*/}
+                {Object.entries(movieData).map(([genre, data]) => {
+                    // Remove items without a poster or a backdrop
+                    const movieCards = data.results
+                        .filter((movie) => movie.poster_path && movie.backdrop_path)
+                        .map((movie) => (
+                            //Create a card per movie
+                            <PosterCaruselItem
+                                movie={movie}
+                                key={movie.id}
+                                onPress={() => handlePosterPress(movie)}
+                                isSelected={selectedMovie !== null && movie.id === selectedMovie.id}
+                            />
+                        ));
 
-                return (
-                    //For each genre return a whole Carusel with the movieCards in
-                    <div key={genre} className="popular-movie-container">
-                        <Carusel items={movieCards} title={genre} />
-                    </div>
-                );
-            })}
-        </>
+                    return (
+                        //For each genre return a whole Carusel with the movieCards in
+                        <div key={genre} className="popular-movie-container">
+                            <Carusel items={movieCards} title={genre} />
+                        </div>
+                    );
+                })}
+            </>
         );
     };
 
-   return (
-  <>
-    <div className="body-container">
-      <div className="header-container">
-        <Navbar />
-        {landingMovie ? (
-          <Header movie={landingMovie} />
-        ) : (
-          <div>Loading...</div>
-        )}
-      </div>
-      <div className="movie-genre-container">{renderCarusels()}</div>
-    </div>
+    return (
+        <>
+            <div className="body-container">
+                <div className="header-container">
+                    <Navbar />
+                    {landingMovie ? (
+                        <Header movie={landingMovie} />
+                    ) : (
+                        <div>Loading...</div>
+                    )}
+                </div>
+                <div className="movie-genre-container">{renderCarusels()}</div>
+            </div>
 
-    {/* Overlay */}
-    <Overlay show={showOverlay} onClose={closeOverlay}>
-      {selectedMovie && (
-        <Header movie={selectedMovie} isOverlay={true} onClose={closeOverlay} />
-      )}
-    </Overlay>
+            {/* Overlay */}
+            <Overlay show={showOverlay} onClose={closeOverlay}>
+                {selectedMovie && (
+                    <Header movie={selectedMovie} isOverlay={true} onClose={closeOverlay} />
+                )}
+            </Overlay>
 
-    {/* Footer */}
-    {showFooter && <Footer className="footer-container" />}
-  </>
-);
+            {/* Footer */}
+            {showFooter && <Footer className="footer-container" />}
+        </>
+    );
 };
 
 export default Discover;

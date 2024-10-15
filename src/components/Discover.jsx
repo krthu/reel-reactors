@@ -5,11 +5,13 @@ import MovieCard from "./MovieCard";
 import { useState, useEffect } from "react";
 import Overlay from "./Overlay";
 import { getMovies, getMoviesWithGenres, getMovieDetails } from "../api/api";
+import { useNavigate } from 'react-router-dom';
 
 const Discover = ({ movieData, setMovieData }) => {
     const [showOverlay, setShowOverlay] = useState(false);
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [landingMovie, setLandingMovie] = useState(null);
+    const navigate = useNavigate();
 
     // Listen for URL changes
     useEffect(() => {
@@ -30,11 +32,22 @@ const Discover = ({ movieData, setMovieData }) => {
         }
     }, [window.location.search, selectedMovie]);
 
+    // funktionen som navigerar till filmsidan
+    const handleMoreInfoClick = (movie) => {
+        navigate(`/movie/${movie.id}`);
+    };
+
     const handlePosterPress = (movie) => {
-        setSelectedMovie(movie); // Set selected movie
-        setShowOverlay(true); // Show overlay
-        // Update URL without reloading the page
-        window.history.pushState({}, '', `?jbv=${movie.id}`);
+        const isMobile = window.innerWidth <= 768; // kolla om det är en mobil enhet
+
+        if (isMobile) {
+            handleMoreInfoClick(movie); // navigera direkt till filmsidan om det är mobil
+        } else {
+            // overlay om det inte är mobil
+            setSelectedMovie(movie);
+            setShowOverlay(true);
+            window.history.pushState({}, '', `?jbv=${movie.id}`);
+        }
     };
 
     const closeOverlay = () => {

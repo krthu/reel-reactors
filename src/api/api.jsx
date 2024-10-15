@@ -35,7 +35,7 @@ export const getGenres = async () => {
 
 export const getMovieDetails = async (id) => {
   try {
-    const response = await apiClient.get(`/movie/${id}?append_to_response=videos`);
+    const response = await apiClient.get(`/movie/${id}?append_to_response=videos,credits,recommendations`);
     return response.data;
   } catch (error) {
     console.error('Error fetching movie details:', error);

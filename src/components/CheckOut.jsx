@@ -1,13 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CardInformation from './CardInformation';
+import OrderDetails from "./OrderDetails";
 import './CheckOut.css';
+
 
 
 
 const Checkout = () => {
     const [isPaymentComplete, setIsPaymentComplete] = useState(false);
     const navigate = useNavigate();
+  
+
+    const shoppingCart = useSelector((state) => state.shoppingCart);
+
+    const [totalPrice, setTotalPrice] = useState(0);
+
+
+    //if shoppingcart gets updated
+    useEffect(() => {
+        const calculatedTotalPrice = shoppingCart.reduce((total, cartItem) => {
+            return total + (cartItem.price * cartItem.count);
+        }, 0);
+        setTotalPrice(calculatedTotalPrice);
+    }, [shoppingCart]);
+
+
 
     const handleCompletePay = () => {
         setIsPaymentComplete(true);
@@ -18,14 +37,13 @@ const Checkout = () => {
     };
 
     return (
-      <div className="checkout-container">
-        {/* orderdetails component */}
-       
-        <div className="left-placeholder">
-          {/* test */}
+        <div className="checkout-container">
+        <div className="order-details-section">
+          <OrderDetails cart={shoppingCart} totalPrice={totalPrice} />
         </div>
+        
         <div className="card-info-section">
-          <CardInformation onCompletePay={handleCompletePay}/>
+          <CardInformation onCompletePay={handleCompletePay} />
         </div>
       
       {isPaymentComplete && (

@@ -1,16 +1,135 @@
-import React from "react";
-import Navbar from "./Navbar";
+import React, { useEffect, useState } from 'react';
+import { FaHeart } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import { getMovies } from '../api/api';
 import './MyMovies.css';
+import Navbar from './Navbar';
+import RatingComponent from './RatingComponent';
+
+const MyMovies = () => {
+  const [favoriteMovies, setFavoriteMovies] = useState([]);
+  const [purchasedMovies, setPurchasedMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
+  const [favorites, setFavorites] = useState([]);
+
+  useEffect(() => {
+    const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    setFavorites(storedFavorites);
+  }, []);
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      setIsLoading(true);
+      try {
+        const favorites = await getMovies('popular');
+        
+        const sortedFavorites = favorites.results.sort((a, b) => b.vote_average - a.vote_average);
+        setFavoriteMovies(sortedFavorites);
+
+        const purchased = await getMovies('top_rated');
+        setPurchasedMovies(purchased.results);
+      } catch (error) {
+        console.error('Error fetching movies:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchMovies();
+  }, []);
+
+  const handleMovieClick = (id) => {
+    navigate(`/movie/${id}`);
+  };
 
 
+  const toggleFavorite = (movie) => {
+    let updatedFavorites;
+    if (favorites.some(favMovie => favMovie.id === movie.id)) {
+      updatedFavorites = favorites.filter(favMovie => favMovie.id !== movie.id);
+    } else {
+      updatedFavorites = [...favorites, movie];
+    }
+  
+    setFavorites(updatedFavorites);
+    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+  };
+  
 
-const TVSeriesPage = () => {
+  const isFavorite = (movieId) => {
+    return favorites.some(favMovie => favMovie.id === movieId);
+  };
 
-    return(
-        <div className="mymovies">            
-        <h1>Here we show my purchased and rented movies and series</h1>
-        </div>
-    );
+  return (
+    <div className="my-movies">
+      <Navbar />
+      {isLoading ? (
+        <div className="loading">Loading...</div>
+      ) : (
+        <>
+          <section className="movie-section">
+            <h2>My Movies</h2>
+            <div className="movies-list">
+              {purchasedMovies.map((movie) => (
+                <div key={movie.id} className="movie-card" onClick={() => handleMovieClick(movie.id)}>
+                  <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
+                  <div className="rating-overlay">
+                    <RatingComponent rating={movie.vote_average} />
+                  </div>
+                  <div className="favorite-icon" onClick={(e) => { e.stopPropagation(); toggleFavorite(movie); }}>
+                    <FaHeart color={isFavorite(movie.id) ? '#ff6666' : 'gray'} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="movie-section">
+            <h2>Top Rated Movies</h2>
+            <div className="movies-list">
+              {favoriteMovies.map((movie) => (
+                <div key={movie.id} className="movie-card" onClick={() => handleMovieClick(movie.id)}>
+                  <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
+                  <div className="rating-overlay">
+                    <RatingComponent rating={movie.vote_average} /> 
+                  </div>
+                  <div className="favorite-icon" onClick={(e) => { e.stopPropagation(); toggleFavorite(movie); }}>
+                    <FaHeart color={isFavorite(movie.id) ? '#ff6666' : 'gray'} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="movie-section">
+            <h2>My Favorites</h2>
+            <div className="movies-list">
+              {favorites.length > 0 ? (
+                favorites.map((movie) => (
+                  <div key={movie.id} className="movie-card" onClick={() => handleMovieClick(movie.id)}>
+                    <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
+                    <div className="rating-overlay">
+                      <RatingComponent rating={movie.vote_average} />
+                    </div>
+                    {/* Favorite Star Icon */}
+                    <div className="favorite-icon" onClick={(e) => { e.stopPropagation(); toggleFavorite(movie); }}>
+                      <FaHeart color={isFavorite(movie.id) ? '#ff6666' : 'gray'} />
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p>No favorite movies yet.</p>
+              )}
+            </div>
+          </section>
+        </>
+      )}
+    </div>
+  );
 };
 
-export default TVSeriesPage;
+export default MyMovies;
+
+// This component displays the user's purchased and favorite movies using placeholder lists.
+// It fetches data from the API and displays each section with movie posters and titles.

@@ -1,0 +1,14 @@
+/* FavoriteButton.css */
+
+.favorite-icon {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+  
+  .movie-card-container:hover .favorite-icon {
+    transform: scale(1.2);
+  }
+  

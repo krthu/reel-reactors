@@ -78,7 +78,7 @@ const MyMovies = () => {
                     <RatingComponent rating={movie.vote_average} />
                   </div>
                   <div className="favorite-icon" onClick={(e) => { e.stopPropagation(); toggleFavorite(movie); }}>
-                    <FaHeart color={isFavorite(movie.id) ? 'red' : 'gray'} />
+                    <FaHeart color={isFavorite(movie.id) ? '#ff6666' : 'gray'} />
                   </div>
                 </div>
               ))}
@@ -95,7 +95,7 @@ const MyMovies = () => {
                     <RatingComponent rating={movie.vote_average} /> 
                   </div>
                   <div className="favorite-icon" onClick={(e) => { e.stopPropagation(); toggleFavorite(movie); }}>
-                    <FaHeart color={isFavorite(movie.id) ? 'red' : 'gray'} />
+                    <FaHeart color={isFavorite(movie.id) ? '#ff6666' : 'gray'} />
                   </div>
                 </div>
               ))}
@@ -114,7 +114,7 @@ const MyMovies = () => {
                     </div>
                     {/* Favorite Star Icon */}
                     <div className="favorite-icon" onClick={(e) => { e.stopPropagation(); toggleFavorite(movie); }}>
-                      <FaHeart color={isFavorite(movie.id) ? 'red' : 'gray'} />
+                      <FaHeart color={isFavorite(movie.id) ? '#ff6666' : 'gray'} />
                     </div>
                   </div>
                 ))

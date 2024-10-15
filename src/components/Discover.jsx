@@ -5,12 +5,14 @@ import Footer from "./Footer";
 import MovieCard from "./MovieCard";
 import { useState, useEffect } from "react";
 import Overlay from "./Overlay";
-import { getMovies, getMoviesWithGenres, getMovieDetails } from "../api/api";
+import { useNavigate } from 'react-router-dom';
+import { getMovieDetails, fetchAllDiscoverData } from "../api/api";
 
 const Discover = ({ movieData, setMovieData }) => {
     const [showOverlay, setShowOverlay] = useState(false);
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [landingMovie, setLandingMovie] = useState(null);
+    const navigate = useNavigate();
 
 
     const [showFooter, setShowFooter] = useState(false);
@@ -52,11 +54,22 @@ const Discover = ({ movieData, setMovieData }) => {
         }
     }, [window.location.search, selectedMovie]);
 
+    // funktionen som navigerar till filmsidan
+    const handleMoreInfoClick = (movie) => {
+        navigate(`/movie/${movie.id}`);
+    };
+
     const handlePosterPress = (movie) => {
-        setSelectedMovie(movie); // Set selected movie
-        setShowOverlay(true); // Show overlay
-        // Update URL without reloading the page
-        window.history.pushState({}, '', `?jbv=${movie.id}`);
+        const isMobile = window.innerWidth <= 768; // kolla om det är en mobil enhet
+
+        if (isMobile) {
+            handleMoreInfoClick(movie); // navigera direkt till filmsidan om det är mobil
+        } else {
+            // overlay om det inte är mobil
+            setSelectedMovie(movie);
+            setShowOverlay(true);
+            window.history.pushState({}, '', `?jbv=${movie.id}`);
+        }
     };
 
     const closeOverlay = () => {
@@ -94,49 +107,21 @@ const Discover = ({ movieData, setMovieData }) => {
         };
     }, [landingMovie, movieData]);
 
-    const genres = [
-        { id: 28, name: "Action" },
-        { id: 12, name: "Adventure" },
-        { id: 16, name: "Animation" },
-        { id: 35, name: "Comedy" },
-        { id: 80, name: "Crime" },
-        { id: 99, name: "Documentary" },
-        { id: 18, name: "Drama" },
-        { id: 10751, name: "Family" },
-    ];
-
-    function shuffleArray(arr) {
-        for (let i = arr.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-        return arr;
-    }
-
-    const fetchMovieData = async () => {
-        const data = { popular: await getMovies() };
-        const promises = genres.map(async (genre) => {
-            const genreData = await getMoviesWithGenres(genre.id);
-            genreData.results = shuffleArray(genreData.results);
-            data[genre.name] = genreData;
-        });
-        await Promise.all(promises);
-        return data;
-    };
-
-    // Fetch all movie data if it's not already set
     useEffect(() => {
-        if (Object.keys(movieData).length === 0) {
+      
             const fetchAllData = async () => {
                 try {
-                    const data = await fetchMovieData();
+                    const data = await fetchAllDiscoverData();
                     fillHeader(data.popular);
-                    setMovieData(data); // Update state with genre data
+                    setMovieData(data);
                 } catch (error) {
                     console.error('Error fetching movie data:', error);
                 }
             };
+            if (Object.keys(movieData).length === 0) {
             fetchAllData();
+            } else {
+                fillHeader(movieData.popular)
         }
     }, [movieData]);
 
@@ -145,24 +130,15 @@ const Discover = ({ movieData, setMovieData }) => {
             return <div>Loading...</div>;
         }
 
-        const popularMovies = movieData.popular.results || [];
-        const popularMovieCards = popularMovies.map((movie) => (
-            <MovieCard
-                url={movie.poster_path}
-                key={movie.id}
-                onPress={() => handlePosterPress(movie)}
-                isSelected={selectedMovie !== null && movie.id === selectedMovie.id}
-            />
-        ));
-
         return (
             <>
-                <div className="popular-movie-container">
-                    <Carusel items={popularMovieCards} title="Popular" />
-                </div>
-                {genres.map((genre) => {
-                    const movies = movieData[genre.name]?.results || [];
-                    const movieCards = movies.map((movie) => (
+            {/* Render all movies from movie data into a array of movie cards*/}
+            {Object.entries(movieData).map(([genre, data]) => {
+                // Remove items without a poster or a backdrop
+                const movieCards = data.results
+                    .filter((movie) => movie.poster_path && movie.backdrop_path)
+                    .map((movie) => (
+                        //Create a card per movie
                         <MovieCard
                             url={movie.poster_path}
                             key={movie.id}
@@ -170,34 +146,43 @@ const Discover = ({ movieData, setMovieData }) => {
                             isSelected={selectedMovie !== null && movie.id === selectedMovie.id}
                         />
                     ));
-                    return (
-                        <div key={genre.id} className="popular-movie-container">
-                            <Carusel items={movieCards} title={genre.name} />
-                        </div>
-                    );
-                })}
-            </>
+
+                return (
+                    //For each genre return a whole Carusel with the movieCards in
+                    <div key={genre} className="popular-movie-container">
+                        <Carusel items={movieCards} title={genre} />
+                    </div>
+                );
+            })}
+        </>
         );
     };
 
-    return (
-        <>
-            <div className="body-container">
-            <div className="header-container">
-                    <Navbar />
-                    {landingMovie ? <Header movie={landingMovie} /> : <div>Loading...</div>}
-                </div>
-                <div className="movie-genre-container">{renderCarusels()}</div>
-            </div>
-            {/* Overlay */}
-            <Overlay show={showOverlay} onClose={closeOverlay}>
-                {selectedMovie && (
-                    <Header movie={selectedMovie} isOverlay={true} onClose={closeOverlay} />
-                )}
-            </Overlay>
-            {showFooter && <Footer className="footer-container" />}
-        </>
-    );
+   return (
+  <>
+    <div className="body-container">
+      <div className="header-container">
+        <Navbar />
+        {landingMovie ? (
+          <Header movie={landingMovie} />
+        ) : (
+          <div>Loading...</div>
+        )}
+      </div>
+      <div className="movie-genre-container">{renderCarusels()}</div>
+    </div>
+
+    {/* Overlay */}
+    <Overlay show={showOverlay} onClose={closeOverlay}>
+      {selectedMovie && (
+        <Header movie={selectedMovie} isOverlay={true} onClose={closeOverlay} />
+      )}
+    </Overlay>
+
+    {/* Footer */}
+    {showFooter && <Footer className="footer-container" />}
+  </>
+);
 };
 
 export default Discover;

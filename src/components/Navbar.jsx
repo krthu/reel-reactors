@@ -3,92 +3,34 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import SearchOverlay from './SearchOverlay';
 import './Navbar.css';
+import { searchMovies } from '../api/api';  // Import the searchMovies function
+import logo from '../assets/images/reel-reactors-logga.png';
+import cartIcon from '../assets/images/icons8-cart-64.png';
 
 const Navbar = () => {
   const [movies, setMovies] = useState([]); // State to store all movies
   const [searchQuery, setSearchQuery] = useState('');
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const totalPages = 20;
-        const movieIds = new Set();
-        const requests = [];
-    
-        for (let page = 1; page <= totalPages; page++) {
-          requests.push(
-            axios.get('https://api.themoviedb.org/3/movie/popular', {
-              headers: {
-                Authorization: `Bearer ${import.meta.env.VITE_TMDB_READ_ACCESS_TOKEN}`,
-              },
-              params: {
-                page,
-              },
-            })
-          );
-        }
-    
-        const responses = await Promise.all(requests);
-    
-        const moviesData = [];
-        responses.forEach(response => {
-          response.data.results.forEach(movie => {
-            if (!movieIds.has(movie.id)) {
-              movieIds.add(movie.id);
-              moviesData.push(movie);
-            }
-          });
-        });
-    
-        setMovies(moviesData);
-      } catch (error) {
-        console.error('Error fetching movies:', error);
-      }
-    };
-    
-    fetchMovies();
-  }, []);
-
-  const filterAndSortMovies = (moviesList) => {
-    if (!Array.isArray(moviesList)) {
-      return [];
-    }
-
-    let filteredMovies = moviesList;
     if (searchQuery) {
-      filteredMovies = moviesList
-        .map((movie) => {
-          let score = 0;
-          const lowerQuery = searchQuery.toLowerCase();
-
-          if (movie.title && movie.title.toLowerCase().includes(lowerQuery)) score += 1;
-          if (movie.overview && movie.overview.toLowerCase().includes(lowerQuery)) score += 1;
-          if (movie.release_date && movie.release_date.includes(lowerQuery)) score += 1;
-
-          return { ...movie, score };
-        })
-        .filter((movie) => movie.score > 0)
-        .sort((a, b) => b.score - a.score);
-
-      // Remove duplicates from filteredMovies
-      const uniqueMoviesMap = new Map();
-      filteredMovies.forEach((movie) => {
-        if (!uniqueMoviesMap.has(movie.id)) {
-          uniqueMoviesMap.set(movie.id, movie);
+      const fetchSearchedMovies = async () => {
+        setIsLoading(true);
+        try {
+          const searchResults = await searchMovies(searchQuery);
+          setMovies(searchResults);
+        } catch (error) {
+          console.error('Error fetching search results:', error);
+        } finally {
+          setIsLoading(false);
         }
-      });
-      filteredMovies = Array.from(uniqueMoviesMap.values());
+      };
+      
+      fetchSearchedMovies();
     }
-
-    return filteredMovies;
-  };
-
-  const handleHome = () => {
-    navigate('/');
-    window.location.reload();
-  };
+  }, [searchQuery]);
 
   const handleSearchChange = (e) => {
     const query = e.target.value;
@@ -99,11 +41,16 @@ const Navbar = () => {
   const handleCloseOverlay = () => {
     setIsOverlayVisible(false);
     setSearchQuery('');
+    setMovies([]); // Clear movie results when search is cleared
   };
 
   const handleMovieClick = (movie) => {
     setIsOverlayVisible(false);
     navigate(`/movie/${movie.id}`);
+  };
+
+  const handleHome = () => {
+    navigate('/');
   };
 
   return (
@@ -125,24 +72,28 @@ const Navbar = () => {
         </div>
       </div>
       <div className="logo-center">
-        <img src="/pictures/reel-reactors-logga.png" alt="Reel Reactors Logo" className="logo" />
+        <img src={logo} alt="Reel Reactors Logo" className="logo" />
       </div>
       <div className="nav-right">
                 <Link to="/cart" className="cart-button">
-                    <img src="/pictures/icons8-cart-64.png" alt="Cart icon" className="cart-icon" />
+                    <img src={cartIcon} alt="Cart icon" className="cart-icon" />
                 </Link>
             </div>
 
       {isOverlayVisible && searchQuery && (
         <SearchOverlay
-          movies={filterAndSortMovies(movies)}
+          movies={movies}
           onSelectMovie={handleMovieClick}
           onClose={handleCloseOverlay}
           searchQuery={searchQuery}
         />
       )}
+
+      {isLoading && <div className="loading">Loading...</div>}
     </nav>
   );
 };
 
 export default Navbar;
+
+// This update improves the search capability by querying the entire movie database directly instead of relying on preloaded movies.

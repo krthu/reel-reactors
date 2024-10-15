@@ -1,10 +1,8 @@
-import { useState, useEffect } from 'react';
-import api from '../api/api'; 
 import './RecommendationComp.css'; 
 import { useNavigate } from 'react-router-dom';
 
-const RecommendationComp = ({ movieId }) => {
-  const [recommendedMovies, setRecommendedMovies] = useState([]);
+const RecommendationComp = ({ recommendedMovies }) => {
+
   const navigate = useNavigate();
   const moviePress = (id) => {
     navigate(`/movie/${id}`)
@@ -14,20 +12,6 @@ const RecommendationComp = ({ movieId }) => {
     });
   }
 
-  useEffect(() => {
-    const fetchRecommendations = async () => {
-      if (movieId) {
-        try {
-          const recommendations = await api.getRecommendations(movieId);
-          setRecommendedMovies(recommendations);
-        } catch (error) {
-          console.error("Error fetching recommendations:", error);
-        }
-      }
-    };
-
-    fetchRecommendations();
-  }, [movieId]);
 
   return (
     <div className="recommendation-section">

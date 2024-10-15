@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { getTrailerID } from '../features/getTrailerID';
+
 
 const apiUrl = 'https://api.themoviedb.org/3';
 const apiKey = import.meta.env.VITE_TMDB_API_KEY; // Access Vite environment variables
@@ -11,10 +13,10 @@ const apiClient = axios.create({
   },
 });
 
-export const getMovies = async () => {
+export const getMovies = async (category = 'popular', params = {}) => {
   try {
-    const response = await apiClient.get('/movie/popular');
-    return response.data; // Axios automatically parses the JSON
+    const response = await apiClient.get(`/movie/${category}`, { params });
+    return response.data;
   } catch (error) {
     console.error('Error fetching movies:', error);
     throw error;
@@ -33,7 +35,7 @@ export const getGenres = async () => {
 
 export const getMovieDetails = async (id) => {
   try {
-    const response = await apiClient.get(`/movie/${id}`);
+    const response = await apiClient.get(`/movie/${id}?append_to_response=videos,credits,recommendations`);
     return response.data;
   } catch (error) {
     console.error('Error fetching movie details:', error);
@@ -61,18 +63,31 @@ export const getRecommendations = async (id) => {
   }
 };
 
-export const getMoviesWithGenres = async (genres, page=1) => {
+export const getMoviesWithGenres = async (genres, page = 1) => {
   const genreURL = `&with_genres=${genres}`;
   const pageURL = `&page=${page}`;
   try {
-    const response = await apiClient.get(`/discover/movie?${genreURL}${pageURL}`)
-    return response.data
-  } catch {
+    const response = await apiClient.get(`/discover/movie?${genreURL}${pageURL}`);
+    return response.data;
+  } catch (error) {
     console.error('Error fetching movies with genres:', error);
     throw error;
   }
-}
+};
 
+// Funktionen för att hämta trailers och videor
+export const getVideos = async (id, isMovie = true) => {
+  const format = isMovie ? 'movie' : 'tv';
+  try {
+    const response = await apiClient.get(`${format}/${id}/videos?language=en-US`);
+    return response.data.results;
+  } catch (error) {
+    console.log('Error fetching videos');
+    throw error;
+  }
+};
+
+// Funktionen för att söka filmer
 export const searchMovies = async (query) => {
   try {
     const response = await apiClient.get('/search/movie', {
@@ -80,7 +95,24 @@ export const searchMovies = async (query) => {
         query,
       },
     });
-    return response.data.results;
+
+    const movieResults = response.data.results;
+
+    // Now, for each movie, fetch the trailer
+    const moviesWithTrailers = await Promise.all(
+      movieResults.map(async (movie) => {
+        try {
+          const videosResponse = await apiClient.get(`/movie/${movie.id}/videos`);
+          const trailerID = getTrailerID(videosResponse.data.results);
+          return { ...movie, trailerID };
+        } catch (error) {
+          console.error(`Error fetching videos for movie ${movie.id}:`, error);
+          return { ...movie, trailerID: null }; // In case fetching videos fails, set trailerID to null
+        }
+      })
+    );
+
+    return moviesWithTrailers;
   } catch (error) {
     console.error('Error searching movies:', error);
     return [];
@@ -88,5 +120,44 @@ export const searchMovies = async (query) => {
 };
 
 
+function shuffleArray(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
 
-export default { getMovies, getGenres, getMovieDetails, getCast, getRecommendations, getMoviesWithGenres, searchMovies };
+const genres = [
+  { id: 28, name: "Action" },
+  { id: 12, name: "Adventure" },
+  { id: 16, name: "Animation" },
+  { id: 35, name: "Comedy" },
+  { id: 80, name: "Crime" },
+  { id: 99, name: "Documentary" },
+  { id: 18, name: "Drama" },
+  { id: 10751, name: "Family" },
+];
+
+
+export const fetchAllDiscoverData = async () => {
+
+  try {
+
+      const data = { popular: await getMovies() };
+      
+      const promises = genres.map(async (genre) => {
+        const genreData = await getMoviesWithGenres(genre.id);
+        genreData.results = shuffleArray(genreData.results);
+        data[genre.name] = genreData;
+
+    });
+    await Promise.all(promises);
+    return data;
+
+  }catch (error) {
+    console.log('Error fetching discover data.')
+  }
+}
+
+export default { getMovies, getGenres, getMovieDetails, getCast, getRecommendations, getMoviesWithGenres, getVideos, searchMovies };

@@ -1,18 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./MovieHeader.css";
 import RatingComponent from './RatingComponent'; // Import the RatingComponent
 import Button from './Button'; // Import Button component for consistent usage
 import { useDispatch } from "react-redux";
 import { addItem } from "../features/shopppingCartSlice";
-
+import { useState } from "react";
+import TrailerEmbed from './TrailerEmbed';
+import Overlay from './Overlay';
+import { getTrailerID } from '../features/getTrailerID';
 // Define default image paths
-const DEFAULT_POSTER = '/pictures/poster.png';
-const DEFAULT_BACKDROP = '/pictures/backdrop.png';
+import DEFAULT_POSTER from '../assets/images/poster.png';
+import DEFAULT_BACKDROP from '../assets/images/backdrop.png';
 
-const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genres, crew, posterUrl, rating, movie }) => {
+
+
+
+const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genres, crew, posterUrl, rating, movie}) => {
   // State to manage the background image
   const [backgroundImage, setBackgroundImage] = React.useState(backdropUrl || DEFAULT_BACKDROP);
   const dispatch = useDispatch();
+  const [showOverlay, setShowOverlay] = useState(false);
+  const [trailerID, setTrailerID] = useState(null);
 
   // Preload the backdrop image
   React.useEffect(() => {
@@ -27,6 +35,33 @@ const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genr
 
     dispatch(addItem({item: movie, price: 149}))
   }
+  const closeOverlay = () => {
+    setShowOverlay(false);
+  }
+
+  const handleTrailerPress = () => {
+    setShowOverlay(true);
+  }
+
+  useEffect(() => {
+    const fetchTrailer = async () => {
+      try {
+        const trailerID = getTrailerID(movie.videos.results);
+        setTrailerID(trailerID);
+      } catch (error) {
+        console.error('Error fetching trailer:', error);
+      }
+    };
+  
+    if (movie && movie.videos) {
+      fetchTrailer();
+    }
+  }, [movie]);
+  
+
+  useEffect(() => {
+    setTrailerID(getTrailerID(movie.videos.results));
+  },[movie])
 
   return (
     <header className="movie-header" style={{ backgroundImage: `url(${backgroundImage})` }}>
@@ -38,11 +73,14 @@ const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genr
             className="movie-poster"
             onError={(e) => {
               e.target.onerror = null; // Prevents infinite loop in case default image also fails
-              e.target.src = DEFAULT_POSTER;
+              e.target.src = {DEFAULT_POSTER};
             }}
           />
           <div className="button-container">
-            <Button text="Watch Trailer" primary onPress={() => console.log('Watch Trailer Clicked')} />
+            {trailerID && (
+            <Button text="Watch Trailer" primary onPress={() => handleTrailerPress()} />
+            )}
+
             <Button text="Buy" icon="shopping_cart" onPress={() => handleBuyPress()} />
           </div>
         </div>
@@ -61,6 +99,11 @@ const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genr
           </div>
         </div>
       </div>
+      <Overlay show={showOverlay} onClose={closeOverlay}>
+        {trailerID && (
+        <TrailerEmbed trailerID={trailerID}/>
+        )}
+    </Overlay>
     </header>
   );
 };

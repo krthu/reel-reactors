@@ -1,11 +1,20 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CardInformation from './CardInformation';
+import OrderDetails from "./OrderDetails";
 import './CheckOut.css';
 
 
 
 const Checkout = () => {
+
+    const shoppingCart = useSelector((state) => state.shoppingCart);
+
+    const totalPrice = shoppingCart.reduce((total, cartItem) => {
+        return total + (cartItem.price * cartItem.count);
+    }, 0);
+
     const [isPaymentComplete, setIsPaymentComplete] = useState(false);
     const navigate = useNavigate();
 
@@ -18,14 +27,13 @@ const Checkout = () => {
     };
 
     return (
-      <div className="checkout-container">
-        {/* orderdetails component */}
-       
-        <div className="left-placeholder">
-          {/* test */}
+        <div className="checkout-container">
+        <div className="order-details-section">
+          <OrderDetails cart={shoppingCart} totalPrice={totalPrice} />
         </div>
+        
         <div className="card-info-section">
-          <CardInformation onCompletePay={handleCompletePay}/>
+          <CardInformation onCompletePay={handleCompletePay} />
         </div>
       
       {isPaymentComplete && (

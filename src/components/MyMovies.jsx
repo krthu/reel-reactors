@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { getMovies } from '../api/api';
-import Navbar from './Navbar';
-import './MyMovies.css';
 import { useNavigate } from 'react-router-dom';
+import { getMovies } from '../api/api';
+import './MyMovies.css';
+import Navbar from './Navbar';
 import RatingComponent from './RatingComponent';
 
 const MyMovies = () => {
@@ -15,11 +15,11 @@ const MyMovies = () => {
     const fetchMovies = async () => {
       setIsLoading(true);
       try {
-        // Placeholder logic to fetch popular movies as favorite movies
         const favorites = await getMovies('popular');
-        setFavoriteMovies(favorites.results);
+        
+        const sortedFavorites = favorites.results.sort((a, b) => b.vote_average - a.vote_average);
+        setFavoriteMovies(sortedFavorites);
 
-        // Placeholder logic to fetch top-rated movies as purchased movies
         const purchased = await getMovies('top_rated');
         setPurchasedMovies(purchased.results);
       } catch (error) {
@@ -52,14 +52,13 @@ const MyMovies = () => {
                   <div className="rating-overlay">
                     <RatingComponent rating={movie.vote_average} />
                   </div>
-                 
                 </div>
               ))}
             </div>
           </section>
 
           <section className="movie-section">
-            <h2>Favorite Movies</h2>
+            <h2>My Favorites</h2>
             <div className="movies-list">
               {favoriteMovies.map((movie) => (
                 <div key={movie.id} className="movie-card" onClick={() => handleMovieClick(movie.id)}>

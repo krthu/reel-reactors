@@ -7,18 +7,17 @@ import { useState, useEffect } from "react";
 import Overlay from "./Overlay";
 import { useNavigate } from 'react-router-dom';
 import { getMovieDetails, fetchAllDiscoverData } from "../api/api";
+import './Discover.css';
+import PosterCaruselItem from "../components/MovieCard";
 
 const Discover = ({ movieData, setMovieData }) => {
     const [showOverlay, setShowOverlay] = useState(false);
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [landingMovie, setLandingMovie] = useState(null);
     const navigate = useNavigate();
-
-
     const [showFooter, setShowFooter] = useState(false);
 
-
-    //Kollar så att man scrollat till botten på sidan och isf visa footer.
+    // Kollar så att man scrollat till botten på sidan och isf visar footern.
     useEffect(() => {
         const handleScroll = () => {
             if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
@@ -32,8 +31,6 @@ const Discover = ({ movieData, setMovieData }) => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
-
-
 
     // Listen for URL changes
     useEffect(() => {
@@ -54,7 +51,7 @@ const Discover = ({ movieData, setMovieData }) => {
         }
     }, [window.location.search, selectedMovie]);
 
-    // funktionen som navigerar till filmsidan
+    // Funktionen som navigerar till filmsidan
     const handleMoreInfoClick = (movie) => {
         navigate(`/movie/${movie.id}`);
     };
@@ -108,7 +105,6 @@ const Discover = ({ movieData, setMovieData }) => {
     }, [landingMovie, movieData]);
 
     useEffect(() => {
-
         const fetchAllData = async () => {
             try {
                 const data = await fetchAllDiscoverData();
@@ -121,7 +117,7 @@ const Discover = ({ movieData, setMovieData }) => {
         if (Object.keys(movieData).length === 0) {
             fetchAllData();
         } else {
-            fillHeader(movieData.popular)
+            fillHeader(movieData.popular);
         }
     }, [movieData]);
 
@@ -132,15 +128,15 @@ const Discover = ({ movieData, setMovieData }) => {
 
         return (
             <>
-                {/* Render all movies from movie data into a array of movie cards*/}
+                {/* Render all movies from movie data into an array of movie cards*/}
                 {Object.entries(movieData).map(([genre, data]) => {
                     // Remove items without a poster or a backdrop
                     const movieCards = data.results
                         .filter((movie) => movie.poster_path && movie.backdrop_path)
                         .map((movie) => (
                             //Create a card per movie
-                            <MovieCard
-                                url={movie.poster_path}
+                            <PosterCaruselItem
+                                movie={movie}
                                 key={movie.id}
                                 onPress={() => handlePosterPress(movie)}
                                 isSelected={selectedMovie !== null && movie.id === selectedMovie.id}

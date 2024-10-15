@@ -67,8 +67,37 @@
 }
 
 .no-results-message {
-    color: #ffcccb; /* Light red color to indicate no results */
+    color: #ffcccb; 
     font-size: 1.5rem;
     text-align: center;
     margin-top: 50px;
 }
+
+.movie-card-container {
+    position: relative; 
+    width: 250px;       
+    margin: 0px;       
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .movie-card-img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+  
+/* Favorite Icon Styling */
+.favorite-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s ease;
+  }
+  
+  .movie-card-container:hover .favorite-icon {
+    opacity: 1; /* Show on hover */
+  }
+  

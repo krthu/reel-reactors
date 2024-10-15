@@ -14,16 +14,16 @@
 
 .cart-header {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr; 
+    grid-template-columns: 2fr 1fr 1fr 1fr;
     padding: var(--spacing-small);
     font-weight: 500;
     border-bottom: 1px solid var(--movie-list-border);
-    text-align: center; 
+    text-align: center;
 }
 
 .cart-header .header-item:first-child {
-    text-align: left; 
-    margin-left: 10px; 
+    text-align: left;
+    margin-left: 10px;
 }
 
 .cart-header div {
@@ -33,20 +33,19 @@
 
 .cart-item {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr; 
+    grid-template-columns: 2fr 1fr 1fr 1fr;
     align-items: center;
     padding: var(--spacing-small);
     border-bottom: 1px solid var(--movie-list-border);
     margin-bottom: var(--spacing-small);
 }
 
-
 .cart-item-info {
     display: flex;
     align-items: center;
-    justify-content: flex-start; 
-    gap: 10px; 
-    text-align: left; 
+    justify-content: flex-start;
+    gap: 10px;
+    text-align: left;
 }
 
 .cart-item img {
@@ -71,41 +70,53 @@
     color: var(--text-color-light);
 }
 
-
 .cart-item-price, .cart-item-count, .cart-item-total {
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
     padding: 5px;
 }
 
-.cart-item-remove button {
-    background-color: transparent;
-    border: none;
-    color: #ff4d4d; 
-    cursor: pointer;
-    font-size: 20px;
+.cart-footer {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    transition: color 0.3s ease;
+    margin-top: 20px;
 }
 
-.cart-item-remove button:hover {
-    color: #ff1a1a; 
+.cart-buttons {
+    display: flex;
+    gap: 15px;
 }
 
-
-.cart-item-remove button {
-    background-color: transparent;
-    border: none;
+.primary-button {
+    background-color: #a11fbf;
     color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
     cursor: pointer;
-    padding: 8px;
+    transition: background-color 0.3s ease;
 }
 
-.cart-item-remove button:hover {
-    color: red;
+.primary-button:hover {
+    background-color: #9a16b3;
+}
+
+.secondary-button {
+    background-color: #000;
+    color: white;
+    border: 1px solid #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.secondary-button:hover {
+    background-color: #333;
 }
 
 .total-price {
@@ -113,3 +124,60 @@
     font-weight: 700;
     color: var(--text-color-light);
 }
+.delete-button {
+    display: inline-block;
+    background-color: transparent;
+    border: 0.6 px solid #fff; 
+    color: #fff;
+    padding: 4px; 
+    width: 105px; 
+    height: 30px; 
+    font-size: 14px; 
+    cursor: pointer;
+    transition: color 0.3s ease, border-color 0.3s ease;
+    border-radius: 5px; 
+    text-align: center;
+    line-height: 24px; 
+}
+
+.delete-button:hover {
+    color: red; 
+    border-color: red; 
+}
+
+
+
+.primary-button {
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease; 
+}
+
+.primary-button:hover {
+    background-color: #004a99; 
+    transform: scale(1.05); 
+}
+
+.secondary-button {
+    background-color: #000;
+    color: white;
+    border: 1px solid #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.secondary-button:hover {
+    background-color: #333;
+    transform: scale(1.05); 
+}
+
+
+

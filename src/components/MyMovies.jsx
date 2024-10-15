@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FaStar } from 'react-icons/fa';
+import { FaHeart } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { getMovies } from '../api/api';
 import './MyMovies.css';
@@ -77,6 +77,9 @@ const MyMovies = () => {
                   <div className="rating-overlay">
                     <RatingComponent rating={movie.vote_average} />
                   </div>
+                  <div className="favorite-icon" onClick={(e) => { e.stopPropagation(); toggleFavorite(movie); }}>
+                    <FaHeart color={isFavorite(movie.id) ? 'red' : 'gray'} />
+                  </div>
                 </div>
               ))}
             </div>
@@ -92,7 +95,7 @@ const MyMovies = () => {
                     <RatingComponent rating={movie.vote_average} /> 
                   </div>
                   <div className="favorite-icon" onClick={(e) => { e.stopPropagation(); toggleFavorite(movie); }}>
-                    <FaStar color={isFavorite(movie.id) ? 'gold' : 'gray'} />
+                    <FaHeart color={isFavorite(movie.id) ? 'red' : 'gray'} />
                   </div>
                 </div>
               ))}
@@ -111,7 +114,7 @@ const MyMovies = () => {
                     </div>
                     {/* Favorite Star Icon */}
                     <div className="favorite-icon" onClick={(e) => { e.stopPropagation(); toggleFavorite(movie); }}>
-                      <FaStar color={isFavorite(movie.id) ? 'gold' : 'gray'} />
+                      <FaHeart color={isFavorite(movie.id) ? 'red' : 'gray'} />
                     </div>
                   </div>
                 ))

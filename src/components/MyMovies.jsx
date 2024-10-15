@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { FaStar } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { getMovies } from '../api/api';
 import './MyMovies.css';
@@ -10,6 +11,7 @@ const MyMovies = () => {
   const [purchasedMovies, setPurchasedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -34,6 +36,19 @@ const MyMovies = () => {
 
   const handleMovieClick = (id) => {
     navigate(`/movie/${id}`);
+  };
+
+
+  const toggleFavorite = (movie) => {
+    if (favorites.some(favMovie => favMovie.id === movie.id)) {
+      setFavorites(favorites.filter(favMovie => favMovie.id !== movie.id));
+    } else {
+      setFavorites([...favorites, movie]);
+    }
+  };
+
+  const isFavorite = (movieId) => {
+    return favorites.some(favMovie => favMovie.id === movieId);
   };
 
   return (
@@ -66,7 +81,9 @@ const MyMovies = () => {
                   <div className="rating-overlay">
                     <RatingComponent rating={movie.vote_average} /> 
                   </div>
-                  
+                  <div className="favorite-icon" onClick={(e) => { e.stopPropagation(); toggleFavorite(movie); }}>
+                    <FaStar color={isFavorite(movie.id) ? 'gold' : 'gray'} />
+                  </div>
                 </div>
               ))}
             </div>

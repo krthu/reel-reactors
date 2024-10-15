@@ -26,12 +26,12 @@ const MovieInformation = ({ onBuy, onWatchTrailer }) => {
     const fetchMovieData = async () => {
       try {
         const movieData = await getMovieDetails(movieId);
-        const castData = await getCast(movieId);
-
+        
         setMovie(movieData);
-        setCast(castData.cast);
-        setCrew(castData.crew);
-        console.log(movieData);
+        setCast(movieData.credits.cast);
+        setCrew(movieData.credits.crew);
+
+
       } catch (error) {
         console.error('Error fetching movie data:', error);
       }
@@ -61,7 +61,7 @@ const MovieInformation = ({ onBuy, onWatchTrailer }) => {
       />
       {/* Additional sections like CastList and RecommendationComp */}
       <ActorCard cast={cast} />
-      <RecommendationComp movieId={movie.id} />
+      <RecommendationComp recommendedMovies={movie.recommendations.results} />
     </div>
     </>
   );

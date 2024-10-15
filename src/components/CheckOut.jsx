@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CardInformation from './CardInformation';
+import CartItem from "./CartItem";
 import OrderDetails from "./OrderDetails";
 import './CheckOut.css';
 
@@ -9,33 +10,48 @@ import './CheckOut.css';
 
 const Checkout = () => {
 
-    const shoppingCart = useSelector((state) => state.shoppingCart);
+  const shoppingCart = useSelector((state) => state.shoppingCart);
+  console.log(shoppingCart)
 
-    const totalPrice = shoppingCart.reduce((total, cartItem) => {
-        return total + (cartItem.price * cartItem.count);
-    }, 0);
+  const totalPrice = shoppingCart.reduce((total, cartItem) => {
+    return total + (cartItem.price * cartItem.count);
+  }, 0);
 
-    const [isPaymentComplete, setIsPaymentComplete] = useState(false);
-    const navigate = useNavigate();
+  const [isPaymentComplete, setIsPaymentComplete] = useState(false);
+  const navigate = useNavigate();
 
-    const handleCompletePay = () => {
-        setIsPaymentComplete(true);
-    };
+  const handleCompletePay = () => {
+    setIsPaymentComplete(true);
+  };
 
-    const handleGoToMyMovies = () => {
-      navigate('/mymovies');
-    };
+  const handleGoToMyMovies = () => {
+    navigate('/mymovies');
+  };
 
-    return (
-        <div className="checkout-container">
-        <div className="order-details-section">
-          <OrderDetails cart={shoppingCart} totalPrice={totalPrice} />
+  return (
+    <div className="checkout-container">
+      <div className="order-details-section">
+        <h3>Order details</h3>
+        <div className="checkout-cart-items">
+          {shoppingCart.length > 0 ? (
+            shoppingCart.map(cartItem => (
+              <CartItem key={cartItem.item.id} cartItem={cartItem} isOrderDetails={true} />
+            ))
+          ) : (
+            <p>Din kundvagn är tom.</p>
+          )}
         </div>
-        
-        <div className="card-info-section">
-          <CardInformation onCompletePay={handleCompletePay} />
+        <div className="checkout-order-details-spec">
+          <p>Subtotal {totalPrice/1.25} </p>
+          <p>VAT 25% {totalPrice*0.2}</p>
+          <p>Total {totalPrice}</p>
         </div>
-      
+      </div>
+
+      <div className="card-info-section">
+        <CardInformation onCompletePay={handleCompletePay} />
+      </div>
+
       {isPaymentComplete && (
         <div className="popup-overlay">
           <div className="popup-content">
@@ -50,5 +66,5 @@ const Checkout = () => {
     </div>
   );
 };
-  
-  export default Checkout;
+
+export default Checkout;

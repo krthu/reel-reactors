@@ -47,6 +47,12 @@
     transition: background-color 0.3s ease;
 }
 
+.cart-item-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .cart-items-container {
     max-height: 500px; 
     overflow-y: auto; 

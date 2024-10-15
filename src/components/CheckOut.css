@@ -9,12 +9,15 @@
   
   .order-details-section {
     flex: 1;
+    color: white;
     margin-right: 20px;
+    border: 1px solid var(--movie-list-border);
   }
   
   .card-info-section {
     flex: 1;
     max-width: 400px;
+    
   }
 
   

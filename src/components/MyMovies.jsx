@@ -58,7 +58,7 @@ const MyMovies = () => {
           </section>
 
           <section className="movie-section">
-            <h2>My Favorites</h2>
+            <h2>My Top Rated Movies</h2>
             <div className="movies-list">
               {favoriteMovies.map((movie) => (
                 <div key={movie.id} className="movie-card" onClick={() => handleMovieClick(movie.id)}>

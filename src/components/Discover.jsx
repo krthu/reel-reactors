@@ -1,6 +1,7 @@
 import Carusel from "./Carusel";
 import Navbar from "./Navbar";
 import Header from "./Header";
+import Footer from "./Footer";
 import MovieCard from "./MovieCard";
 import { useState, useEffect } from "react";
 import Overlay from "./Overlay";
@@ -12,6 +13,27 @@ const Discover = ({ movieData, setMovieData }) => {
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [landingMovie, setLandingMovie] = useState(null);
     const navigate = useNavigate();
+
+
+    const [showFooter, setShowFooter] = useState(false);
+
+
+    //Kollar så att man scrollat till botten på sidan och isf visa footer.
+    useEffect(() => {
+        const handleScroll = () => {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                setShowFooter(true); 
+            } else {
+                setShowFooter(false); 
+            }
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+
 
     // Listen for URL changes
     useEffect(() => {
@@ -136,28 +158,31 @@ const Discover = ({ movieData, setMovieData }) => {
         );
     };
 
-    return (
-    <>
-        <div className="body-container">
-            <div className="header-container">
-                <Navbar />
-                {landingMovie ? (
-                    <Header movie={landingMovie} />
-                ) : (
-                    <div>Loading...</div>
-                )}
-            </div>
-            <div className="movie-genre-container">{renderCarusels()}</div>
-        </div>
-        {/* Overlay */}
-        <Overlay show={showOverlay} onClose={closeOverlay}>
-            {selectedMovie && (
-                <Header movie={selectedMovie} isOverlay={true} onClose={closeOverlay} />
-            )}
-        </Overlay>
-    </>
-);
+   return (
+  <>
+    <div className="body-container">
+      <div className="header-container">
+        <Navbar />
+        {landingMovie ? (
+          <Header movie={landingMovie} />
+        ) : (
+          <div>Loading...</div>
+        )}
+      </div>
+      <div className="movie-genre-container">{renderCarusels()}</div>
+    </div>
 
+    {/* Overlay */}
+    <Overlay show={showOverlay} onClose={closeOverlay}>
+      {selectedMovie && (
+        <Header movie={selectedMovie} isOverlay={true} onClose={closeOverlay} />
+      )}
+    </Overlay>
+
+    {/* Footer */}
+    {showFooter && <Footer className="footer-container" />}
+  </>
+);
 };
 
 export default Discover;

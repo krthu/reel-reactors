@@ -1,32 +1,35 @@
 .checkout-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start; 
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .order-details-section {
-    flex: 1;
-    color: white;
-    margin-right: 20px;
-    border: 1px solid var(--movie-list-border);
-  }
-  
-  .card-info-section {
-    flex: 1;
-    max-width: 400px;
-    
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; 
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-  
-  .card-info-form {
-    padding: 20px;
-    background-color: #000000;
-    border-radius: 8px;
-    
-  }
+.checkout-order-details-spec {
+  margin-left: auto;
+  text-align: right;
+}
+
+.order-details-section {
+  flex: 1;
+  color: white;
+  margin-right: 20px;
+  border: 1px solid var(--movie-list-border);
+}
+
+.card-info-section {
+  flex: 1;
+  max-width: 400px;
+}
+
+.card-info-form {
+  padding: 20px;
+  background-color: #000000;
+  border-radius: 8px;
+}
+
 
   .popup-overlay {
     position: fixed;

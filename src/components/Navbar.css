@@ -140,6 +140,27 @@
     z-index: 10001; 
 }
 
+.cart-icon-badge{
+    background-color: red;       /* Bakgrundsfärg för badgen */
+    color: white;                /* Textfärg */
+    padding: 5px;                /* Inre avstånd */
+    border-radius: 50%;          /* Gör den rund */
+    height: 24px;                /* Höjd och bredd måste vara samma för att bli en cirkel */
+    width: 24px;
+    display: flex;               /* Flex för att centrera texten */
+    align-items: center;         /* Vertikal centrering av text */
+    justify-content: center;     /* Horisontell centrering av text */
+    font-size: 14px;             /* Textstorlek */
+    position: absolute;          /* Gör att badgen kan positioneras över ikonen */
+    top: -10px;                  /* Justera för att placera över ikonen */
+    right: -10px;   
+    
+}
+
+.cart-icon-badge-hidden {
+    display: none;
+}
+
 /* Mobilanpassning (max 768px bred) */
 @media (max-width: 768px) {
     .logo {
@@ -208,4 +229,6 @@
         width: 24px;
         height: 24px;
     }
+
+
 }

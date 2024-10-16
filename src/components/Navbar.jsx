@@ -6,6 +6,7 @@ import './Navbar.css';
 import { searchMovies } from '../api/api';  // Import the searchMovies function
 import logo from '../assets/images/reel-reactors-logga.png';
 import cartIcon from '../assets/images/icons8-cart-64.png';
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [movies, setMovies] = useState([]); // State to store all movies
@@ -13,6 +14,7 @@ const Navbar = () => {
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const shoppingCart = useSelector((state) => state.shoppingCart);
 
   useEffect(() => {
     if (searchQuery) {
@@ -91,6 +93,7 @@ const Navbar = () => {
   </div>
                 <Link to="/cart" className="cart-button">
                     <img src={cartIcon} alt="Cart icon" className="cart-icon" />
+                    <span className={shoppingCart.length > 0 ? "cart-icon-badge" : "cart-icon-badge-hidden"}>{shoppingCart.length}</span>
                 </Link>
             </div>
 

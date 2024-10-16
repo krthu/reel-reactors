@@ -12,7 +12,6 @@ import DEFAULT_BACKDROP from '../assets/images/backdrop.png';
 import DEFAULT_POSTER from '../assets/images/poster.png';
 import FavoriteButton from './FavoriteButton';
 import getPrice from '../features/getPrice'
-
 import { useSelector } from "react-redux";
 
 
@@ -23,8 +22,6 @@ const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genr
   const dispatch = useDispatch();
   const [showOverlay, setShowOverlay] = useState(false);
   const [trailerID, setTrailerID] = useState(null);
-
-
   const shoppingCart = useSelector((state) => state.shoppingCart);
   const [message, setMessage] = useState(""); 
 
@@ -42,10 +39,8 @@ const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genr
     const itemExists = shoppingCart.some(item => item.item.id === movie.id);
     if(itemExists) {
     setMessage("This item already exist in your shoppingcart");
-    //setTimeout(() => setMessage(""), 3000); //tar bort meddelandet efter 3sek
     return;
   }
-
     dispatch(addItem({item: movie, price: getPrice(movie.release_date)}))
     setMessage("");
   };

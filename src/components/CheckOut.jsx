@@ -42,9 +42,9 @@ const Checkout = () => {
           )}
         </div>
         <div className="checkout-order-details-spec">
-          <p>Subtotal {totalPrice/1.25} </p>
-          <p>VAT 25% {totalPrice*0.2}</p>
-          <p>Total {totalPrice}</p>
+          <p>Subtotal {totalPrice/1.25}:- </p>
+          <p>VAT 25% {totalPrice*0.2}:-</p>
+          <p>Total {totalPrice}:-</p>
         </div>
       </div>
 

@@ -23,12 +23,12 @@ const mockMovie = {
 
 
 const initialState = 
-    //cartItems: [],
-    [{
-        item: mockMovie,
-        count: 1,
-        price: 129
-    }];
+     []
+    // [{
+    //     item: mockMovie,
+    //     count: 1,
+    //     price: 129
+    // }];
 
 const shoppingCartSlice = createSlice({
     name: 'cartItems',
@@ -67,9 +67,6 @@ const shoppingCartSlice = createSlice({
                 }else {
                     return state.filter(cartItem => cartItem.item.id !== action.payload.id)
                 }
-                
-
-                
 
             } else {
                 return state;
@@ -77,12 +74,14 @@ const shoppingCartSlice = createSlice({
         },
         removeItem: (state, action) => {
             return state.filter(cartItem => cartItem.item.id !== action.payload.id)
+        },
+        emptyCart: (state, action) => {
+            return [];
         }
-
     },
 
 });
 
-export const { addItem, removeItem, decrease } = shoppingCartSlice.actions;
+export const { addItem, removeItem, decrease, emptyCart } = shoppingCartSlice.actions;
 
 export default shoppingCartSlice.reducer;

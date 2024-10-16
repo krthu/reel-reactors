@@ -15,6 +15,7 @@ import ShoppingCart from './components/ShoppingCart'
 import OrderDetails from './components/OrderDetails';
 import StarComponent from './components/StarComponent';
 import placeholder from './features/placeholder';
+import TVShows from './components/TVShows';
 
 
 
@@ -72,7 +73,7 @@ function App() {
       <div className='app-container'>
         <Routes>
           <Route path="/movies" element={<MoviePage />} />
-          <Route path="/tvseries" element={<TVSeriesPage />} />
+          <Route path="/tvseries" element={<TVShows />} />
           <Route path="/mymovies" element={<MyMovies />} />
           <Route path='/' element={<Discover movieData={movieData} setMovieData={setMovieData}/>} />
           <Route path='/movie/:id' element={<MovieInformation />} />

@@ -30,6 +30,16 @@
     gap: 20px;
 }
 
+.links a {
+    text-decoration: none; /* Ta bort understrykning */
+  } 
+  
+
+.links .active-link {
+    color: rgb(37, 129, 241); /* Färg för den aktiva länken */
+}
+
+
 .search-container {
     position: relative;
     z-index: 1001; /* Högre än overlay (1001) så att sökfältet ligger över */
@@ -88,13 +98,25 @@
 .profile-icon .icon {
     width: 25px; 
     height: 25px;
+    fill: white;
 }
+.circle-icon {
+    fill: white; 
+    stroke: none;
+}
+
+.path-icon {
+    fill: #0c5797;
+}
+
+
 .icon-chevron {
     position: absolute;
     top: -38px; /* position ovanför */
     right: 25px; /* horisontell position till profil iconen */
     width: 20px; 
     height: 20px;
+    fill: white;
 }
 
 
@@ -139,6 +161,7 @@
     position: relative;
     z-index: 10001; 
 }
+  
 
 .cart-icon-badge{
     background-color: red;       /* Bakgrundsfärg för badgen */

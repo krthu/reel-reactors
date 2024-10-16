@@ -30,6 +30,16 @@
     gap: 20px;
 }
 
+.links a {
+    text-decoration: none; /* Ta bort understrykning */
+  } 
+  
+
+.links .active-link {
+    color: rgb(37, 129, 241); /* Färg för den aktiva länken */
+}
+
+
 .search-container {
     position: relative;
     z-index: 1001; /* Högre än overlay (1001) så att sökfältet ligger över */
@@ -151,6 +161,7 @@
     position: relative;
     z-index: 10001; 
 }
+  
 
 /* Mobilanpassning (max 768px bred) */
 @media (max-width: 768px) {

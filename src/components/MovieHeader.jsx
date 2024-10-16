@@ -95,7 +95,7 @@ const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genr
                 e.target.src = {DEFAULT_POSTER};
               }}
             />
-            <h2 className="movie-price">{getPrice(movie.release_date)} kr</h2>
+            <h2 className="movie-price">{getPrice(movie.release_date)}:-</h2>
           </div>
           <div className="button-container">
             {trailerID && (

@@ -8,12 +8,14 @@ import RecommendationComp from './RecommendationComp';
 import Navbar from './Navbar';
 import Footer from "./Footer";
 
+
 const MovieInformation = ({ onBuy, onWatchTrailer }) => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [cast, setCast] = useState([]);
   const [crew, setCrew] = useState([]);
   const [showFooter] = useState(true); // Definiera showFooter, alltid true i detta fall
+
 
   useEffect(() => {
     const movieId = id;
@@ -38,6 +40,7 @@ const MovieInformation = ({ onBuy, onWatchTrailer }) => {
 
     fetchMovieData();
   }, [id]);
+
 
   if (!movie) {
     return <div>Loading...</div>;

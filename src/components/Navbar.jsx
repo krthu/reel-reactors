@@ -5,12 +5,14 @@ import './Navbar.css';
 import { searchMovies } from '../api/api';
 import logo from '../assets/images/reel-reactors-logga3.png';
 import cartIcon from '../assets/images/icons8-cart-64.png';
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [movies, setMovies] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const navigate = useNavigate();
+  const shoppingCart = useSelector((state) => state.shoppingCart);
 
   useEffect(() => {
     if (searchQuery) {
@@ -68,6 +70,7 @@ const Navbar = () => {
       </div>
 
       <div className="nav-right">
+
         <div className="profile-container">
           <div className="profile-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24" className="icon">
@@ -81,8 +84,10 @@ const Navbar = () => {
         </div>
         <NavLink to="/cart" className="cart-button">
           <img src={cartIcon} alt="Cart icon" className="cart-icon" />
+            <span className={shoppingCart.length > 0 ? "cart-icon-badge" : "cart-icon-badge-hidden"}>{shoppingCart.length}</span>
         </NavLink>
       </div>
+
 
       {isOverlayVisible && searchQuery && (
         <SearchOverlay

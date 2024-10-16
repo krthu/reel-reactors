@@ -11,14 +11,19 @@ const MyMovies = () => {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const [favorites, setFavorites] = useState([]);
+  //const [boughtMovies, setBoughtMovies] = useState([]);
 
   useEffect(() => {
     const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
     setFavorites(storedFavorites);
+    loadBoughtMovies();
+
+
 
     const handleFavoritesUpdated = () => {
       const updatedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
       setFavorites(updatedFavorites);
+ 
     };
 
     window.addEventListener('favoritesUpdated', handleFavoritesUpdated);
@@ -26,23 +31,31 @@ const MyMovies = () => {
     return () => {
       window.removeEventListener('favoritesUpdated', handleFavoritesUpdated);
     };
+
   }, []);
 
-  useEffect(() => {
-    const fetchMovies = async () => {
-      setIsLoading(true);
-      try {
-        const purchased = await getMovies('top_rated');
-        setPurchasedMovies(purchased.results);
-      } catch (error) {
-        console.error('Error fetching movies:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  const loadBoughtMovies = () => {
+    const boughtMoviesFromStorage = JSON.parse(localStorage.getItem('bought-movies')) || [];
+    setPurchasedMovies(boughtMoviesFromStorage);
+    console.log(boughtMoviesFromStorage);
+    setIsLoading(false);
+  }
 
-    fetchMovies();
-  }, []);
+  // useEffect(() => {
+  //   const fetchMovies = async () => {
+  //     setIsLoading(true);
+  //     try {
+  //       const purchased = await getMovies('top_rated');
+  //       setPurchasedMovies(purchased.results);
+  //     } catch (error) {
+  //       console.error('Error fetching movies:', error);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   };
+
+  //   fetchMovies();
+  // }, []);
 
   const handleMovieClick = (movie) => {
     navigate(`/movie/${movie.id}`);
@@ -59,7 +72,9 @@ const MyMovies = () => {
           <section className="movie-section">
             <h2>My Movies</h2>
             <div className="movies-list">
-              {purchasedMovies.map((movie) => (
+
+              { purchasedMovies.length > 0 ? (
+              purchasedMovies.map((movie) => (
                 <div
                   key={movie.id}
                   className="movie-card"
@@ -75,7 +90,9 @@ const MyMovies = () => {
                   {/* Use FavoriteButton */}
                   <FavoriteButton movie={movie} />
                 </div>
-              ))}
+              ))) : (
+                <p>No bought movies yet.</p>
+              )}
             </div>
           </section>
 

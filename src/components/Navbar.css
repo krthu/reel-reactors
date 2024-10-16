@@ -163,11 +163,10 @@
 }
   
 
-.cart-icon-badge{
-    background-color: red;       /* Bakgrundsfärg för badgen */
-    color: white;                /* Textfärg */
-    padding: 5px;                /* Inre avstånd */
-    border-radius: 50%;          /* Gör den rund */
+.cart-icon-badge {
+    background-color: rgb(220, 2, 2);       /* Bakgrundsfärg för badgen */
+    color: white;                /* Textfärg */    
+    border-radius: 30%;          /* Gör den rund */
     height: 24px;                /* Höjd och bredd måste vara samma för att bli en cirkel */
     width: 24px;
     display: flex;               /* Flex för att centrera texten */
@@ -251,6 +250,12 @@
     .cart-icon {
         width: 24px;
         height: 24px;
+    }
+
+    .cart-icon-badge {       
+        height: 18px;                
+        width: 18px;
+        margin-top: 5px;     
     }
 
 

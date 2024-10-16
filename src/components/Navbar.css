@@ -88,13 +88,25 @@
 .profile-icon .icon {
     width: 25px; 
     height: 25px;
+    fill: white;
 }
+.circle-icon {
+    fill: white; 
+    stroke: none;
+}
+
+.path-icon {
+    fill: #0c5797;
+}
+
+
 .icon-chevron {
     position: absolute;
     top: -38px; /* position ovanför */
     right: 25px; /* horisontell position till profil iconen */
     width: 20px; 
     height: 20px;
+    fill: white;
 }
 
 

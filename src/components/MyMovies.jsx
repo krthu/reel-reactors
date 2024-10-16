@@ -5,12 +5,29 @@ import './MyMovies.css';
 import Navbar from './Navbar';
 import RatingComponent from './RatingComponent';
 import FavoriteButton from './FavoriteButton';
+import Footer from "./Footer";
 
 const MyMovies = () => {
   const [purchasedMovies, setPurchasedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const [favorites, setFavorites] = useState([]);
+  const [showFooter, setShowFooter] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+            setShowFooter(true);
+        } else {
+            setShowFooter(false);
+        }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+        window.removeEventListener('scroll', handleScroll);
+    };
+}, []);
+
   //const [boughtMovies, setBoughtMovies] = useState([]);
 
   useEffect(() => {
@@ -122,7 +139,9 @@ const MyMovies = () => {
                 <p>No favorite movies yet.</p>
               )}
             </div>
+            {showFooter && <Footer className="footer-container" />}
           </section>
+         
         </>
       )}
     </div>

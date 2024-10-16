@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { removeItem, addItem, decrease } from '../features/shopppingCartSlice';
+import { removeItem } from '../features/shopppingCartSlice';
 import { baseImageURL } from '../api/baseURLs';
 import './ShoppingCart.css';
 
@@ -13,12 +13,11 @@ const CartItem = ({ cartItem, isOrderDetails = false }) => {
 
 
     return (
-        <div className='cart-item-title'>
-            <h4>{cartItem.item.title}</h4>
-            <div className="cart-item">
-                <div className="cart-item-info">
+        <div className='cart-item'>
+            <div className="cart-item-info">
                     <img src={`${baseImageURL}${cartItem.item.poster_path}`} alt="Produktbild" />
                     <div className="cart-item-details">
+                        <h4>{cartItem.item.title}</h4>
                         <p><span>{cartItem.item.original_language}</span></p>
                     </div>
                 </div>
@@ -28,12 +27,9 @@ const CartItem = ({ cartItem, isOrderDetails = false }) => {
                 </div>
 
                 <div className="cart-item-count">
+                
                 <span>{cartItem.count}</span>
-
-                </div>
-                <div className="cart-item-total">
-                    <p>{(cartItem.count * cartItem.price).toFixed(0)}:-</p>
-                </div>
+            </div>
 
                 <div className="cart-item-delete"> {/* Ny kolumn för radera-knappen */}
                     {isOrderDetails ? null :
@@ -43,7 +39,7 @@ const CartItem = ({ cartItem, isOrderDetails = false }) => {
                     }
                 </div>
             </div>
-        </div>
+
 
     );
 };

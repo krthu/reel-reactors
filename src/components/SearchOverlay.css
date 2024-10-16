@@ -1,17 +1,18 @@
-/* SearchOverlay.css */
 .search-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 1.5);
+    max-height: 85vh; /* Håller overlay inom 80% av viewport-höjden */
+    background: rgba(0, 0, 0, 0.95); /* Mörk bakgrund för overlay */
     z-index: 1000;
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    overflow: hidden; /* Hindrar sidans bakgrund från att skrollas */
 }
 
 .close-button {
@@ -35,7 +36,18 @@
     gap: 20px;
     width: 100%;
     max-width: 1200px;
-    overflow-y: auto;
+    height: calc(100% - 60px); /* Justerar så att resultatsektionen får rätt höjd */
+    overflow-y: auto; /* Skapar en skrollbar yta för resultaten */
+    padding-bottom: 20px;
+}
+
+.search-results::-webkit-scrollbar {
+    display: none; /* Dölj scrollbar för webkit-baserade webbläsare (Chrome, Safari) */
+}
+
+.search-results {
+    -ms-overflow-style: none;  /* Dölj scrollbar för Internet Explorer */
+    scrollbar-width: none;  /* Dölj scrollbar för Firefox */
 }
 
 .search-result-item {
@@ -51,7 +63,7 @@
 }
 
 .search-result-item:hover {
-    background: rgba(0, 61, 136, 0.9);
+    background: rgba(0, 61, 136, 0.9); /* Blå nyans vid hover */
 }
 
 .search-thumbnail {
@@ -79,9 +91,9 @@
     margin: 0px;       
     cursor: pointer;
     transition: transform 0.3s ease;
-  }
+}
   
-  .movie-card-img {
+.movie-card-img {
     width: 100%;
     height: auto;
     border-radius: 8px;
@@ -95,9 +107,8 @@
     cursor: pointer;
     opacity: 0; /* Initially hidden */
     transition: opacity 0.3s ease;
-  }
+}
   
-  .movie-card-container:hover .favorite-icon {
+.movie-card-container:hover .favorite-icon {
     opacity: 1; /* Show on hover */
-  }
-  
+}

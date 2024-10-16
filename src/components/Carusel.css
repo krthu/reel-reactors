@@ -51,6 +51,12 @@
     font-size: 3rem;    
 }
 
+.carusel-button {
+    -webkit-tap-highlight-color: transparent; 
+    outline: none; 
+    border: none; 
+}
+
 @media (max-width: 1440px) {
     .carusel-content {
         --items-per-screen: 5;

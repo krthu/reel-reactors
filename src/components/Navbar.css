@@ -31,18 +31,18 @@
 }
 
 .search-container {
-    flex-grow: 1;
-    /* Låter sökrutan ta upp mer utrymme inom sin container */
+    position: relative;
+    z-index: 1001; /* Högre än overlay (1001) så att sökfältet ligger över */
     width: 100%;
 }
+
 
 .search-container input {
     padding: 10px;
     background-color: rgba(0, 94, 170, 0.3);
-    /* 0.5 är 50% opacity */
     color: white;
     width: 100%;
-    /* Anpassa bredden efter behov */
+    z-index: 101; /* Sökrutan förblir ovanpå overlay */
 }
 
 .logo-center {
@@ -114,16 +114,30 @@
   
 .search-overlay {
     position: fixed;
-    top: 150px; /* Placerar sökresultaten under sökrutan */
+    top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    background: black;
-    z-index: 10000;
+    height: 100vh; /* Säkerställ att höjden täcker hela skärmen */
+    background: rgba(0, 0, 0, 0.95); /* Mörklägger bakgrunden */
+    z-index: 99; /* Overlay under navbaren */
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
+    padding-top: 60px; /* Tillräckligt utrymme för sökrutan */
+    overflow-y: auto; /* Tillåt scroll om innehållet är stort */
+}
+
+/* Se till att navbarens sökruta alltid syns */
+.navbar {
+    z-index: 100; /* Sökfält och navbar ligger över overlayen */
+}
+
+
+.search-input {
+    position: relative;
+    z-index: 10001; 
 }
 
 /* Mobilanpassning (max 768px bred) */
@@ -148,6 +162,10 @@
         box-shadow: none;
     }
     
+    .search-overlay {
+        top: 0; /* Flyttar overlay till toppen */
+    }
+    
     .search-container {
         position: absolute;
         top: 10px;
@@ -160,10 +178,6 @@
         padding: 5px;
         font-size: 0.9rem;
         width: 100%; /* Se till att sökfältet sträcker sig över hela containern */
-    }
-
-    .search-overlay { 
-        top: 50px;
     }
 
     .logo-center {

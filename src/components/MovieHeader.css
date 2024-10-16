@@ -131,7 +131,7 @@
   }
 
   .close-X {
-    float: right; /* Placera kryss-knappen till höger */
+    float: right; 
     cursor: pointer; 
     font-size: 25px; 
     line-height: 0; 

@@ -11,6 +11,7 @@ import TrailerEmbed from './TrailerEmbed';
 import DEFAULT_BACKDROP from '../assets/images/backdrop.png';
 import DEFAULT_POSTER from '../assets/images/poster.png';
 import FavoriteButton from './FavoriteButton';
+import getPrice from '../features/getPrice'
 
 
 const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genres, crew, posterUrl, rating, movie}) => {
@@ -42,24 +43,24 @@ const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genr
     setShowOverlay(true);
   }
 
-  const getPrice = (releaseDate) => {
-    console.log(movie);
-    const yearNow = new Date().getFullYear();
-    const releaseYear = new Date(releaseDate).getFullYear();;
-    console.log(yearNow);
-    console.log(releaseYear);
-    const diff = yearNow - releaseYear;
+  // const getPrice = (releaseDate) => {
+  //   console.log(movie);
+  //   const yearNow = new Date().getFullYear();
+  //   const releaseYear = new Date(releaseDate).getFullYear();;
+  //   console.log(yearNow);
+  //   console.log(releaseYear);
+  //   const diff = yearNow - releaseYear;
     
-    if (diff <= 3){
-      return 149
-    } else if (diff <= 5){
-      return 99
-    } else {
-      return 49
-    }
+  //   if (diff <= 3){
+  //     return 149
+  //   } else if (diff <= 5){
+  //     return 99
+  //   } else {
+  //     return 49
+  //   }
 
-  }
-  const price = getPrice(movie);
+  // }
+  // const price = getPrice(movie);
 
   useEffect(() => {
     const fetchTrailer = async () => {

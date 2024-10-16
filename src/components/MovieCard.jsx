@@ -2,6 +2,7 @@
 import './MovieCard.css';
 import { baseImageURL } from '../api/baseURLs';
 import FavoriteButton from './FavoriteButton';
+import getPrice from '../features/getPrice';
 
 const PosterCaruselItem = ({ movie, onPress, isSelected }) => {
   if (!movie) {
@@ -17,8 +18,10 @@ const PosterCaruselItem = ({ movie, onPress, isSelected }) => {
         src={`${baseImageURL}${movie.poster_path}`}
         alt={movie.title}
       />
+      <h2 className="movieCard-price">{getPrice(movie.release_date)}:-</h2>
     </div>
   );
+
 };
 
 export default PosterCaruselItem;

@@ -33,3 +33,12 @@
     transition: filter 0.3s ease, transform 0.3s ease;
   }
   
+  .movieCard-price {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    padding: 2px 5px;
+    background-color: var(--body-bg);
+    border-radius: var(--border-radius-medium);
+
+}

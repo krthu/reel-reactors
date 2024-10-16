@@ -58,17 +58,51 @@
     height: auto;
 }
 
-.nav-right {
+/*.nav-right {
     display: flex;
     justify-content: flex-end;
     flex: 1;
-    /* Fördelar utrymme till höger */
+    /* Fördelar utrymme till höger 
+} */
+
+
+.nav-right {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1;
 }
+
+
+.profile-icon {
+    position: absolute;
+    top: -45px; /* position ovanför */
+    right: 45px; /* horisontell position till shoppingcart */
+    display: flex;
+    background-color: #0c5797;
+    border-radius: 50%;
+    padding: 4px;
+    cursor: pointer;
+}
+.profile-icon .icon {
+    width: 25px; 
+    height: 25px;
+}
+.icon-chevron {
+    position: absolute;
+    top: -38px; /* position ovanför */
+    right: 25px; /* horisontell position till profil iconen */
+    width: 20px; 
+    height: 20px;
+}
+
 
 .cart-button {
     background: none;
     border: none;
     cursor: pointer;
+    position: relative;
 }
 
 .cart-icon {

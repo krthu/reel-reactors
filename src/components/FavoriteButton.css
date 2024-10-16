@@ -12,3 +12,13 @@
     transform: scale(1.2);
   }
   
+  .heart-icon {
+    color: gray; /* Grå färg när det inte är favorit */
+    transition: color 0.3s ease; /* Smidig övergång när färgen ändras */
+  }
+  
+  .heart-icon.favorite {
+    color: #ff6666; /* Röd färg när det är favorit */
+  }
+  
+  

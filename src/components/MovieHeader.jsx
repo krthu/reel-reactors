@@ -1,16 +1,16 @@
-import React, { useEffect } from "react";
-import "./MovieHeader.css";
-import RatingComponent from './RatingComponent'; // Import the RatingComponent
-import Button from './Button'; // Import Button component for consistent usage
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addItem } from "../features/shopppingCartSlice";
-import { useState } from "react";
-import TrailerEmbed from './TrailerEmbed';
-import Overlay from './Overlay';
 import { getTrailerID } from '../features/getTrailerID';
+import { addItem } from "../features/shopppingCartSlice";
+import Button from './Button'; // Import Button component for consistent usage
+import "./MovieHeader.css";
+import Overlay from './Overlay';
+import RatingComponent from './RatingComponent'; // Import the RatingComponent
+import TrailerEmbed from './TrailerEmbed';
 // Define default image paths
-import DEFAULT_POSTER from '../assets/images/poster.png';
 import DEFAULT_BACKDROP from '../assets/images/backdrop.png';
+import DEFAULT_POSTER from '../assets/images/poster.png';
+import FavoriteButton from './FavoriteButton';
 
 
 const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genres, crew, posterUrl, rating, movie}) => {
@@ -96,6 +96,7 @@ const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genr
               }}
             />
             <h2 className="movie-price">{getPrice(movie.release_date)}:-</h2>
+            <FavoriteButton movie={movie} />
           </div>
           <div className="button-container">
             {trailerID && (

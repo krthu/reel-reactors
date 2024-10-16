@@ -25,8 +25,8 @@ const ShoppingCart = () => {
         <div className="shopping-cart">
             <div className="cart-header">
                 <div className="header-item">Product</div>
-                <div className="header-item">Price</div>
                 <div className="header-item">Number</div>
+                <div className="header-item">Price</div>
                 
             </div>
     

@@ -49,8 +49,10 @@
 
 .cart-item-info {
     display: flex;
-    align-items: center;
-    gap: 10px;
+    flex-direction: column; /* Ställer in så att titeln, bilden och språket staplas vertikalt */
+    align-items: center; /* Centrerar titeln, bilden och språket */
+    text-align: center; /* Centrerar texten */
+    gap: 10px; /* Utrymme mellan titeln, bilden och språket */
 }
 
 .cart-items-container {
@@ -61,7 +63,8 @@
 
 .cart-item-info {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    margin-left: 10px;
     gap: 10px;
 }
 
@@ -89,11 +92,12 @@
 }
 
 .cart-item-details p {
-    margin: 5px 0 0 0;
+    margin: 0;
     font-size: 14px;
-    color: #ccc; /* Mjukare färg för mindre text */
+    color: #ccc;
     text-transform: uppercase;
 }
+
 
 /* Cart item pricing and quantity */
 .cart-item-price, .cart-item-count, .cart-item-total {

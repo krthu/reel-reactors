@@ -21,6 +21,9 @@ const ShoppingCart = () => {
         navigate('/checkout'); 
     };
 
+    const isCartEmpty = shoppingCart.length === 0;
+
+
     return (
         <div className="shopping-cart">
             <div className="cart-header">
@@ -44,12 +47,17 @@ const ShoppingCart = () => {
             <div className="cart-footer">
                 <h3 className="total-price">Total price: {totalPrice.toFixed(2)}:-</h3>
                 <div className="cart-buttons">
-                    <button className="primary-button" onClick={handleCheckout}>
+                        {/* Lägg till disabled om varukorgen är tom */}
+                    <button
+                        className={`primary-button ${isCartEmpty ? 'disabled-button' : ''}`}
+                        onClick={handleCheckout}
+                        disabled={isCartEmpty}
+                    >
                         Proceed to checkout
                     </button>
                     <button className="secondary-button" onClick={handleContinueShopping}>
                         Continue Shopping
-                    </button>
+                        </button>
                 </div>
             </div>
         </div>

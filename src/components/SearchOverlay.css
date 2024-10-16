@@ -4,16 +4,15 @@
     left: 0;
     width: 100%;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.95); /* Mörk bakgrund för overlay */
+    background: rgba(0, 0, 0, 0.95);
     z-index: 1000;
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    overflow: hidden; /* Hindrar sidans bakgrund från att skrollas */
+    overflow: auto; 
 }
-
 .close-button {
     background: rgba(0, 0, 0, 0.5);
     color: white;
@@ -35,11 +34,11 @@
     gap: 20px;
     width: 100%;
     max-width: 1200px;
-    height: calc(100vh - 60px); /* Sätt en fast höjd beroende på hur du vill ha det */
-    max-height: 380px; /* Maximal höjd om det behövs */
-    overflow-y: auto; /* Lägg till en scrollbar om det behövs när det finns för många filmer */
+    height: auto; /* Ta bort fast höjd och använd auto för att justera efter innehållet */
+    max-height: 90vh; /* Sätt maxhöjd om du vill begränsa storleken */
+    overflow-y: auto; /* Tillåt vertikal scroll */
     padding-bottom: 20px;
-  }
+}
 
 .search-results::-webkit-scrollbar {
     display: none; /* Dölj scrollbar för webkit-baserade webbläsare (Chrome, Safari) */
@@ -58,7 +57,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: background 0.8s;
     max-width: 200px;
 }
 
@@ -87,8 +85,8 @@
 
 .movie-card-container {
     position: relative; 
-    width: 250px;       
-    margin: 0px;       
+    width: 100%;  /* Låt containern fylla hela bredden */
+    margin: 0;    /* Ta bort marginaler */
     cursor: pointer;
     transition: transform 0.3s ease;
 }

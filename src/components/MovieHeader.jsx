@@ -132,7 +132,7 @@ const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genr
           <p className="movie-info">
             {releaseDate} | {genres && genres.join(', ')}
           </p>
-          <h2>Översikt</h2>
+          <h2>Summary</h2>
           <p className="movie-overview">{movieOverview}</p>
           <div className="crew-info">
             {crew && crew.slice(0, 4).map((member) => (

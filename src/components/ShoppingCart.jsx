@@ -27,7 +27,7 @@ const ShoppingCart = () => {
                 <div className="header-item">Product</div>
                 <div className="header-item">Price</div>
                 <div className="header-item">Number</div>
-                <div className="header-item">Total</div>
+                
             </div>
     
             {/* Lägg produkterna i en egen container för scroll */}

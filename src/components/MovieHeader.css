@@ -119,6 +119,27 @@
     color: #cccccc;
 }
 
+.message-popup {
+    position: absolute; 
+    top: 370px; 
+    left: 70%; 
+    transform: translateX(-100%); /* positionera till vänster*/
+    background-color: white; 
+    color: black; 
+    padding: 10px 15px; 
+    border-radius: 5px;
+  }
+
+  .close-X {
+    float: right; 
+    cursor: pointer; 
+    font-size: 25px; 
+    line-height: 0; 
+    margin-left: 10px; 
+  }
+
+
+
 /* Responsive Styles for Mobile */
 @media (max-width: 768px) {
     .movie-header-wrapper {
@@ -157,4 +178,6 @@
         align-items: center;
         gap: 5px;
     }
+
+
 }

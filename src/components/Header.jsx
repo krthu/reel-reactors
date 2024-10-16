@@ -6,6 +6,7 @@ import Overlay from "./Overlay";
 import TrailerEmbed from "./TrailerEmbed";
 import { getTrailerID } from "../features/getTrailerID";
 import { getVideos } from "../api/api";
+import RatingComponent from "./RatingComponent"; // Importera RatingComponent
 
 const Header = ({ movie, isOverlay, onClose }) => {
   const [showTrailerOverlay, setShowTrailerOverlay] = useState(false);
@@ -16,7 +17,7 @@ const Header = ({ movie, isOverlay, onClose }) => {
 
   // Navigera till mer information om filmen
   const handleMoreInfoClick = () => {
-    if (isOverlay){
+    if (isOverlay) {
       onClose();
     }
     navigate(`/movie/${movie.id}`);
@@ -50,6 +51,10 @@ const Header = ({ movie, isOverlay, onClose }) => {
       <div className="container-left">
         <h1>{movie.title}</h1>
         <p>{movie.overview}</p>
+
+        {/* Visa RatingComponent om det är en overlay */}
+        {isOverlay && <RatingComponent rating={movie.vote_average} maxRating={10} />}
+
         <div className={`button-container ${isOverlay ? 'overlay-button-container' : ''}`}>
           <Button icon="arrow_right" text="Watch Now" primary={true} onPress={handleMoreInfoClick} />
           {trailerID && (

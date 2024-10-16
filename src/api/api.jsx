@@ -87,6 +87,68 @@ export const getVideos = async (id, isMovie = true) => {
   }
 };
 
+export const getTVShows = async (category = 'popular', params = {}) => {
+  try {
+    const response = await apiClient.get(`/tv/${category}`, { params });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching TV shows:', error);
+    throw error;
+  }
+};
+
+export const getTVShowDetails = async (id) => {
+  try {
+    const response = await apiClient.get(`/tv/${id}?append_to_response=videos,credits,recommendations`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching TV show details:', error);
+    throw error;
+  }
+};
+
+export const getTVShowGenres = async () => {
+  try {
+    const response = await apiClient.get('/genre/tv/list');
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching TV show genres:', error);
+    throw error;
+  }
+};
+
+export const getTVShowsWithGenres = async (genres, page = 1) => {
+  const genreURL = `&with_genres=${genres}`;
+  const pageURL = `&page=${page}`;
+  try {
+    const response = await apiClient.get(`/discover/tv?${genreURL}${pageURL}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching TV shows with genres:', error);
+    throw error;
+  }
+};
+
+// Fetch all TV shows data for the TVShows component
+export const fetchAllTVShowsData = async () => {
+  try {
+    const data = { popular: await getTVShows() };
+    const genresResponse = await getTVShowGenres();
+    const genres = genresResponse.genres.slice(0, 8); // Get first 8 genres for example
+
+    const promises = genres.map(async (genre) => {
+      const genreData = await getTVShowsWithGenres(genre.id);
+      genreData.results = shuffleArray(genreData.results);
+      data[genre.name] = genreData;
+    });
+    await Promise.all(promises);
+    return data;
+  } catch (error) {
+    console.error('Error fetching TV shows discover data.');
+    throw error;
+  }
+};
+
 // Funktionen för att söka filmer
 export const searchMovies = async (query) => {
   try {

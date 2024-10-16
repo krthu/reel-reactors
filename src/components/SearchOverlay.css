@@ -1,17 +1,17 @@
-/* SearchOverlay.css */
 .search-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 1.5);
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95); /* Mörk bakgrund för overlay */
     z-index: 1000;
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    overflow: hidden; /* Hindrar sidans bakgrund från att skrollas */
 }
 
 .close-button {
@@ -35,7 +35,19 @@
     gap: 20px;
     width: 100%;
     max-width: 1200px;
-    overflow-y: auto;
+    height: calc(100vh - 60px); /* Sätt en fast höjd beroende på hur du vill ha det */
+    max-height: 380px; /* Maximal höjd om det behövs */
+    overflow-y: auto; /* Lägg till en scrollbar om det behövs när det finns för många filmer */
+    padding-bottom: 20px;
+  }
+
+.search-results::-webkit-scrollbar {
+    display: none; /* Dölj scrollbar för webkit-baserade webbläsare (Chrome, Safari) */
+}
+
+.search-results {
+    -ms-overflow-style: none;  /* Dölj scrollbar för Internet Explorer */
+    scrollbar-width: none;  /* Dölj scrollbar för Firefox */
 }
 
 .search-result-item {
@@ -51,7 +63,7 @@
 }
 
 .search-result-item:hover {
-    background: rgba(0, 61, 136, 0.9);
+    background: rgba(0, 61, 136, 0.9); /* Blå nyans vid hover */
 }
 
 .search-thumbnail {
@@ -79,9 +91,9 @@
     margin: 0px;       
     cursor: pointer;
     transition: transform 0.3s ease;
-  }
+}
   
-  .movie-card-img {
+.movie-card-img {
     width: 100%;
     height: auto;
     border-radius: 8px;
@@ -95,9 +107,30 @@
     cursor: pointer;
     opacity: 0; /* Initially hidden */
     transition: opacity 0.3s ease;
-  }
+}
   
-  .movie-card-container:hover .favorite-icon {
+.movie-card-container:hover .favorite-icon {
     opacity: 1; /* Show on hover */
-  }
+}
+
+@media (max-width: 768px) {
+    .search-results {
+      grid-template-columns: repeat(2, 1fr); /* Säkerställer att det alltid är 2 bilder per rad */
+    }
+    
+    .movie-card-container {
+      width: 100%; /* Se till att containern fyller sin grid-plats */
+      max-width: 150px; /* Minska storleken på korten */
+      margin: 0 auto; /* Centrera korten */
+    }
   
+    .movie-card-img {
+      width: 100%; /* Anpassa bilden till containern */
+      height: auto; /* Bevara bildens proportioner */
+    }
+    
+    .favorite-icon {
+      top: 10px; /* Justera ikonen så den inte flyttas vid storleksändring */
+      right: 10px;
+    }
+  }

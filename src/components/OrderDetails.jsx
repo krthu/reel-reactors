@@ -22,7 +22,7 @@ const OrderDetails = () => {
              <label className="order-title">OrderDetails</label>
             <div className="order-items">
                 {cart.length === 0 ? (
-                    <p>Inga artiklar i beställningen.</p>
+                    <p>No items in the order.</p>
                 ) : (
                     cart.map((item) => (
                         <div key={item.item.id} className="order-item">
@@ -31,9 +31,9 @@ const OrderDetails = () => {
                             </div>
                             <div className="product-info">
                                 <h4>{item.item.title}</h4>
-                                <p>Antal: {item.count}</p>
-                                <p>Enhetspris: {item.price.toFixed(2)} kr</p>
-                                <p>Totalt: {(item.count * item.price).toFixed(2)} kr</p>
+                                <p>Number: {item.count}</p>
+                                <p>Unit price: {item.price.toFixed(2)} kr</p>
+                                <p>Total: {(item.count * item.price).toFixed(2)} kr</p>
                             </div>
                         </div>
                     ))

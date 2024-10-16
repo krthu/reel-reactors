@@ -1,29 +1,44 @@
 .movie-card-container {
+    position: relative; /* Viktigt för absolut positionering av FavoriteButton */
     flex: 0 0 calc((100% / var(--items-per-screen)) - var(--spacing-medium));
     padding: var(--spacing-medium);
     display: flex;
     align-items: center;
-    justify-content: center;   
-
-}
-
-.movie-card-img  {
+    justify-content: center;
+  }
+  
+  .favorite-icon {
+    position: absolute;
+    top: 5%; /* Flytta ner 5% från toppen av kortet */
+    right: 10%; /* Flytta in 5% från höger */
+    cursor: pointer;
+    z-index: 10; /* Se till att ikonen ligger ovanför filmens bild */
+    opacity: 1;
+    visibility: visible;
+    width: 24px; /* Justera storleken beroende på hur stor ikonen ska vara */
+    height: 24px;
+  }
+  
+  .movie-card-img {
+    width: 100%; /* Se till att bilden fyller kortet */
+    height: auto;
     border-radius: var(--border-radius-medium);
     box-shadow: var(--box-shadow-medium);
     transition: filter 0.3s ease, transform 0.3s ease;
-}
-
-.movie-card-img:hover {    
+  }
+  
+  .movie-card-img:hover {
     cursor: pointer;
     transform: scale(1.05); /* Slight zoom */
-    transition: filter 0.3s ease, transform 0.3s ease; /* Smooth transition */
+    transition: filter 0.3s ease, transform 0.3s ease;
+  }
+  
+  .movieCard-price {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    padding: 2px 5px;
+    background-color: var(--body-bg);
+    border-radius: var(--border-radius-medium);
+
 }
-
-
-
-
-
-
-
-
-

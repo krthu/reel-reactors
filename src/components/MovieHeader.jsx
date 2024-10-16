@@ -1,16 +1,17 @@
-import React, { useEffect } from "react";
-import "./MovieHeader.css";
-import RatingComponent from './RatingComponent'; // Import the RatingComponent
-import Button from './Button'; // Import Button component for consistent usage
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addItem } from "../features/shopppingCartSlice";
-import { useState } from "react";
-import TrailerEmbed from './TrailerEmbed';
-import Overlay from './Overlay';
 import { getTrailerID } from '../features/getTrailerID';
+import { addItem } from "../features/shopppingCartSlice";
+import Button from './Button'; // Import Button component for consistent usage
+import "./MovieHeader.css";
+import Overlay from './Overlay';
+import RatingComponent from './RatingComponent'; // Import the RatingComponent
+import TrailerEmbed from './TrailerEmbed';
 // Define default image paths
-import DEFAULT_POSTER from '../assets/images/poster.png';
 import DEFAULT_BACKDROP from '../assets/images/backdrop.png';
+import DEFAULT_POSTER from '../assets/images/poster.png';
+import FavoriteButton from './FavoriteButton';
+import getPrice from '../features/getPrice'
 
 
 const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genres, crew, posterUrl, rating, movie}) => {
@@ -42,24 +43,24 @@ const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genr
     setShowOverlay(true);
   }
 
-  const getPrice = (releaseDate) => {
-    console.log(movie);
-    const yearNow = new Date().getFullYear();
-    const releaseYear = new Date(releaseDate).getFullYear();;
-    console.log(yearNow);
-    console.log(releaseYear);
-    const diff = yearNow - releaseYear;
+  // const getPrice = (releaseDate) => {
+  //   console.log(movie);
+  //   const yearNow = new Date().getFullYear();
+  //   const releaseYear = new Date(releaseDate).getFullYear();;
+  //   console.log(yearNow);
+  //   console.log(releaseYear);
+  //   const diff = yearNow - releaseYear;
     
-    if (diff <= 3){
-      return 149
-    } else if (diff <= 5){
-      return 99
-    } else {
-      return 49
-    }
+  //   if (diff <= 3){
+  //     return 149
+  //   } else if (diff <= 5){
+  //     return 99
+  //   } else {
+  //     return 49
+  //   }
 
-  }
-  const price = getPrice(movie);
+  // }
+  // const price = getPrice(movie);
 
   useEffect(() => {
     const fetchTrailer = async () => {
@@ -96,6 +97,7 @@ const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genr
               }}
             />
             <h2 className="movie-price">{getPrice(movie.release_date)}:-</h2>
+            <FavoriteButton movie={movie} />
           </div>
           <div className="button-container">
             {trailerID && (

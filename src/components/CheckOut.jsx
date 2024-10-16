@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CardInformation from './CardInformation';
 import CartItem from "./CartItem";
 import OrderDetails from "./OrderDetails";
 import './CheckOut.css';
+import { emptyCart } from "../features/shopppingCartSlice";
 
 
 
 const Checkout = () => {
-
+  const dispatch = useDispatch();
   const shoppingCart = useSelector((state) => state.shoppingCart);
   console.log(shoppingCart)
 
@@ -21,7 +22,18 @@ const Checkout = () => {
   const navigate = useNavigate();
 
   const handleCompletePay = () => {
+   
+    const newMovies = []
+    const savedMovies = JSON.parse(localStorage.getItem('bought-movies')) || [];
+    shoppingCart.forEach(cartItem => {
+      newMovies.push(cartItem.item);
+    });
+    const updatedMovies = [...newMovies, ...savedMovies]
+    localStorage.setItem('bought-movies', JSON.stringify(updatedMovies));
+
+    dispatch(emptyCart());
     setIsPaymentComplete(true);
+
   };
 
   const handleGoToMyMovies = () => {
@@ -42,9 +54,9 @@ const Checkout = () => {
           )}
         </div>
         <div className="checkout-order-details-spec">
-          <p>Subtotal {totalPrice/1.25} </p>
-          <p>VAT 25% {totalPrice*0.2}</p>
-          <p>Total {totalPrice}</p>
+          <p>Subtotal {totalPrice/1.25}:- </p>
+          <p>VAT 25% {totalPrice*0.2}:-</p>
+          <p>Total {totalPrice}:-</p>
         </div>
       </div>
 

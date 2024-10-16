@@ -5,20 +5,42 @@ import './MyMovies.css';
 import Navbar from './Navbar';
 import RatingComponent from './RatingComponent';
 import FavoriteButton from './FavoriteButton';
+import Footer from "./Footer";
 
 const MyMovies = () => {
   const [purchasedMovies, setPurchasedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const [favorites, setFavorites] = useState([]);
+  const [showFooter, setShowFooter] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+            setShowFooter(true);
+        } else {
+            setShowFooter(false);
+        }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+        window.removeEventListener('scroll', handleScroll);
+    };
+}, []);
+
+  //const [boughtMovies, setBoughtMovies] = useState([]);
 
   useEffect(() => {
     const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
     setFavorites(storedFavorites);
+    loadBoughtMovies();
+
+
 
     const handleFavoritesUpdated = () => {
       const updatedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
       setFavorites(updatedFavorites);
+ 
     };
 
     window.addEventListener('favoritesUpdated', handleFavoritesUpdated);
@@ -26,23 +48,31 @@ const MyMovies = () => {
     return () => {
       window.removeEventListener('favoritesUpdated', handleFavoritesUpdated);
     };
+
   }, []);
 
-  useEffect(() => {
-    const fetchMovies = async () => {
-      setIsLoading(true);
-      try {
-        const purchased = await getMovies('top_rated');
-        setPurchasedMovies(purchased.results);
-      } catch (error) {
-        console.error('Error fetching movies:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  const loadBoughtMovies = () => {
+    const boughtMoviesFromStorage = JSON.parse(localStorage.getItem('bought-movies')) || [];
+    setPurchasedMovies(boughtMoviesFromStorage);
+    console.log(boughtMoviesFromStorage);
+    setIsLoading(false);
+  }
 
-    fetchMovies();
-  }, []);
+  // useEffect(() => {
+  //   const fetchMovies = async () => {
+  //     setIsLoading(true);
+  //     try {
+  //       const purchased = await getMovies('top_rated');
+  //       setPurchasedMovies(purchased.results);
+  //     } catch (error) {
+  //       console.error('Error fetching movies:', error);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   };
+
+  //   fetchMovies();
+  // }, []);
 
   const handleMovieClick = (movie) => {
     navigate(`/movie/${movie.id}`);
@@ -59,7 +89,9 @@ const MyMovies = () => {
           <section className="movie-section">
             <h2>My Movies</h2>
             <div className="movies-list">
-              {purchasedMovies.map((movie) => (
+
+              { purchasedMovies.length > 0 ? (
+              purchasedMovies.map((movie) => (
                 <div
                   key={movie.id}
                   className="movie-card"
@@ -75,7 +107,9 @@ const MyMovies = () => {
                   {/* Use FavoriteButton */}
                   <FavoriteButton movie={movie} />
                 </div>
-              ))}
+              ))) : (
+                <p>No bought movies yet.</p>
+              )}
             </div>
           </section>
 
@@ -105,7 +139,9 @@ const MyMovies = () => {
                 <p>No favorite movies yet.</p>
               )}
             </div>
+            {showFooter && <Footer className="footer-container" />}
           </section>
+         
         </>
       )}
     </div>

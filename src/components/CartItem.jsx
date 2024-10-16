@@ -11,13 +11,6 @@ const CartItem = ({ cartItem, isOrderDetails = false }) => {
         dispatch(removeItem(cartItem.item));
     };
 
-    const handleIncrease = () => {
-        dispatch(addItem(cartItem));
-    };
-
-    const handleDecrease = () => {
-        dispatch(decrease(cartItem.item));
-    };
 
     return (
         <div className='cart-item-title'>
@@ -35,9 +28,8 @@ const CartItem = ({ cartItem, isOrderDetails = false }) => {
                 </div>
 
                 <div className="cart-item-count">
-                    {isOrderDetails ? null : <button onClick={handleDecrease}>-</button>}
-                    <span>{cartItem.count}</span>
-                    {isOrderDetails ? null : <button onClick={handleIncrease}>+</button>}
+                <span>{cartItem.count}</span>
+
                 </div>
                 <div className="cart-item-total">
                     <p>{(cartItem.count * cartItem.price).toFixed(0)}:-</p>

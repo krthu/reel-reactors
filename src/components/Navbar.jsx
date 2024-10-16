@@ -71,10 +71,24 @@ const Navbar = () => {
           />
         </div>
       </div>
+
       <div className="logo-center">
         <img src={logo} alt="Reel Reactors Logo" className="logo" />
       </div>
+
+
       <div className="nav-right">
+       <div className="profile-container">
+         <div className="profile-icon">
+           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="icon">
+           <circle className="cirle-icon" cx="12" cy="12" r="10"/>
+          <path className="path-icon" d="M12 12c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm0 2c2.67 0 8 1.34 8 4v2H4v-2c0-2.66 5.33-4 8-4z"/>
+     </svg>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="icon-chevron">
+      <path d="M7 10l5 5 5-5z"/>
+    </svg>
+  </div>
                 <Link to="/cart" className="cart-button">
                     <img src={cartIcon} alt="Cart icon" className="cart-icon" />
                 </Link>

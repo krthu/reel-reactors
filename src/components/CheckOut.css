@@ -1,10 +1,11 @@
 .checkout-container {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start; 
+  align-items: flex-start;
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
+  flex-wrap: wrap; /* För att bryta rader på mindre skärmar */
 }
 
 .checkout-order-details-spec {
@@ -24,52 +25,90 @@
   max-width: 400px;
 }
 
+/* Responsivitet för mindre skärmar */
+@media (max-width: 768px) {
+  .checkout-container {
+    flex-direction: column; /* Ställ allt i kolumn för mobiler */
+    align-items: center;
+  }
+
+  .order-details-section {
+    margin-right: 0;
+    margin-bottom: 20px; /* Lägg till utrymme under på mobiler */
+    width: 100%; /* Full bredd på mobiler */
+  }
+
+  .card-info-section {
+    width: 100%; /* Full bredd på mobiler */
+    max-width: none; /* Ingen maxbredd på mobiler */
+  }
+
+  .checkout-order-details-spec {
+    text-align: center;
+    margin-left: 0;
+  }
+
+  .card-info-form {
+    width: 100%; /* Full bredd på mobiler */
+  }
+}
+
 .card-info-form {
   padding: 20px;
   background-color: #000000;
   border-radius: 8px;
 }
 
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
 
-  .popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7); 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+.popup-content {
+  background-color: rgb(0, 0, 0);
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.popup-content h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.popup-content p {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.popup-btn {
+  background-color: #a11fbf;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Lägg till media query för större skärmar */
+@media (min-width: 1024px) {
+  .checkout-container {
+    flex-direction: row; /* Behåll rad-layouten för större skärmar */
   }
-  
-  .popup-content {
-    background-color: rgb(0, 0, 0);
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+  .card-info-section, .order-details-section {
+    width: auto; /* Behåll automatisk bredd på större skärmar */
   }
-  
-  .popup-content h3 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .popup-content p {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-  }
-  
-  .popup-btn {
-    background-color: #a11fbf;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
+}

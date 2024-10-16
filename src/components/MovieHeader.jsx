@@ -13,6 +13,9 @@ import DEFAULT_POSTER from '../assets/images/poster.png';
 import FavoriteButton from './FavoriteButton';
 import getPrice from '../features/getPrice'
 
+import { useSelector } from "react-redux";
+
+
 
 const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genres, crew, posterUrl, rating, movie}) => {
   // State to manage the background image
@@ -20,6 +23,10 @@ const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genr
   const dispatch = useDispatch();
   const [showOverlay, setShowOverlay] = useState(false);
   const [trailerID, setTrailerID] = useState(null);
+
+
+  const shoppingCart = useSelector((state) => state.shoppingCart);
+  const [message, setMessage] = useState(""); 
 
 
   // Preload the backdrop image
@@ -30,11 +37,19 @@ const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genr
     img.onerror = () => setBackgroundImage(DEFAULT_BACKDROP);
   }, [backdropUrl]);
 
+
   const handleBuyPress = () => {
-  
+    const itemExists = shoppingCart.some(item => item.item.id === movie.id);
+    if(itemExists) {
+    setMessage("This item already exist in your shoppingcart");
+    //setTimeout(() => setMessage(""), 3000); //tar bort meddelandet efter 3sek
+    return;
+  }
 
     dispatch(addItem({item: movie, price: getPrice(movie.release_date)}))
-  }
+    setMessage("");
+  };
+
   const closeOverlay = () => {
     setShowOverlay(false);
   }
@@ -106,6 +121,15 @@ const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genr
 
             <Button text="Buy" icon="shopping_cart" onPress={() => handleBuyPress()} />
           </div>
+          {message && (
+            <div className="popup-overlay" onClick={() => setMessage("")}>
+           <div className="message-popup" onClick={(e) => e.stopPropagation()}>
+              <span className="close-X" onClick={() => setMessage("")}>&times;</span>
+              {message}
+              </div>
+              </div>
+              )}
+
         </div>
         <div className="movie-header-content">
           <h1>{movieTitle} ({new Date(releaseDate).getFullYear()})</h1>

@@ -1,5 +1,3 @@
-/* MyMovies.css */
-
 .my-movies {
   margin-top: 100px;
   background-color: var(--body-bg);
@@ -116,6 +114,24 @@
 /* Responsive Design Adjustments */
 @media (max-width: 768px) {
   .movie-section h2 {
+    margin-top: 60px; 
     margin-left: 20px;
+  }
+
+  .movies-list {
+    gap: var(--spacing-small); /* Minska avståndet mellan filmer */
+    padding: var(--spacing-small);
+  }
+
+  .movie-card {
+    width: 150px; /* Justera bredden på filmkorten för att passa mindre skärmar */
+  }
+
+  .rating-overlay {
+    font-size: 1.5rem; /* Minska storleken på betygsöverlägget på mindre skärmar */
+  }
+
+  .favorite-icon {
+    font-size: 20px; /* Minska favorit-ikonen */
   }
 }

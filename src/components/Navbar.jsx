@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom'; // Importera NavLink
 import SearchOverlay from './SearchOverlay';
 import './Navbar.css';
-import { searchMovies } from '../api/api'; 
-import logo from '../assets/images/reel-reactors-logga.png';
+import { searchMovies } from '../api/api';
+import logo from '../assets/images/reel-reactors-logga3.png';
 import cartIcon from '../assets/images/icons8-cart-64.png';
 
 const Navbar = () => {
@@ -22,7 +22,7 @@ const Navbar = () => {
           console.error('Error fetching search results:', error);
         }
       };
-      
+
       fetchSearchedMovies();
     }
   }, [searchQuery]);
@@ -47,11 +47,11 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="nav-left">
-        <div className="links">
-          <NavLink to="/" className={({ isActive }) => (isActive ? "active-link" : "")}>Movies</NavLink>
-          <NavLink to="/tvseries" className={({ isActive }) => (isActive ? "active-link" : "")}>TV-Shows</NavLink>
-          <NavLink to="/mymovies" className={({ isActive }) => (isActive ? "active-link" : "")}>My Movies</NavLink>
-        </div>
+      <div className="links">
+      <NavLink to="/" className={({ isActive }) => (isActive ? "active-link" : "")}>Movies</NavLink>
+      <NavLink to="/tvseries" className={({ isActive }) => (isActive ? "active-link" : "")}>TV-Shows</NavLink>
+      <NavLink to="/mymovies" className={({ isActive }) => (isActive ? "active-link" : "")}>My Movies</NavLink>
+    </div>
         <div className="search-container">
           <input
             type="text"

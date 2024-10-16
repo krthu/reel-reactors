@@ -11,6 +11,7 @@ import { getTrailerID } from '../features/getTrailerID';
 // Define default image paths
 import DEFAULT_POSTER from '../assets/images/poster.png';
 import DEFAULT_BACKDROP from '../assets/images/backdrop.png';
+import FavoriteButton from './FavoriteButton';
 
 
 const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genres, crew, posterUrl, rating, movie}) => {

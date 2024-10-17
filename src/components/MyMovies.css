@@ -39,7 +39,7 @@
   width: 250px;
   margin: 0 auto;
   cursor: pointer;
-  transition: transform var(--transition-default);
+  transition: filter 0.3s ease, transform 0.3s ease;
 }
 
 .movie-card img {
@@ -49,7 +49,9 @@
 }
 
 .movie-card:hover {
-  transform: translateY(-10px);
+  cursor: pointer;
+  transform: scale(1.05); /* Slight zoom */
+  transition: filter 0.3s ease, transform 0.3s ease;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.9);
 }
 

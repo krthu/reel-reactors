@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { removeItem } from '../features/shopppingCartSlice';
 import { baseImageURL } from '../api/baseURLs';
 import './ShoppingCart.css';
+import './CartItem.css';
 
 const CartItem = ({ cartItem, isOrderDetails = false }) => {
     const dispatch = useDispatch();

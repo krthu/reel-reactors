@@ -2,7 +2,6 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
   flex-wrap: wrap; /* För att bryta rader på mindre skärmar */
@@ -15,14 +14,37 @@
 
 .order-details-section {
   flex: 1;
-  color: white;
-  margin-right: 20px;
+  color: var(--text-color-light);
   border: 1px solid var(--movie-list-border);
 }
 
 .card-info-section {
   flex: 1;
   max-width: 400px;
+}
+
+.checkout-cart-items .cart-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-bottom: 1px solid #333;
+}
+
+.checkout-cart-items .cart-item-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.checkout-cart-items .cart-item-quantity {
+  flex: 1;
+  text-align: center; /* Sätter kvantiteten i mitten */
+}
+
+.checkout-cart-items .cart-item-price {
+  text-align: right; /* Sätter priset längst till höger */
 }
 
 /* Responsivitet för mindre skärmar */

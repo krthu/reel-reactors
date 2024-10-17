@@ -8,7 +8,7 @@ import Overlay from "./Overlay";
 import { useNavigate } from 'react-router-dom';
 import { getMovieDetails, fetchAllDiscoverData } from "../api/api";
 import './Discover.css';
-import MovieCard from "../components/MovieCard";
+
 
 const Discover = ({ movieData, setMovieData }) => {
     const [showOverlay, setShowOverlay] = useState(false);

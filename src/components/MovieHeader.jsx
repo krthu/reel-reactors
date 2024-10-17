@@ -53,25 +53,6 @@ const MovieHeader = ({ backdropUrl, movieTitle, movieOverview, releaseDate, genr
     setShowOverlay(true);
   }
 
-  // const getPrice = (releaseDate) => {
-  //   console.log(movie);
-  //   const yearNow = new Date().getFullYear();
-  //   const releaseYear = new Date(releaseDate).getFullYear();;
-  //   console.log(yearNow);
-  //   console.log(releaseYear);
-  //   const diff = yearNow - releaseYear;
-    
-  //   if (diff <= 3){
-  //     return 149
-  //   } else if (diff <= 5){
-  //     return 99
-  //   } else {
-  //     return 49
-  //   }
-
-  // }
-  // const price = getPrice(movie);
-
   useEffect(() => {
     const fetchTrailer = async () => {
       try {

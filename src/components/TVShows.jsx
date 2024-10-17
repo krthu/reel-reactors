@@ -55,16 +55,18 @@ const TVShows = () => {
   };
 
   const handlePosterPress = (tvShow) => {
-    const isMobile = window.innerWidth <= 768;
+    const isMobile = window.innerWidth <= 768; // kolla om det är en mobil enhet
 
-    if (isMobile) {
-      handleMoreInfoClick(tvShow);
-    } else {
-      setSelectedTVShow(tvShow);
-      setShowOverlay(true);
-      window.history.pushState({}, '', `?jbv=${tvShow.id}`);
-    }
+        if (isMobile) {
+            handleMoreInfoClick(tvShow); // navigera direkt till filmsidan om det är mobil
+        } else {
+            setSelectedTVShow(tvShow);
+            setShowOverlay(true); // Ensure this is set to true
+            window.history.pushState({}, '', `?jbv=${tvShow.id}`); // Update URL
+        }
+    
   };
+  
 
   const closeOverlay = () => {
     setShowOverlay(false);

@@ -223,4 +223,4 @@ export const fetchAllDiscoverData = async () => {
   }
 }
 
-export default { getMovies, getGenres, getMovieDetails, getCast, getRecommendations, getMoviesWithGenres, getVideos, searchMovies };
+export default { getMovies, getGenres, getMovieDetails, getCast, getRecommendations, getMoviesWithGenres, getVideos, searchMovies, fetchAllDiscoverData, getTVShows, getTVShowDetails, getTVShowGenres, getTVShowsWithGenres, fetchAllTVShowsData };

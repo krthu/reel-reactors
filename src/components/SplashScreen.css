@@ -1,0 +1,54 @@
+.splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000; /* Black background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Ensure it overlays everything */
+    animation: fadeIn 1s ease-in-out, fadeOut 1s ease-in-out 3s; /* Adjusted fadeIn and fadeOut animations */
+}
+
+.splash-logo {
+    width: 1000px; /* Adjust the size of your logo */
+}
+
+
+/* Keyframe for fade in */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+    
+}
+
+/* Keyframe for fade out */
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
+
+@media (max-width: 768px) {
+    .splash-logo {
+        width: 400px; /* Adjust the size of your logo */
+    }
+}
+
+@media (max-width: 480px) {
+    .splash-logo {
+        width: 200px; /* Adjust the size of your logo */
+    }
+}
+

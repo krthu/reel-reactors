@@ -20,8 +20,7 @@
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr 50px; /* Lägg till kolumn för ikon */
     font-weight: 700;
-    border-bottom: 1px solid #4a4a4a;
-    margin-right: 50px;
+    border-bottom: 1px solid #4a4a4a;    
     color: #aaa; 
 }
 

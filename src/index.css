@@ -10,9 +10,12 @@
     --body-bg-fallback: #040C18; /* Fallback-färg för bakgrunden om gradient inte stöds */    
     --footer-bg: #0B1220; /* Färg för footerns bakgrund (just nu har vi ingen footer med i vår design) */
     --button-bg-primary: linear-gradient(to bottom, #102537, #0c5797); /* Används för primära knappar som "Köp nu" och "Information" */
-    --button-bg-secondary: transparent; /* Används för transparenta knappar som "Se Trailer" */     
+    --button-bg-secondary: transparent; /* Används för transparenta knappar som "Se Trailer" */
+
     --text-color-light: #fefefe; /* Applicera på de flesta texter som ligger på mörka bakgrunder */
+    
     --text-color-dark: #000000; /* Används för texter på ljusare bakgrunder om det behövs */ 
+    --text-color-movie-info: #fefefe;
     --movie-list-bg: rgba(3, 35, 62, 0.35); /* Använd som bakgrund på MovieList/MovieRecommend-containern */
     --movie-list-border: rgba(3, 35, 62, 0.5); /* Använd som border (kantlinje) på MovieList/MovireRecomend -containern */
     --hover-color: #1A5276; /* Använd denna färg för hover-effekter på knappar */

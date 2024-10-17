@@ -3,7 +3,7 @@ import './MovieCard.css';
 import { baseImageURL } from '../api/baseURLs';
 import FavoriteButton from './FavoriteButton';
 
-const PosterCaruselItem = ({ movie, onPress, isSelected }) => {
+const MovieCard = ({ movie, onPress, isSelected }) => {
   if (!movie) {
     console.error('Movie is undefined in PosterCaruselItem');
     return null;
@@ -21,4 +21,4 @@ const PosterCaruselItem = ({ movie, onPress, isSelected }) => {
   );
 };
 
-export default PosterCaruselItem;
+export default MovieCard;

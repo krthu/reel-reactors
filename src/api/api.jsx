@@ -160,21 +160,6 @@ export const searchMovies = async (query) => {
 
     const movieResults = response.data.results;
 
-    // Now, for each movie, fetch the trailer
-    // const moviesWithTrailers = await Promise.all(
-    //   movieResults.map(async (movie) => {
-    //     try {
-    //       const videosResponse = await apiClient.get(`/movie/${movie.id}/videos`);
-    //       const trailerID = getTrailerID(videosResponse.data.results);
-    //       return { ...movie, trailerID };
-    //     } catch (error) {
-    //       console.error(`Error fetching videos for movie ${movie.id}:`, error);
-    //       return { ...movie, trailerID: null }; // In case fetching videos fails, set trailerID to null
-    //     }
-    //   })
-    // );
-
-   // return moviesWithTrailers;
    return movieResults;
   } catch (error) {
     console.error('Error searching movies:', error);

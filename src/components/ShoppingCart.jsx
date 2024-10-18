@@ -14,37 +14,45 @@ const ShoppingCart = () => {
     }, 0);
 
     const handleContinueShopping = () => {
-        navigate(-1); 
+        navigate(-1);
     };
 
     const handleCheckout = () => {
-        navigate('/checkout'); 
+        navigate('/checkout');
     };
 
+    const isCartEmpty = shoppingCart.length === 0;
+
+
     return (
-        <div className="shopping-cart">
-            <div className="cart-header">
-                <div className="header-item">Product</div>
-                <div className="header-item">Price</div>
-                <div className="header-item">Number</div>
-                
+        <div className="shopping-cart-container">
+            <div className="shopping-cart">
+                <div className="cart-header">
+                    <div className="header-item">Product</div>
+                    <div className="header-count">Number</div>
+                    <div className="header-price">Price</div>
+                    <div className="header-empty"></div>
+                </div>
+
+                <div className="cart-items-container">
+                    {shoppingCart.length > 0 ? (
+                        shoppingCart.map(cartItem => (
+                            <CartItem key={cartItem.item.id} cartItem={cartItem} />
+                        ))
+                    ) : (
+                        <p>Your cart is empty.</p>
+                    )}
+                </div>
             </div>
-    
-            {/* Lägg produkterna i en egen container för scroll */}
-            <div className="cart-items-container">
-                {shoppingCart.length > 0 ? (
-                    shoppingCart.map(cartItem => (
-                        <CartItem key={cartItem.item.id} cartItem={cartItem} />
-                    ))
-                ) : (
-                    <p>Your cart is empty.</p>
-                )}
-            </div>    
-            
+
             <div className="cart-footer">
                 <h3 className="total-price">Total price: {totalPrice.toFixed(2)}:-</h3>
                 <div className="cart-buttons">
-                    <button className="primary-button" onClick={handleCheckout}>
+                    <button
+                        className={`primary-button ${isCartEmpty ? 'disabled-button' : ''}`}
+                        onClick={handleCheckout}
+                        disabled={isCartEmpty}
+                    >
                         Proceed to checkout
                     </button>
                     <button className="secondary-button" onClick={handleContinueShopping}>
@@ -54,8 +62,6 @@ const ShoppingCart = () => {
             </div>
         </div>
     );
-    
-    
 };
 
 export default ShoppingCart;

@@ -1,0 +1,49 @@
+/* Yttre container som styr placeringen av varje produkt */
+.cart-item-container {
+    min-width: 300px;
+    padding: 10px;
+}
+
+/* Inner content styling */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-item img {
+    width: 100px;
+    height: auto;
+}
+
+.cart-item-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 2;
+}
+
+.cart-item-info h4 {
+    margin-bottom: 5px;
+}
+
+.cart-item-count,
+.cart-item-price,
+.cart-item-delete {
+    flex: 1;
+    text-align: center;
+}
+
+.cart-item-details span {
+    text-transform: capitalize;
+}
+
+
+.cart-item-delete button {
+    background: none;
+    border: none;
+    color: rgb(239, 83, 83);
+    cursor: pointer;
+}
+
+

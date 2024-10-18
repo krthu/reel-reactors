@@ -8,7 +8,7 @@ import Overlay from "./Overlay";
 import { useNavigate } from 'react-router-dom';
 import { getMovieDetails, fetchAllDiscoverData } from "../api/api";
 import './Discover.css';
-import PosterCaruselItem from "../components/MovieCard";
+
 
 const Discover = ({ movieData, setMovieData }) => {
     const [showOverlay, setShowOverlay] = useState(false);
@@ -135,7 +135,7 @@ const Discover = ({ movieData, setMovieData }) => {
                         .filter((movie) => movie.poster_path && movie.backdrop_path)
                         .map((movie) => (
                             //Create a card per movie
-                            <PosterCaruselItem
+                            <MovieCard
                                 movie={movie}
                                 key={movie.id}
                                 onPress={() => handlePosterPress(movie)}
@@ -148,6 +148,7 @@ const Discover = ({ movieData, setMovieData }) => {
                         <div key={genre} className="popular-movie-container">
                             <Carusel items={movieCards} title={genre} />
                         </div>
+                        
                     );
                 })}
             </>

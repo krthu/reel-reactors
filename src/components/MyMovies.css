@@ -20,26 +20,28 @@
   color: var(--text-color-light);
   margin-bottom: 20px;
   text-transform: capitalize;
-  margin-left: 80px;
 }
 
 .movies-list {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-medium);
+  flex-direction: row;
+  justify-content: center; 
+  align-items: flex-start;
   background-color: var(--movie-list-bg);
   border: 1px solid var(--movie-list-border);
   border-radius: var(--border-radius-large);
-  padding: var(--spacing-medium);
+  padding: var(--spacing-small);
   overflow-x: hidden;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .movie-card {
   position: relative;
-  width: 250px;
-  margin: 0 auto;
+  width: 250px; 
+  margin: 5px;
   cursor: pointer;
-  transition: transform var(--transition-default);
+  transition: filter 0.3s ease, transform 0.3s ease;
 }
 
 .movie-card img {
@@ -49,7 +51,9 @@
 }
 
 .movie-card:hover {
-  transform: translateY(-10px);
+  cursor: pointer;
+  transform: scale(1.05); /* Slight zoom */
+  transition: filter 0.3s ease, transform 0.3s ease;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.9);
 }
 
@@ -119,19 +123,20 @@
   }
 
   .movies-list {
-    gap: var(--spacing-small); /* Minska avståndet mellan filmer */
+    gap: 10px; 
     padding: var(--spacing-small);
   }
 
   .movie-card {
-    width: 150px; /* Justera bredden på filmkorten för att passa mindre skärmar */
+    width: 150px; 
+    margin: 0; 
   }
 
   .rating-overlay {
-    font-size: 1.5rem; /* Minska storleken på betygsöverlägget på mindre skärmar */
+    font-size: 1.5rem; 
   }
 
   .favorite-icon {
-    font-size: 20px; /* Minska favorit-ikonen */
+    font-size: 20px;
   }
 }

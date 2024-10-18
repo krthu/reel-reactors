@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CardInformation from './CardInformation';
 import CartItem from "./CartItem";
-import OrderDetails from "./OrderDetails";
 import './CheckOut.css';
 import { emptyCart } from "../features/shopppingCartSlice";
 

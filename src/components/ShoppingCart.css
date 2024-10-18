@@ -1,258 +1,114 @@
-/* Shopping cart container */
-.shopping-cart {
+.shopping-cart-container {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-between;
     padding: 20px;
-    background-color: var(--movie-list-bg);
-    border-radius: 10px;
-    color: #fff;
-    width: 80%;
-    max-width: 1200px;
-    margin: 20px auto;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    font-family: 'Roboto', sans-serif;
-    height: 95vh; 
+    border-radius: 12px;
+    color: white;
 }
 
-/* Header styling */
 .cart-header {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr 50px; /* Lägg till kolumn för ikon */
-    font-weight: 700;
-    border-bottom: 1px solid #4a4a4a;    
-    color: #aaa; 
-}
-
-.cart-header .header-item {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
 }
 
-.cart-header .header-item:first-child {
-    justify-content: flex-start; /* Justera "Produkt" till vänster */
+.header-item {
+    flex: 2; /* Samma flex-värde som cart-item-info */
+    text-align: left;
 }
 
-/* Cart item styling */
-.cart-item {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr 50px; /* Lägger till en kolumn för papperskorgen */
-    align-items: center;
-    padding: 15px 10px;
-    border-bottom: 1px solid #4a4a4a;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    transition: background-color 0.3s ease;
+.header-count {
+    flex: 1; /* Samma flex-värde som cart-item-count */
+    text-align: center;
 }
 
-.cart-item-info {
-    display: flex;
-    flex-direction: column; /* Ställer in så att titeln, bilden och språket staplas vertikalt */
-    align-items: center; /* Centrerar titeln, bilden och språket */
-    text-align: center; /* Centrerar texten */
-    gap: 10px; /* Utrymme mellan titeln, bilden och språket */
+.header-price {
+    flex: 1; /* Samma flex-värde som cart-item-price */
+    text-align: center;
+}
+
+.header-empty {
+    flex: 1;
+    text-align: center;
+}
+
+.shopping-cart {
+    flex: 3;
+    background-color: var(--movie-list-bg);
+    border-radius: 12px;
+    padding: 20px;
+    margin-right: 20px;
 }
 
 .cart-items-container {
-    flex-grow: 1;
-    overflow-y: auto;
-    height: calc(100vh - 150px); /* Justera 150px för header + footer */
+    margin-top: 20px;
+    max-height: 530px; 
+    overflow-y: auto;  
+    padding-right: 10px;
 }
 
-.cart-item-info {
-    display: flex;
-    align-items: flex-start;
-    margin-left: 10px;
-    gap: 10px;
-}
-
-.cart-item-title h4 {
-    padding-top: 10px;
-}
-
-/* Product image */
-.cart-item img {
-    width: 100px;
-    height: auto;
-    border-radius: 5px;
-    transition: transform 0.3s ease;
-}
-
-.cart-item img:hover {
-    transform: scale(1.05); /* Zooma in lite när muspekaren är över bilden */
-}
-
-/* Product details */
-.cart-item-details h4 {
-    font-size: 18px;
-    font-weight: 600;
-    margin: 0;
-}
-
-.cart-item-details p {
-    margin: 0;
-    font-size: 14px;
-    color: #ccc;
-    text-transform: uppercase;
-}
-
-
-/* Cart item pricing and quantity */
-.cart-item-price, .cart-item-count, .cart-item-total {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 500;
-}
-
-.cart-item-count {
-    gap: 20px; 
-    padding: 5px;
-}
-
-.cart-item-count button {    
-    background: none;
-    color: white;
-    box-shadow: none;
-    border: none;
-    font-size: 1.2rem;
-    padding: 10px;
-}
-
-.cart-item-count button:hover {
-    font-size: 2rem;
-    cursor: pointer;
-}
-
-/* Delete button */
-.cart-item-delete {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    grid-column: 5; /* Gör så att papperskorgen den hamnar i sista kolumnen */
-    margin-right: 10px;
-}
-
-.delete-button {
-    background-color: transparent;
-    border: none;
-    color: #c40a1ce2; /* färg för papperskorgsikonen */
-    font-size: 20px;
-    cursor: pointer;
-    transition: filter 0.3s ease, transform 0.3s ease;
-}
-
-.delete-button:hover {
-    color: #ff6b6b;
-    transform: scale(1.2);
-    transition: filter 0.3s ease, transform 0.3s ease;
-}
-
-/* Footer */
 .cart-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    min-width: 300px;
+    height: 220px;
+    flex: 1;
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.3);
-    position: sticky;
-    bottom: 0;
-    border-radius: 0 0 10px 10px;
-    z-index: 10;
+    background-color: var(--movie-list-bg);
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid #1A1D2E;
 }
 
-/* Total price */
-.total-price {
-    font-size: 20px;
-    font-weight: 700;
-    color: #fff;
+.cart-footer h3 {
+    margin-bottom: 20px;
 }
 
-/* Buttons */
-.primary-button {
-    background-color: #0056b3;
-    color: white;
-    border: none;
-    padding: 15px 25px;
-    font-size: 18px;
+.cart-buttons button {
+    width: 100%;
+    padding: 12px;
     border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    margin-right: 10px;
-}
-
-.primary-button:hover {
-    background-color: #004a99;
-    transform: translateY(-3px); /* Lyft knappen lite när musen hovrar */
+    margin-bottom: 10px;
 }
 
 .secondary-button {
-    background-color: #000;
+    background-color: rgba(0, 0, 0, 0.6);
     color: white;
-    border: 1px solid #fff;
-    padding: 15px 25px;
-    font-size: 18px;
-    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.secondary-button:hover {
-    background-color: #333;
-    transform: translateY(-3px); /* Lyft knappen lite när musen hovrar */
+.primary-button {
+    cursor: pointer;
 }
 
-/* Responsivitet för mobil */
+.primary-button:hover, .secondary-button:hover {
+    opacity: 0.8;
+}
+
+.disabled-button {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Media query för mindre skärmar */
 @media (max-width: 768px) {
-    .shopping-cart {
-        width: 90%;
-        max-width: none;
-        padding: 15px;
+    .shopping-cart-container {
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 100vh;
     }
 
-    /* Lägg titeln ovanför pris, antal och papperskorgen */
-    .cart-item {
-        grid-template-columns: 1fr;
-        gap: 10px;
-    }
-
-    .cart-item-count {
-        gap: 5px; 
-        padding: 5px;
-    }
-
-    /* Pris, antal, total och delete ikon kommer under titeln */
-    .cart-item-price, .cart-item-count, .cart-item-total, .cart-item-delete {
-        justify-content: space-around;
-        flex-direction: row;
-        text-align: center;
-    }
-
-    .primary-button, .secondary-button {
-        width: 100%;
-        margin-top: 10px;
+    .cart-items-container {
+        flex-grow: 1; 
+        overflow-y: auto;
+        margin-top: 20px;
+        padding-right: 10px;
     }
 
     .cart-footer {
-        flex-direction: column;
-        gap: 10px;
+        flex-shrink: 0;
+        margin-top: 20px; /* Lägg till mellanrum mellan produktlistan och footern */
+        min-width: unset; /* Ta bort minsta bredd */
+        width: 100%; /* Se till att footern täcker hela bredden på små skärmar */
     }
-}
-
-.primary-button:hover {
-    background-color: #0056b3;
-}
-
-
-.disabled-button {
-    background-color: grey;
-    cursor: not-allowed; 
-    opacity: 0.7;
-}
-
-.primary-button:disabled {
-    background-color: grey;
-    color: #cccccc;
 }
